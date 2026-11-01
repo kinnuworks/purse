@@ -1,0 +1,222 @@
+{
+  "foundryTests": 139,
+  "transactions": [
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Deployed Purse",
+      "hash": "0x2dff156466e6832d068addade9b08f0ea82006e0b39a88abc4d37770d9b4539a",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Funded the demo wallet with 1 USDC",
+      "hash": "0xdf036597d893f6d9808c93ef876f017d6f513c7619d974f434e60a59ee6ea5bd",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Demo purse 0: create",
+      "hash": "0x7c26f09c4d0f19b0ddd49c55fe2df27eef690f58e1ab80c86ecd7c142c64a19b",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Demo purse 0: lock",
+      "hash": "0x9c2734b348f19c818733a21865aad314472e647f212332760dd608827bc037ce",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Demo purse 0: name",
+      "hash": "0x4fd87c9409a30a90c988d26713adc5100cd1245bc76afd335faf0b76ef966f73",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Demo purse 0: deliver a real cent",
+      "hash": "0x35991382fde6e7010c5b58f383c64aeb651552912fddef72370a1b8786343eef",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "approve (organiser wallet)",
+      "hash": "0x9349e4e71d983abfd9d4f8d0a42a3780554aca40338399e6140cff2dc355734f",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "approve (second funder)",
+      "hash": "0xd2d57af344fce9d2fb6048aea678e8e0a769f8355f18b296012ebfb4b6ef507c",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Launch prize, purse 1: create, 1 USDC",
+      "hash": "0x6ea12b5f44be1c62e5e22086da19d4cf8ab10baba611a817d168650c5914523b",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "No winners named, purse 2: create, 0.10",
+      "hash": "0x6d7d24024ad4616c25661874d62e4503c7d79ed6955e8e5ea145ad0a7e80b5ca",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "No winners named, purse 2: second funder adds 0.05",
+      "hash": "0xb01e6a891feee72c2d3d7a1ce95b66e7748a9992ca3599f50300a47e12b9b1b7",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "No winners named, purse 2: refund organiser",
+      "hash": "0xb50605a21d6dd75a0c3b2f1fdb4c96badb9bcb4713a05907ceefb2b2be5edb38",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "No winners named, purse 2: refund second funder",
+      "hash": "0xab9ec67c6979e06413ab78962bb47e050217e0c3a12367971ad9e7275791f981",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Prize unclaimed, purse 3: create, 0.10",
+      "hash": "0x4b9eba9dfc0911be1e2733f5564760ae52596a2ce6a67879fef8ba3eaa46feed",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Prize unclaimed, purse 3: lock",
+      "hash": "0x3da682dfae2cc94b104cdaff91d4344ca782912da67ba6f6ee30b63e13f2f2ad",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Prize unclaimed, purse 3: name own second wallet",
+      "hash": "0x26d5d30d56aeaf134114373ec6c444959297c1d6e1fd90efa1c67f8fd09c7536",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Prize unclaimed, purse 3: sweep back",
+      "hash": "0x9fdff44607d649e7c503732a6e8148e8107d6407f730eb0ddd3ac75cd3193820",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Ten winners (our test wallets), purse 4: create, 0.10",
+      "hash": "0xdd2ac0e5f0809f7e5e1f5c22af258e1de8875dc3b019f19969ee59b9973bd461",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Ten winners (our test wallets), purse 4: lock",
+      "hash": "0x53d92f3746d536a76d0c0b2648d4e48b1b9eeb529f2142e41bd756ecc2ad7e69",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "Ten winners (our test wallets), purse 4: name",
+      "hash": "0xdde826c20a2ca4f9b47b3be2ab5b9e8b53dfac4b0dbea3b389d1e8ebab5fbbee",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x39037c85e421d92b86e44053a1af8c4f2d71dd4c1f2998136441d0f7b34624d0",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x755f85dbf73a78256951c88d76e8705281f32c5d5ae4b7a0dcb93956b36afaa4",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0xf3a780891f5fd358272d76037b1c0cd092cfe85f8c4fa33c9f8a1ea6dab8213d",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0xcf9dded29e9c33d4f6f25ea6299967cef123974356a082970295992d94cfcc98",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x4a71332cc418226fdca39599ce2633230bf1e3fe370d405702b3c73bb19b963f",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x4ac48a968263800c3eb52aac54a1fff09f76cd0dc3f1d4f16a78a38f7f286a4a",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x4c3bc490309cf49e6e78e78060fe38ff8f890a405842186bf5eb53b959d73f30",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x0bdb473fb18a09a7e562dc687d8ab9805807437ca69b0431319d77b568157cc7",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0x82afb874f939f25749142e07084be3954f248933020688f3dccd7c21bd06f36b",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "Ten winners (our test wallets), purse 4: deliver",
+      "hash": "0xa4836390e7432fd8153c9fedb33d921ca6e0079e7a0ab8f475ed1556b0ef2c22",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Arc Studio platform deployer wallet",
+      "what": "Deployed Purse to Arc Testnet",
+      "hash": "0x9c17cdd660af604504804cd202926abbbb3f73fdfeee72e857083e370b486094",
+      "network": "testnet"
+    },
+    {
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "what": "Approved USDC for the purse",
+      "hash": "0x050a6720315364e6af3f9819bc7f7542d5bfd7a55287fb32bbd6318761c1fbb6",
+      "network": "testnet"
+    },
+    {
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "what": "Created purse #0 \"Testnet proof\" with 0.01 USDC",
+      "hash": "0x76b2579c6a739b1f23eaec06c95b8bfe91fe975f834e57a0ab7da0c40b0bf1f6",
+      "network": "testnet"
+    },
+    {
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "what": "Locked the purse",
+      "hash": "0x712ea06c7cf483a4a22b03f6dd8875ea8f07cecbab474a24f7249fa85ff844ec",
+      "network": "testnet"
+    },
+    {
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "what": "Named one winner for the whole pool",
+      "hash": "0xee773b619823b18d1929417c56ae37e1a379ffa8dee6af9cd8dc5da1b3dee848",
+      "network": "testnet"
+    },
+    {
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "what": "Delivered the prize to winner 0x7157…9CAF",
+      "hash": "0x6cce5517d388c780481d7a807f0a3577a7380ebea6cbc28e71617ee20f7d206b",
+      "network": "testnet"
+    }
+  ],
+  "testnetContract": "0x7fCF2eAf1b38f93e4d606a2826394E299a38bb97"
+}
