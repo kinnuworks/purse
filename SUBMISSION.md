@@ -20,5 +20,5 @@ On mainnet, money has left the contract all three ways: delivered to winners, re
 **Proof page:** https://purse-arc.vercel.app/proof
 **For reviewers:** https://purse-arc.vercel.app/judges
 **Try to break it:** https://purse-arc.vercel.app/break-it
-**Video:** to be added
+**Video:** https://youtu.be/Q8y04SuUvik
 **Open now:** a real 1 USDC bug bounty, locked on mainnet. Report bugs at https://github.com/kinnuworks/purse/issues

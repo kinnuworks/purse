@@ -4,6 +4,8 @@
 
 **Live app:** https://purse-arc.vercel.app (no wallet needed to read anything)
 
+**Demo film:** https://youtu.be/Q8y04SuUvik
+
 **Try it in 30 seconds:** paste any wallet address into "Try it with a real cent" and press the button. The app runs a real 0.01 USDC prize on Arc mainnet and that address receives it. Each step links to its transaction.
 
 **Why Arc:** prizes are priced in dollars and gas is paid in USDC, so a 0.01 USDC prize is practical. Anyone can deliver a prize, so a winner needs no gas or USDC to receive one.
