@@ -2,23 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The Engraved Plate. Tokens are mirrored in tailwind.config.js. */
+:root {
+  --paper: #f6f2e9;
+  --plate: #fcfaf4;
+  --ink: #1c1a15;
+  --ink-2: #4f4a3f;
+  --rule: #ddd6c6;
+  --brass: #7a5c1e;
+  --paid: #1f5c3f;
+  --alert: #9a2b1f;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
-  background: #fbfaf7;
-  color: #14171a;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  font-size: 17px;
   line-height: 1.6;
-  font-family: 'DM Sans', ui-sans-serif, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 18px;
+  }
 }
 
 a {
@@ -26,35 +46,192 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid #14171a;
+  outline: 2px solid var(--brass);
   outline-offset: 2px;
 }
 
 input,
 select,
-button {
+button,
+textarea {
   font: inherit;
   color: inherit;
 }
 
-@keyframes purse-pulse {
-  0%,
-  100% {
-    opacity: 0.35;
+@layer components {
+  /* Type scale. Newsreader 500 for display and amounts, with lining tabular numerals. */
+  .t-amount,
+  .t-amount-sm,
+  .h-headline,
+  .h-section {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 500;
+    font-variant-numeric: lining-nums tabular-nums;
   }
-  50% {
-    opacity: 0.7;
+  .t-amount {
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
+  }
+  /* The badge page is a small plate, so its amount is smaller than a full plate's. */
+  .t-amount-sm {
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
+  }
+  .h-headline {
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .h-section {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+  .t-small {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .t-mono {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  @media (min-width: 640px) {
+    .t-amount {
+      font-size: 112px;
+    }
+    .h-headline {
+      font-size: 56px;
+      line-height: 1.08;
+    }
+    .h-section {
+      font-size: 28px;
+      line-height: 1.2;
+    }
+    .t-mono {
+      font-size: 14px;
+    }
+  }
+  .smallcaps {
+    font-family: 'Instrument Sans', ui-sans-serif, sans-serif;
+    font-variant-caps: all-small-caps;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  /* The plate: fill, 1px ink border, an inner 1px brass rule inset 6px, one soft edge. */
+  .plate {
+    position: relative;
+    background: var(--plate);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    padding: 32px 22px 24px;
+    box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(28, 26, 21, 0.35);
+  }
+  .plate::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--brass);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+  .plate > * {
+    position: relative;
+  }
+  .plate-sm {
+    padding: 20px 18px 16px;
+  }
+  @media (min-width: 640px) {
+    .plate {
+      padding: 40px 40px 32px;
+    }
+    .plate-sm {
+      padding: 20px 22px 16px;
+    }
+  }
+  /* Faint horizontal statement rules, only behind the plate. */
+  .plate-backing {
+    padding: 14px;
+    border-radius: 2px;
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(221, 214, 198, 0.6) 31px, rgba(221, 214, 198, 0.6) 32px);
+  }
+  @media (min-width: 640px) {
+    .plate-backing {
+      padding: 32px;
+    }
+  }
+
+  /* The stamp: 1.5px paid border, uppercase 12px, rotated -3deg, date under PAID. */
+  .stamp {
+    display: inline-block;
+    border: 1.5px solid var(--paid);
+    border-radius: 2px;
+    color: var(--paid);
+    padding: 3px 9px 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transform: rotate(-3deg);
+    background: var(--plate);
+  }
+  .stamp .stamp-date {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+  a.stamp:hover {
+    background: var(--paid);
+    color: var(--plate);
+  }
+  .stamp-press {
+    animation: stamp-press 220ms ease-out both;
+  }
+  .amount-in {
+    animation: fade-in 200ms ease-out both;
+  }
+}
+
+@keyframes stamp-press {
+  from {
+    opacity: 0;
+    transform: rotate(-3deg) scale(1.25);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-3deg) scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
 .skeleton {
-  background: rgba(20, 23, 26, 0.09);
-  border-radius: 6px;
-  animation: purse-pulse 1.4s ease-in-out infinite;
+  background: rgba(28, 26, 21, 0.09);
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skeleton {
+  .stamp-press,
+  .amount-in {
     animation: none;
   }
 }

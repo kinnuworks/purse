@@ -6,33 +6,41 @@ export default {
   ],
   theme: {
     extend: {
+      // The Engraved Plate (see DESIGN.md). Colour tokens, exactly as specified.
       colors: {
-        // A public ledger: warm paper, near-black ink, one deep green for locked or paid.
-        paper: '#FBFAF7',
-        ink: '#14171A',
-        // Secondary text. 7.9:1 on the paper, so it stays readable (WCAG AAA for body text).
-        soft: '#4A4F57',
-        // The thin rule between ledger rows.
-        rule: '#D6D1C4',
-        lock: '#0F5C3A',
+        paper: '#F6F2E9',
+        plate: '#FCFAF4',
+        ink: '#1C1A15',
+        // --ink-2: secondary text, at least 7:1 on the paper.
+        soft: '#4F4A3F',
+        rule: '#DDD6C6',
+        brass: '#7A5C1E',
+        paid: '#1F5C3F',
+        lock: '#1F5C3F',
+        alert: '#9A2B1F',
       },
       fontFamily: {
-        sans: ['"DM Sans"', 'ui-sans-serif', 'sans-serif'],
-        display: ['"Space Grotesk"', '"DM Sans"', 'ui-sans-serif', 'sans-serif'],
+        sans: ['"Instrument Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Newsreader', 'Georgia', 'serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'Menlo', 'monospace'],
       },
-      // Root size is 17px (see index.css), so base text is 17px and the smallest text is about 15px.
+      // Body is 17px on a phone and 18px from 640px up (set on <body>); small is 15px.
       fontSize: {
-        xs: ['0.9rem', '1.5'],
-        sm: ['0.95rem', '1.55'],
-        base: ['1rem', '1.6'],
-        lg: ['1.15rem', '1.5'],
-        xl: ['1.3rem', '1.4'],
-        '2xl': ['1.55rem', '1.3'],
-        '3xl': ['1.9rem', '1.2'],
-        '4xl': ['2.4rem', '1.15'],
-        '5xl': ['3.2rem', '1.05'],
-        '6xl': ['4rem', '1'],
+        xs: ['0.9375rem', '1.5'],
+        sm: ['0.9375rem', '1.5'],
+        base: ['1em', '1.6'],
+        lg: ['1.0625em', '1.6'],
+        xl: ['1.5rem', '1.25'],
+        '2xl': ['1.75rem', '1.2'],
+        '3xl': ['2rem', '1.15'],
+        '4xl': ['2.375rem', '1.1'],
+      },
+      borderRadius: {
+        DEFAULT: '4px',
+        sm: '2px',
+        md: '4px',
+        lg: '4px',
+        xl: '4px',
       },
     },
   },

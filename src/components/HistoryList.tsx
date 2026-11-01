@@ -1,54 +1,68 @@
+import type { ReactNode } from 'react'
 import type { PurseEvent } from '@/lib/events'
-import { formatDate, formatDuration } from '@/lib/format'
+import { formatDuration } from '@/lib/format'
 import { useBlockTimes } from '@/lib/hooks'
 import { useHistory } from '@/lib/history'
-import { Addr, Money, Notice, Skeleton, TxLink } from './ui'
+import { Addr, Dt, Money, Notice, Skeleton, TxLink } from './ui'
 
-function Line({ event }: { event: PurseEvent }) {
+/** What happened, in words, and the amount (if any) for the right-hand column. */
+function describe(event: PurseEvent): { text: ReactNode; amount?: bigint } {
   switch (event.name) {
     case 'PurseCreated':
-      return (
-        <>
-          Purse created by <Addr address={event.organiser} /> with <Money raw={event.amount} />. Winners to be named by {formatDate(event.nameBy)}, then{' '}
-          {formatDuration(event.claimWindow)} to claim.
-        </>
-      )
+      return {
+        text: (
+          <>
+            Purse created by <Addr address={event.organiser} />. Winners to be named by <Dt seconds={event.nameBy} />, then {formatDuration(event.claimWindow)} to claim.
+          </>
+        ),
+        amount: event.amount,
+      }
     case 'Funded':
-      return (
-        <>
-          <Addr address={event.funder} /> added <Money raw={event.amount} />. The pool is now <Money raw={event.newPool} />.
-        </>
-      )
+      return {
+        text: (
+          <>
+            <Addr address={event.funder} /> added funds. The pool is now <Money raw={event.newPool} />.
+          </>
+        ),
+        amount: event.amount,
+      }
     case 'FundingLocked':
-      return (
-        <>
-          Funding locked. The pool is fixed at <Money raw={event.pool} />.
-        </>
-      )
+      return { text: 'Funding locked. The pool is fixed.', amount: event.pool }
     case 'WinnersNamed':
-      return (
-        <>
-          {event.winners.length} winner{event.winners.length === 1 ? '' : 's'} named. Prizes can be claimed until {formatDate(event.claimBy)}.
-        </>
-      )
+      return {
+        text: (
+          <>
+            {event.winners.length} winner{event.winners.length === 1 ? '' : 's'} named. Prizes can be claimed until <Dt seconds={event.claimBy} />.
+          </>
+        ),
+      }
     case 'Delivered':
-      return (
-        <>
-          <Money raw={event.amount} /> delivered to <Addr address={event.winner} />, sent by <Addr address={event.caller} />.
-        </>
-      )
+      return {
+        text: (
+          <>
+            Delivered to <Addr address={event.winner} />, sent by <Addr address={event.caller} />.
+          </>
+        ),
+        amount: event.amount,
+      }
     case 'Refunded':
-      return (
-        <>
-          <Money raw={event.amount} /> returned to <Addr address={event.funder} />.
-        </>
-      )
+      return {
+        text: (
+          <>
+            Returned to <Addr address={event.funder} />.
+          </>
+        ),
+        amount: event.amount,
+      }
     case 'Swept':
-      return (
-        <>
-          <Money raw={event.amount} /> of unclaimed prize returned to the organiser <Addr address={event.organiser} />.
-        </>
-      )
+      return {
+        text: (
+          <>
+            Unclaimed prize returned to the organiser <Addr address={event.organiser} />.
+          </>
+        ),
+        amount: event.amount,
+      }
   }
 }
 
@@ -70,12 +84,12 @@ export function HistoryList({ id }: { id: bigint }) {
             <Skeleton className="h-5 w-3/4" />
             <Skeleton className="h-5 w-2/3" />
             <Skeleton className="h-5 w-1/2" />
-            <p className="text-sm text-soft tabular-nums">
+            <p className="t-small text-soft tabular-nums">
               Reading the chain history{progress ? `: block ${progress.scannedTo.toString()} of ${progress.head.toString()}` : '…'}
             </p>
           </>
         ) : (
-          <p className="text-sm text-soft">No events recorded for this purse yet.</p>
+          <p className="t-small text-soft">No events recorded for this purse yet.</p>
         )}
       </div>
     )
@@ -85,22 +99,22 @@ export function HistoryList({ id }: { id: bigint }) {
     <ol className="divide-y divide-rule border-y border-rule">
       {events.map((event) => {
         const time = times.data?.[event.blockNumber.toString()]
+        const { text, amount } = describe(event)
         return (
-          <li key={`${event.txHash}:${event.logIndex}`} className="py-4 leading-relaxed">
-            <div className="mb-1 text-sm text-soft tabular-nums">
-              {time !== undefined ? formatDate(time) : <Skeleton className="inline-block h-3 w-28 align-middle" />}
-            </div>
-            <div className="text-pretty">
-              <Line event={event} />
-            </div>
-            <div className="mt-1">
-              <TxLink hash={event.txHash} />
+          <li key={`${event.txHash}:${event.logIndex}`} className="grid gap-x-6 gap-y-2 py-4 hover:bg-plate sm:grid-cols-[11rem_minmax(0,1fr)_auto]">
+            <div>{time !== undefined ? <Dt seconds={time} /> : <Skeleton className="inline-block h-3 w-28 align-middle" />}</div>
+            <div className="min-w-0 text-pretty">{text}</div>
+            <div className="flex flex-col gap-1 sm:items-end sm:text-right">
+              {amount !== undefined && <Money raw={amount} className="text-[20px]" />}
+              <span className="t-small">
+                <TxLink hash={event.txHash} />
+              </span>
             </div>
           </li>
         )
       })}
       {history.status === 'loading' && (
-        <li className="py-3 text-sm text-soft">Checking for newer events…</li>
+        <li className="t-small py-3 text-soft">Checking for newer events…</li>
       )}
     </ol>
   )

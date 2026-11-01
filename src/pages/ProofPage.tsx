@@ -1,16 +1,16 @@
 import { ExternalLink } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { NotConfigured } from '@/components/Shell'
-import { Addr, ContractLine, CopyButton, GroupLabel, Ledger, LedgerRow, Notice, Skeleton } from '@/components/ui'
+import { Addr, ContractLine, CopyButton, Dt, GroupLabel, Ledger, LedgerRow, Notice, Skeleton } from '@/components/ui'
 import { readTransaction, testnetAddressUrl, testnetTxUrl } from '@/lib/data'
 import { CHAIN_ID, PURSE_ADDRESS, STUDIO_PROJECT_URL, explorerTx, sourcifyUrl } from '@/lib/env'
-import { formatDate, shortAddress } from '@/lib/format'
+import { shortAddress } from '@/lib/format'
 import { readProof, type ProofTx } from '@/lib/proof-data'
 import proof from '@/proof.json'
 
 const HASH = /^0x[0-9a-fA-F]{64}$/
 
-const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink'
+const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass'
 
 function ProofRow({ tx }: { tx: ProofTx }) {
   const valid = HASH.test(tx.hash)
@@ -24,12 +24,12 @@ function ProofRow({ tx }: { tx: ProofTx }) {
   return (
     <li className="py-4">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-        <span className="font-medium text-pretty">
+        <span className="font-semibold text-pretty">
           {tx.what}
-          {testnet && <span className="ml-2 whitespace-nowrap rounded border border-ink/40 px-1.5 py-0.5 text-sm font-medium">Testnet</span>}
+          {testnet && <span className="ml-2 whitespace-nowrap rounded-sm border border-soft px-1.5 py-0.5 text-sm font-semibold">Testnet</span>}
         </span>
-        <span className="tabular-nums text-soft">
-          {!valid ? 'Not a valid hash' : read.isLoading ? <Skeleton className="inline-block h-4 w-28 align-middle" /> : read.data ? formatDate(read.data.timestamp) : 'Not found'}
+        <span className="text-soft">
+          {!valid ? 'Not a valid hash' : read.isLoading ? <Skeleton className="inline-block h-4 w-28 align-middle" /> : read.data ? <Dt seconds={read.data.timestamp} /> : 'Not found'}
         </span>
       </div>
       <div className="mt-1.5 flex flex-wrap items-center gap-x-5 gap-y-1 text-soft">
@@ -41,7 +41,7 @@ function ProofRow({ tx }: { tx: ProofTx }) {
           {read.data ? (
             testnet ? (
               <span className="inline-flex items-center gap-2.5">
-                <a href={testnetAddressUrl(read.data.from)} target="_blank" rel="noopener noreferrer" title={read.data.from} className="font-mono text-[0.9em] text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+                <a href={testnetAddressUrl(read.data.from)} target="_blank" rel="noopener noreferrer" title={read.data.from} className="t-mono text-ink underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass">
                   {shortAddress(read.data.from)}
                 </a>
                 <CopyButton value={read.data.from} />
@@ -73,10 +73,10 @@ export default function ProofPage() {
   const testnetTransactions = transactions.filter((t) => t.network === 'testnet')
   return (
     <>
-      <h1 className="font-display text-4xl font-semibold tracking-tight">Proof</h1>
+      <h1 className="h-headline">Proof</h1>
       <p className="mt-3 max-w-[34rem] text-lg text-pretty">Where the contract lives, how it was built, and the transactions that show it working.</p>
 
-      <h2 className="mt-12 font-display text-xl font-semibold tracking-tight">The contract</h2>
+      <h2 className="mt-20 h-section">The contract</h2>
       <div className="mt-4">
         <Ledger>
           <LedgerRow label="Contract address">{PURSE_ADDRESS ? <ContractLine address={PURSE_ADDRESS} /> : 'Not set yet'}</LedgerRow>
@@ -90,7 +90,7 @@ export default function ProofPage() {
           {file.testnetContract && (
             <LedgerRow label="Testnet contract">
               <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <span className="break-all font-mono text-[0.9em]">{file.testnetContract}</span>
+                <span className="break-all t-mono">{file.testnetContract}</span>
                 <CopyButton value={file.testnetContract} label="Copy contract address" />
                 <a href={testnetAddressUrl(file.testnetContract)} target="_blank" rel="noopener noreferrer" className={linkClass}>
                   Explorer <ExternalLink size={14} aria-hidden />
@@ -116,11 +116,11 @@ export default function ProofPage() {
         </div>
       )}
 
-      <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">Transactions</h2>
+      <h2 className="mt-20 h-section">Transactions</h2>
       {transactions.length === 0 ? (
         <div className="mt-4">
           <Notice>
-            No transactions have been added yet. Add them to <span className="font-mono">src/proof.json</span> with who sent each one.
+            No transactions have been added yet. Add them to <span className="t-mono">src/proof.json</span> with who sent each one.
           </Notice>
         </div>
       ) : (

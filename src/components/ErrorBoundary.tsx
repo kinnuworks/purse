@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
     if (!this.state.error) return this.props.children
     return (
       <div role="alert" className="border-l-2 border-ink pl-4 py-1">
-        <p className="font-medium">Something on this page could not be shown.</p>
+        <p className="font-semibold">Something on this page could not be shown.</p>
         <p className="mt-1 text-soft text-pretty">The rest of the site still works. The figures come from the chain, so nothing about your money is affected.</p>
         <p className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
           <button type="button" onClick={() => this.setState({ error: null })} className="min-h-11 underline underline-offset-4">

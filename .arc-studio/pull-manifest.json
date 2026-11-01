@@ -30,8 +30,8 @@
       "pulledAt": "2026-11-01T17:23:31.996Z"
     },
     "index.html": {
-      "hash": "1c081b8938c2f4fa7977c70967c2b6a77d3064a34e9feda0b6c330134c7d2364",
-      "pulledAt": "2026-11-01T17:38:48.206Z"
+      "hash": "be7e3936af042ecf23923a9a6e811ab2ddfacdbb030ea85b0f4df7aa9b8d7eef",
+      "pulledAt": "2026-11-01T20:32:35.075Z"
     },
     "package.json": {
       "hash": "bf247cdd733b1f2402ffaffec6fd2445d8e884bc5203c47528e10d461ca8f9bc",
@@ -46,8 +46,8 @@
       "pulledAt": "2026-11-01T17:23:31.997Z"
     },
     "tailwind.config.js": {
-      "hash": "937c81a6b72d3867e69338b990295ebbe647be3a0f7d01025e4f06c60c5ec206",
-      "pulledAt": "2026-11-01T19:29:25.823Z"
+      "hash": "1cfac907606fb608783a48face7672f99c1529bda47762e68a57497eedc5ae1a",
+      "pulledAt": "2026-11-01T20:32:35.078Z"
     },
     "tsconfig.json": {
       "hash": "003683dc0879da1ed95203d91536162d27753053d74e43db14c24f1dae4b4912",
@@ -94,8 +94,8 @@
       "pulledAt": "2026-11-01T17:23:32.001Z"
     },
     "src/index.css": {
-      "hash": "c9b42f4a31fd0c9951d5bf0257de89e18e49739b26ec476619481f11deacb7a3",
-      "pulledAt": "2026-11-01T19:29:25.827Z"
+      "hash": "81a30acd7cf8a5c7741e7918e7629cd6cf2732f0a50259883a16e5bf143ea8c6",
+      "pulledAt": "2026-11-01T20:32:35.085Z"
     },
     "src/main.tsx": {
       "hash": "93b3c455a1493f8935b43f28230aa336e1da7375eeed2da64f0cdbb5f626f8fc",
@@ -550,32 +550,32 @@
       "pulledAt": "2026-11-01T19:53:33.277Z"
     },
     "src/components/AddFunds.tsx": {
-      "hash": "38e692feaf2217a85d9d07e0445909fbd088d9ac81c9b0adbebaa8d24f67a981",
-      "pulledAt": "2026-11-01T19:29:25.832Z"
+      "hash": "c88c596f2b40c77dec6dbab95f9f77f3d923b3b82ad494b84381a2ab74157d98",
+      "pulledAt": "2026-11-01T20:32:35.091Z"
     },
     "src/components/ChainButton.tsx": {
       "hash": "2558f4a0629cb0eff0c39d5f1bda8b2b5268bda860ded2973e727e6608e6ddce",
       "pulledAt": "2026-11-01T17:38:48.216Z"
     },
     "src/components/DemoPanel.tsx": {
-      "hash": "7c8928669a013c0a9f788163e8271196e51d9d58999f5237198af2a24306374c",
-      "pulledAt": "2026-11-01T19:29:25.833Z"
+      "hash": "11347f9fc5862c54afb55b0fc615ed7f8e28317214367b291f50ccf1bba4c5d7",
+      "pulledAt": "2026-11-01T20:32:35.093Z"
     },
     "src/components/HistoryList.tsx": {
-      "hash": "b570b2891b86118631442ee1655001b4968077854f3afd32cbe7e1b0a97320e1",
-      "pulledAt": "2026-11-01T19:29:25.833Z"
+      "hash": "0703ea684349329d4b1d33bbf0cc786fefe5c7e77b8716c57cb5f4ef9a898df2",
+      "pulledAt": "2026-11-01T20:32:35.094Z"
     },
     "src/components/OrganiserControls.tsx": {
-      "hash": "9f78319f563ab0fe5219bf4cc622430747532c508346d4b109ced506fad77095",
-      "pulledAt": "2026-11-01T19:29:25.833Z"
+      "hash": "c2d73d152fc9e8eeaa3a0ebe88c9850a3e618faccd3b529203fa2b35267cb51d",
+      "pulledAt": "2026-11-01T20:32:35.095Z"
     },
     "src/components/Shell.tsx": {
-      "hash": "1719f37d6261695dd9e3a1755c0ae1f297bad375e0e71c5b0868f220c4ff4242",
-      "pulledAt": "2026-11-01T19:29:25.834Z"
+      "hash": "ca16e41ca4b50080f41a2c615c13c49a792a7aa7cff4ffd5b37b8c4597ed7a42",
+      "pulledAt": "2026-11-01T20:32:35.096Z"
     },
     "src/components/ui.tsx": {
-      "hash": "6f40d545d3f12659ad7cc58cf97aab4ea975e232bd174def50a23142f5636d87",
-      "pulledAt": "2026-11-01T19:29:25.834Z"
+      "hash": "0cd5edcaf62f32f776b6db5007ef7adc0f3fd2ee7184827f4a3747042f253565",
+      "pulledAt": "2026-11-01T20:32:35.097Z"
     },
     "src/lib/chain.ts": {
       "hash": "b243eb6a0666c1e99efacda7a17d17c041fc8ba0141ebc45f7f68ac3b8d9e236",
@@ -602,8 +602,8 @@
       "pulledAt": "2026-11-01T17:38:48.218Z"
     },
     "src/lib/format.ts": {
-      "hash": "c9e1e6bbc78d8527698ea098602c9f772987e8b91123ce77b290cbca6cdf3eb8",
-      "pulledAt": "2026-11-01T19:49:56.910Z"
+      "hash": "71870d126a687aaf0ca0d04da51a8fa21454fd943f7da5ec6518a2aef967f241",
+      "pulledAt": "2026-11-01T20:32:35.098Z"
     },
     "src/lib/history.ts": {
       "hash": "68db35c511a29ecd89ba6320257804195de55bb1f2d2bdd70b1efef3c04a20bf",
@@ -642,20 +642,20 @@
       "pulledAt": "2026-11-01T17:38:48.220Z"
     },
     "src/pages/CreatePage.tsx": {
-      "hash": "640bab321822d25fdc41ee3b08d6d314b6bad87b7f71c6a268eb9aeca45a0ac1",
-      "pulledAt": "2026-11-01T19:49:56.914Z"
+      "hash": "a1695a9b306fb024921024a1a32730fe5c22afd3dc75fafef40f8fa02b2a8272",
+      "pulledAt": "2026-11-01T20:32:35.102Z"
     },
     "src/pages/HomePage.tsx": {
-      "hash": "0e7f6971e84f1cca6648c60bd94d188ce059df7cfe78510eb840b9ad803fcc0a",
-      "pulledAt": "2026-11-01T20:20:20.886Z"
+      "hash": "ae58195aa919dbd51a5d3c6872c4ffd949de5747d42a3751507bcc8aabfdc614",
+      "pulledAt": "2026-11-01T20:32:35.103Z"
     },
     "src/pages/ProofPage.tsx": {
-      "hash": "a984e7499aa47c18cfe6a420336e4b825e63218ee37a1a9142d214635b798c96",
-      "pulledAt": "2026-11-01T19:49:56.915Z"
+      "hash": "1a13a1bacb67409e9f078b894e3c8061a2970bb35f92ac7a7fc3410ed5c6a188",
+      "pulledAt": "2026-11-01T20:32:35.104Z"
     },
     "src/pages/PursePage.tsx": {
-      "hash": "a8a3416f7cd06db2f2c3ef61cb809a7052278ecf19c04406777bdc6f0a4117d7",
-      "pulledAt": "2026-11-01T19:49:56.915Z"
+      "hash": "cc9dc83a8535bccf74d6fb32acef9892431224d9ef091465443207f95315ed92",
+      "pulledAt": "2026-11-01T20:32:35.104Z"
     },
     "contracts/out/Base.sol/CommonBase.json": {
       "hash": "19e9d367aee662b24ad5f3ee89428c793c285be432c3000aa20974cf0dcf9479",
@@ -902,8 +902,8 @@
       "pulledAt": "2026-11-01T19:21:49.663Z"
     },
     "src/components/EmbedBadge.tsx": {
-      "hash": "756f61024cd482c0b42e15e05f0b8874353539ecf4281c7ea79225392c303488",
-      "pulledAt": "2026-11-01T19:29:25.833Z"
+      "hash": "7fcce947a01313d426ef15e6b05c2abfeb588cb22ef036a95600d8287faf6d63",
+      "pulledAt": "2026-11-01T20:32:35.093Z"
     },
     "src/lib/attacks.ts": {
       "hash": "790c53ae8788a6a30757865ec2c0d8d719cef55b5df8813bf9d3c5c1469f2070",
@@ -918,16 +918,16 @@
       "pulledAt": "2026-11-01T19:21:49.668Z"
     },
     "src/pages/BadgePage.tsx": {
-      "hash": "87d71d326461f86b750635d79e4217bb8649244242f2058922f44ae2ad627088",
-      "pulledAt": "2026-11-01T19:29:25.836Z"
+      "hash": "bd27ebaa33de1c715a3e12d647f66f7c3f57a9516ed46272fe43bdfc85a2e320",
+      "pulledAt": "2026-11-01T20:32:35.101Z"
     },
     "src/pages/BreakItPage.tsx": {
-      "hash": "6a216b46f78c059b4e0d37f0f38b601ffe2fcc93905799a41da8b87611eea214",
-      "pulledAt": "2026-11-01T19:49:56.914Z"
+      "hash": "e23c233e2df0b375fce4d1303744b0c30ea48eff1a5872eb6b5d7453c32ba69a",
+      "pulledAt": "2026-11-01T20:32:35.102Z"
     },
     "src/pages/JudgesPage.tsx": {
-      "hash": "1851b79a8239bd1534f29f7edbf01d12f6e7b5e30aa9c1e98be51a78bc70f16f",
-      "pulledAt": "2026-11-01T19:49:56.915Z"
+      "hash": "8f221cfc104c9c5d9200f43e1f37bc5d68c19e6580467c56174e2e00b2e41e43",
+      "pulledAt": "2026-11-01T20:32:35.103Z"
     },
     "packages/purse-sdk/src/abi.ts": {
       "hash": "65b01cbfd39ca742ae46f5491c6661a7f9c566bf174422ddca9699a2f806d5f1",
@@ -958,8 +958,8 @@
       "pulledAt": "2026-11-01T19:21:49.695Z"
     },
     "src/components/ErrorBoundary.tsx": {
-      "hash": "a573061f96503a858930bfc1720307d9f3918b86c4388359ec83e84d7cf68a83",
-      "pulledAt": "2026-11-01T19:49:56.908Z"
+      "hash": "f1fb76b4d2dc3e7f6f80428b0728539cfe03844b5fe451b4c7f2ef5acf975614",
+      "pulledAt": "2026-11-01T20:32:35.094Z"
     },
     "src/lib/proof-data.test.ts": {
       "hash": "3d634d83890c13b8cd7cdb9a51a7ed7fe467492e0f19176826911669de926d22",
@@ -972,6 +972,18 @@
     "src/pages/render.test.tsx": {
       "hash": "5023f5a8823fe8162e6fc53273bfce100c982cfdf05cb5d4680aa1cf9a62587e",
       "pulledAt": "2026-11-01T19:49:56.915Z"
+    },
+    "src/components/PursePlate.tsx": {
+      "hash": "c00846c0f0e700b940b0a8b7b9b8638f73a3e3b6e4963fb167a678db8e9b66bc",
+      "pulledAt": "2026-11-01T20:32:35.096Z"
+    },
+    "src/components/WinnerLines.tsx": {
+      "hash": "70c3ccf45a355f0b7b4d4e7be5f3d2fc4a65eaa8f1ca744c26874ab7bb0de30b",
+      "pulledAt": "2026-11-01T20:32:35.096Z"
+    },
+    "src/lib/seen.ts": {
+      "hash": "faedba2c12daf4569914b618a06f6234a89a5cb62990fb718744ac4280b9990f",
+      "pulledAt": "2026-11-01T20:32:35.100Z"
     }
   }
 }

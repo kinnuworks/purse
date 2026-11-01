@@ -38,7 +38,7 @@ function Result({ plan, result }: { plan: AttackPlan; result: SimulationResult |
   }
   if (result.outcome === 'succeeded') {
     return (
-      <div className="mt-3 rounded-lg border-2 border-red-700 bg-red-50 px-4 py-3 text-red-900" role="alert">
+      <div className="mt-3 rounded-lg border-2 border-alert bg-plate px-4 py-3 text-alert" role="alert">
         <p className="font-semibold">Failure: this call succeeded.</p>
         <p className="mt-1">The contract should have refused it. If you see this, please report it.</p>
       </div>
@@ -54,14 +54,14 @@ function Result({ plan, result }: { plan: AttackPlan; result: SimulationResult |
   return (
     <div className="mt-4 grid gap-5 border-l-2 border-rule pl-4 sm:grid-cols-2" role="status">
       <div>
-        <div className="text-sm font-medium text-soft">The contract said</div>
-        <p className="mt-1 break-all font-mono text-[0.85em]">{result.reason}</p>
+        <div className="text-sm font-semibold text-soft">The contract said</div>
+        <p className="mt-1 break-all t-mono">{result.reason}</p>
         {!result.matchesExpected && (
           <p className="mt-1 text-sm">It refused, but for a different reason than expected ({plan.expect}). The purse’s state may have changed.</p>
         )}
       </div>
       <div>
-        <div className="text-sm font-medium text-soft">In plain words</div>
+        <div className="text-sm font-semibold text-soft">In plain words</div>
         <p className="mt-1 text-pretty">{plainRevert(result.name) ?? plan.meaning}</p>
         <p className="mt-1 text-sm text-soft text-pretty">{plan.meaning}</p>
       </div>
@@ -78,31 +78,31 @@ function CannotStop() {
   const shortest = minWindow.data !== undefined ? `${minWindow.data.toString()} seconds` : 'the shortest the contract allows'
   return (
     <>
-      <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">What Purse can’t stop</h2>
+      <h2 className="mt-20 h-section">What Purse can’t stop</h2>
       <p className="mt-3 max-w-[34rem] text-pretty">These are not bugs. They are things the contract allows by design, so you should know them before you trust a purse.</p>
       <ul className="mt-4 divide-y divide-rule border-y border-rule">
         <li className="py-4 text-pretty">
-          <span className="font-medium">The organiser can name themselves as a winner.</span> The purse page flags it when they do.
+          <span className="font-semibold">The organiser can name themselves as a winner.</span> The purse page flags it when they do.
         </li>
         <li className="py-4 text-pretty">
-          <span className="font-medium">The organiser can set a claim window as short as {shortest}</span>, then return an undelivered prize to themselves once it ends.
+          <span className="font-semibold">The organiser can set a claim window as short as {shortest}</span>, then return an undelivered prize to themselves once it ends.
         </li>
         <li className="py-4 text-pretty">
-          <span className="font-medium">Money a sponsor added goes with it.</span> An unclaimed prize returns to the organiser, not to the sponsors.
+          <span className="font-semibold">Money a sponsor added goes with it.</span> An unclaimed prize returns to the organiser, not to the sponsors.
         </li>
         <li className="py-4 text-pretty">
-          <span className="font-medium">Anyone can deliver a prize,</span> so a short claim window is only a risk if nobody delivers in time.
+          <span className="font-semibold">Anyone can deliver a prize,</span> so a short claim window is only a risk if nobody delivers in time.
         </li>
       </ul>
       <p className="mt-4 max-w-[34rem] text-pretty">
         A real example is{' '}
-        <Link to={`/p/${SWEPT_EXAMPLE_ID.toString()}`} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+        <Link to={`/p/${SWEPT_EXAMPLE_ID.toString()}`} className="underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass">
           purse #{SWEPT_EXAMPLE_ID.toString()}
         </Link>
         {swept && swept.name === 'Swept' ? (
           <>
             , where <Money raw={swept.amount} /> went back to the organiser after the claim window ended (
-            <a href={explorerTx(swept.txHash)} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+            <a href={explorerTx(swept.txHash)} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass">
               transaction
             </a>
             ).
@@ -136,7 +136,7 @@ export default function BreakItPage() {
 
   return (
     <>
-      <h1 className="font-display text-4xl font-semibold tracking-tight">Try to break it</h1>
+      <h1 className="h-headline">Try to break it</h1>
       <p className="mt-3 max-w-[34rem] text-lg text-pretty">
         Each row is an attack. The button asks the live contract on Arc to run it, from the address that would really try it, using a read-only call. No wallet, no transaction, no money moves. The contract’s own refusal is shown next to what it means.
       </p>
@@ -155,7 +155,7 @@ export default function BreakItPage() {
           <Button disabled={!anyRunnable} onClick={() => void runAll()}>
             Run them all
           </Button>
-          {failures > 0 && <span className="font-semibold text-red-800">{failures} failed. See below.</span>}
+          {failures > 0 && <span className="font-semibold text-alert">{failures} failed. See below.</span>}
         </div>
       )}
 
@@ -172,16 +172,16 @@ export default function BreakItPage() {
         </div>
       )}
 
-      <h2 className="mt-12 font-display text-xl font-semibold tracking-tight">The attacks</h2>
+      <h2 className="mt-20 h-section">The attacks</h2>
       <ol className="mt-4 divide-y divide-rule border-y border-rule">
         {plans.map((plan, i) => {
           const result = results[plan.key]
           const failed = result !== undefined && result !== 'running' && result.outcome === 'succeeded'
           return (
-            <li key={plan.key} className={cx('py-6', failed && 'border-l-4 border-red-700 pl-4')}>
+            <li key={plan.key} className={cx('py-6', failed && 'border-l-4 border-alert pl-4')}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                  <h3 className="font-display text-[22px] font-semibold leading-tight">
                     {i + 1}. {plan.title}
                   </h3>
                   <p className="mt-1 text-pretty text-soft">{plan.how}</p>
@@ -204,7 +204,7 @@ export default function BreakItPage() {
                   <div>
                     <dt className="inline text-soft">On: </dt>
                     <dd className="inline">
-                      <Link to={`/p/${plan.target.purseId}`} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+                      <Link to={`/p/${plan.target.purseId}`} className="underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass">
                         Purse #{plan.target.purseId.toString()}, {plan.target.purseTitle}
                       </Link>{' '}
                       <StatePill state={plan.target.purseState} />
@@ -212,7 +212,7 @@ export default function BreakItPage() {
                   </div>
                 </dl>
               ) : (
-                <p className="mt-4 font-medium">Not run: {plan.unavailable}</p>
+                <p className="mt-4 font-semibold">Not run: {plan.unavailable}</p>
               )}
               {plan.note && plan.target && <p className="mt-3 text-sm text-soft text-pretty">{plan.note}</p>}
               {result !== undefined && <Result plan={plan} result={result} />}
@@ -223,7 +223,7 @@ export default function BreakItPage() {
 
       <CannotStop />
 
-      <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">Found a way through?</h2>
+      <h2 className="mt-20 h-section">Found a way through?</h2>
       <p className="mt-3 max-w-[34rem] text-pretty">
         Found a way past any of these, or something we missed? Please{' '}
         <a href={reportUrl || STUDIO_PROJECT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">

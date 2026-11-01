@@ -19,8 +19,8 @@ type Unit = keyof typeof UNITS
 function Step({ n, title, done, children }: { n: number; title: string; done?: boolean; children: ReactNode }) {
   return (
     <section className="border-t border-rule pt-6">
-      <h2 className="flex items-center gap-3 font-display text-xl font-semibold tracking-tight">
-        <span className={cx('inline-flex h-8 w-8 items-center justify-center rounded-full text-sm', done ? 'bg-lock text-white' : 'border border-ink/40')}>
+      <h2 className="flex items-center gap-3 h-section">
+        <span className={cx('inline-flex h-8 w-8 items-center justify-center rounded-sm text-sm', done ? 'bg-paid text-plate' : 'border border-soft')}>
           {done ? <Check size={14} aria-hidden /> : n}
         </span>
         {title}
@@ -33,7 +33,7 @@ function Step({ n, title, done, children }: { n: number; title: string; done?: b
 function Field({ id, label, hint, children }: { id: string; label: string; hint?: string; children: ReactNode }) {
   return (
     <div>
-      <label htmlFor={id} className="block font-medium">
+      <label htmlFor={id} className="block font-semibold">
         {label}
       </label>
       {children}
@@ -42,7 +42,7 @@ function Field({ id, label, hint, children }: { id: string; label: string; hint?
   )
 }
 
-const inputClass = 'mt-2 min-h-12 w-full rounded-lg border border-ink/40 bg-white px-3'
+const inputClass = 'mt-2 min-h-12 w-full rounded-lg border border-soft bg-plate px-3'
 
 export default function CreatePage() {
   const navigate = useNavigate()
@@ -98,7 +98,7 @@ export default function CreatePage() {
 
   return (
     <>
-      <h1 className="font-display text-4xl font-semibold tracking-tight">Create a purse</h1>
+      <h1 className="h-headline">Create a purse</h1>
       <p className="mt-3 max-w-[34rem] text-lg text-pretty">
         The prize leaves your wallet now and sits in the contract. The whole pool has to go to the winners you name. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to you.
       </p>
@@ -140,7 +140,7 @@ export default function CreatePage() {
             <Field id="window" label="Time winners have to claim" hint="Counted from the moment you name winners, so naming late never shortens it.">
               <div className="mt-1 flex gap-2">
                 <input id="window" inputMode="decimal" value={windowValue} onChange={(e) => setWindowValue(e.target.value)} className="min-h-12 w-24 rounded-lg border border-ink/40 px-3 text-right tabular-nums" />
-                <select aria-label="Claim window unit" value={unit} onChange={(e) => setUnit(e.target.value as Unit)} className="min-h-12 rounded-lg border border-ink/40 bg-white px-3">
+                <select aria-label="Claim window unit" value={unit} onChange={(e) => setUnit(e.target.value as Unit)} className="min-h-12 rounded-lg border border-soft bg-plate px-3">
                   <option value="minutes">minutes</option>
                   <option value="hours">hours</option>
                   <option value="days">days</option>
@@ -159,7 +159,7 @@ export default function CreatePage() {
 
         <Step n={3} title="Approve USDC" done={approved}>
           {approved ? (
-            <p className="text-sm text-lock">Approved. The purse may take {amount !== null && formatMoney(amount)} USDC from your wallet.</p>
+            <p className="text-sm text-paid">Approved. The purse may take {amount !== null && formatMoney(amount)} USDC from your wallet.</p>
           ) : (
             <>
               <p className="mb-2 text-sm text-soft">This lets the contract take exactly the prize amount. It moves nothing yet.</p>

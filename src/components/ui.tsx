@@ -1,33 +1,51 @@
-import { useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { useEffect, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Check, Copy, ExternalLink } from 'lucide-react'
 import { explorerAddress, explorerTx } from '@/lib/env'
-import { formatMoney, shortAddress } from '@/lib/format'
+import { formatDay, formatMoney, formatDate, shortAddress } from '@/lib/format'
+import { markSeen, wasSeen } from '@/lib/seen'
 import type { PurseState } from '@/lib/purse-state'
 import type { SendState } from '@/lib/hooks'
 import type { Held } from '@/lib/purse-state'
 
 export const cx = (...parts: Array<string | false | null | undefined>) => parts.filter(Boolean).join(' ')
 
-/** Money in the 6-decimal USDC view, with tabular figures so columns line up. */
-export function Money({ raw, className = '', unit = true }: { raw: bigint; className?: string; unit?: boolean }) {
+const linkClass = 'underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass'
+
+/** Money in the 6-decimal USDC view: serif, lining tabular figures, "USDC" in small caps. */
+export function Money({ raw, className = '', unit = true, unitClassName = 'text-[0.62em]' }: { raw: bigint; className?: string; unit?: boolean; unitClassName?: string }) {
   return (
-    <span className={cx('tabular-nums whitespace-nowrap', className)}>
+    <span className={cx('font-display font-medium tabular-nums whitespace-nowrap', className)} style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}>
       {formatMoney(raw)}
-      {unit && <span className="ml-1 text-[0.7em] font-medium tracking-wide text-soft">USDC</span>}
+      {unit && <span className={cx('smallcaps ml-1 text-soft', unitClassName)}>USDC</span>}
     </span>
   )
 }
 
 /** A purse's amount: the pool, or what it held when everything has been returned. */
-export function HeldMoney({ held, className = '', returnedClassName = 'text-sm font-medium' }: { held: Held; className?: string; returnedClassName?: string }) {
-  if (held.kind === 'loading') return <Skeleton className={cx('inline-block h-[1em] w-24 align-middle', className)} />
+export function HeldMoney({
+  held,
+  className = '',
+  returnedClassName = 'text-sm font-medium',
+  unitClassName,
+}: {
+  held: Held
+  className?: string
+  returnedClassName?: string
+  unitClassName?: string
+}) {
+  if (held.kind === 'loading') return <Skeleton className={cx('inline-block h-[0.8em] w-40 align-middle', className)} />
   return (
-    <span className="inline-flex flex-wrap items-baseline gap-x-2">
-      <Money raw={held.raw} className={className} />
+    <span className="inline-flex flex-wrap items-baseline gap-x-3">
+      <Money raw={held.raw} className={className} unitClassName={unitClassName} />
       {held.returned && <span className={returnedClassName}>returned</span>}
     </span>
   )
+}
+
+/** A date and time in mono, as the design asks for dates. */
+export function Dt({ seconds, className = '' }: { seconds: bigint | number; className?: string }) {
+  return <span className={cx('t-mono whitespace-nowrap', className)}>{formatDate(seconds)}</span>
 }
 
 /** Copies text and says so for a moment. Roomy hit area without taking up room in the line. */
@@ -38,7 +56,7 @@ export function CopyButton({ value, label = 'Copy address' }: { value: string; l
       type="button"
       aria-label={copied ? 'Copied' : label}
       title={copied ? 'Copied' : label}
-      className="-m-2 inline-flex items-center justify-center rounded p-2 text-soft hover:text-ink"
+      className="-m-2 inline-flex items-center justify-center rounded p-2 text-soft hover:text-brass"
       onClick={() => {
         void navigator.clipboard
           ?.writeText(value)
@@ -49,7 +67,7 @@ export function CopyButton({ value, label = 'Copy address' }: { value: string; l
           .catch(() => undefined)
       }}
     >
-      {copied ? <Check size={16} aria-hidden className="text-lock" /> : <Copy size={16} aria-hidden />}
+      {copied ? <Check size={16} aria-hidden className="text-paid" /> : <Copy size={16} aria-hidden />}
     </button>
   )
 }
@@ -58,15 +76,9 @@ export function CopyButton({ value, label = 'Copy address' }: { value: string; l
 export function Addr({ address, you }: { address: string; you?: boolean }) {
   return (
     <span className="inline-flex items-center gap-2.5 whitespace-nowrap">
-      <a
-        href={explorerAddress(address)}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={address}
-        className="inline-flex items-center gap-1 font-mono text-[0.9em] underline decoration-ink/30 underline-offset-4 hover:decoration-ink"
-      >
+      <a href={explorerAddress(address)} target="_blank" rel="noopener noreferrer" title={address} className={cx('t-mono inline-flex items-center gap-1.5', linkClass)}>
         {shortAddress(address)}
-        {you && <span className="rounded bg-ink px-1.5 py-px font-sans text-[0.75em] font-medium text-paper no-underline">you</span>}
+        {you && <span className="rounded-sm bg-ink px-1.5 py-px font-sans text-[12px] font-semibold text-paper no-underline">you</span>}
       </a>
       <CopyButton value={address} />
     </span>
@@ -77,9 +89,9 @@ export function Addr({ address, you }: { address: string; you?: boolean }) {
 export function ContractLine({ address, href = explorerAddress(address) }: { address: string; href?: string }) {
   return (
     <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-      <span className="break-all font-mono text-[0.9em]">{address}</span>
+      <span className="t-mono break-all">{address}</span>
       <CopyButton value={address} label="Copy contract address" />
-      <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cx('inline-flex items-center gap-1', linkClass)}>
         Explorer <ExternalLink size={14} aria-hidden />
       </a>
     </span>
@@ -88,33 +100,64 @@ export function ContractLine({ address, href = explorerAddress(address) }: { add
 
 export function TxLink({ hash, label = 'Transaction' }: { hash: string; label?: string }) {
   return (
-    <a
-      href={explorerTx(hash)}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink"
-    >
+    <a href={explorerTx(hash)} target="_blank" rel="noopener noreferrer" className={cx('inline-flex items-center gap-1', linkClass)}>
       {label}
       <ExternalLink size={14} aria-hidden />
     </a>
   )
 }
 
-const GREEN_STATES: PurseState[] = ['Locked', 'Paid out']
+const PAID_STATES: PurseState[] = ['Locked', 'Paid out']
 
+/** The state marker: the only pill in the design. */
 export function StatePill({ state }: { state: PurseState }) {
-  const green = GREEN_STATES.includes(state)
+  const paid = PAID_STATES.includes(state)
   return (
     <span
       className={cx(
-        'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1 text-sm font-medium',
-        green ? 'border-lock bg-lock text-white' : 'border-ink/40 text-ink',
+        'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-0.5 text-sm font-semibold',
+        paid ? 'border-paid bg-paid text-plate' : 'border-ink bg-plate text-ink',
       )}
     >
-      <span className={cx('h-1.5 w-1.5 rounded-full', green ? 'bg-white' : 'bg-ink/60')} aria-hidden />
+      <span className={cx('h-1.5 w-1.5 rounded-full', paid ? 'bg-plate' : 'bg-ink')} aria-hidden />
       {state}
     </span>
   )
+}
+
+/**
+ * The PAID stamp: a small rotated mark with the date, linked to the transaction when there is one.
+ * It presses in once, the first time this row is seen as paid in a browser session.
+ */
+export function Stamp({ id, date, href }: { id: string; date?: bigint | number; href?: string }) {
+  const [press] = useState(() => !wasSeen(id))
+  useEffect(() => {
+    markSeen(id)
+  }, [id])
+  const body = (
+    <>
+      Paid
+      {date !== undefined && <span className="stamp-date">{formatDay(date)}</span>}
+    </>
+  )
+  const cls = cx('stamp', press && 'stamp-press')
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={cls} title="View the transaction">
+      {body}
+    </a>
+  ) : (
+    <span className={cls}>{body}</span>
+  )
+}
+
+/** Paper behind a plate, with faint horizontal statement rules. */
+export function PlateBacking({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <div className={cx('plate-backing', className)}>{children}</div>
+}
+
+/** The engraved plate: ink border, inner brass rule, one soft edge. One per screen. */
+export function Plate({ children, small = false, className = '' }: { children: ReactNode; small?: boolean; className?: string }) {
+  return <article className={cx('plate', small && 'plate-sm', className)}>{children}</article>
 }
 
 export function Skeleton({ className = '' }: { className?: string }) {
@@ -122,11 +165,7 @@ export function Skeleton({ className = '' }: { className?: string }) {
 }
 
 export function Notice({ children, strong = false }: { children: ReactNode; strong?: boolean }) {
-  return (
-    <div className={cx('border-l-2 py-1 pl-4 text-pretty', strong ? 'border-ink' : 'border-rule')}>
-      {children}
-    </div>
-  )
+  return <div className={cx('border-l-2 py-1 pl-4 text-pretty', strong ? 'border-ink' : 'border-rule')}>{children}</div>
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'green' }
@@ -136,10 +175,10 @@ export function Button({ variant = 'primary', className = '', ...props }: Button
     <button
       {...props}
       className={cx(
-        'inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50',
-        variant === 'primary' && 'bg-ink text-paper hover:bg-ink/85',
-        variant === 'green' && 'bg-lock text-white hover:bg-lock/90',
-        variant === 'secondary' && 'border border-ink/40 bg-transparent hover:border-ink hover:bg-ink/[0.04]',
+        'inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded px-5 text-[16px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-55',
+        variant === 'primary' && 'bg-ink text-paper hover:bg-black',
+        variant === 'green' && 'bg-paid text-plate hover:bg-black',
+        variant === 'secondary' && 'border border-ink bg-transparent text-ink hover:bg-ink hover:text-paper',
         className,
       )}
     />
@@ -150,7 +189,7 @@ export function Button({ variant = 'primary', className = '', ...props }: Button
 export function SendStatus({ state }: { state: SendState }) {
   if (state.phase === 'idle') return null
   return (
-    <div className="mt-2 text-sm" role="status" aria-live="polite">
+    <div className="t-small mt-2" role="status" aria-live="polite">
       {state.phase === 'wallet' && <p className="text-soft">Waiting for your wallet. Confirm the request there.</p>}
       {state.phase === 'confirming' && (
         <p className="text-soft">
@@ -158,20 +197,20 @@ export function SendStatus({ state }: { state: SendState }) {
         </p>
       )}
       {state.phase === 'done' && (
-        <p className="text-lock">
+        <p className="text-paid">
           Done. {state.hash && <TxLink hash={state.hash} label="View transaction" />}
         </p>
       )}
-      {state.phase === 'error' && <p className="font-medium">{state.error}</p>}
+      {state.phase === 'error' && <p className="font-semibold">{state.error}</p>}
     </div>
   )
 }
 
 export function Section({ title, children, aside }: { title: string; children: ReactNode; aside?: ReactNode }) {
   return (
-    <section className="mt-14 border-t border-rule pt-8">
-      <div className="mb-4 flex items-baseline justify-between gap-3">
-        <h2 className="font-display text-xl font-semibold tracking-tight">{title}</h2>
+    <section className="mt-20 border-t border-rule pt-10">
+      <div className="mb-5 flex items-baseline justify-between gap-3">
+        <h2 className="h-section">{title}</h2>
         {aside}
       </div>
       {children}
@@ -195,11 +234,11 @@ export function LedgerRow({ label, children }: { label: ReactNode; children: Rea
 
 /** Small heading for a group of rows in a long list. */
 export function GroupLabel({ children }: { children: ReactNode }) {
-  return <h3 className="pb-3 pt-10 text-base font-medium text-soft">{children}</h3>
+  return <h3 className="pb-3 pt-12 font-semibold text-soft">{children}</h3>
 }
 
 export const BackLink = ({ to = '/', children = 'All purses' }: { to?: string; children?: ReactNode }) => (
-  <Link to={to} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+  <Link to={to} className={linkClass}>
     {children}
   </Link>
 )

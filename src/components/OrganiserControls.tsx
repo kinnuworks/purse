@@ -15,7 +15,7 @@ function AllocationLine({ pool, amounts }: { pool: bigint; amounts: bigint[] }) 
   const a = allocation(amounts, pool)
   return (
     <div
-      className={cx('border-l-2 py-1 pl-4', a.status === 'match' ? 'border-lock text-lock' : 'border-ink')}
+      className={cx('border-l-2 py-1 pl-4', a.status === 'match' ? 'border-paid text-paid' : 'border-ink')}
       role="status"
       aria-live="polite"
     >
@@ -23,7 +23,7 @@ function AllocationLine({ pool, amounts }: { pool: bigint; amounts: bigint[] }) 
         <span>
           Assigned <Money raw={a.total} /> of <Money raw={a.pool} />
         </span>
-        <span className="font-medium">
+        <span className="font-semibold">
           {a.status === 'match' && 'Matches the pool'}
           {a.status === 'short' && (
             <>
@@ -63,11 +63,11 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
 
   return (
     <div className="space-y-5 border-t-2 border-ink pt-6">
-      <h3 className="font-display text-lg font-semibold tracking-tight">You are the organiser</h3>
+      <h3 className="font-display text-[22px] font-semibold leading-tight">You are the organiser</h3>
 
       {canLock(purse, now) && (
         <div>
-          <p className="text-sm font-medium">Step 1. Lock the purse</p>
+          <p className="text-sm font-semibold">Step 1. Lock the purse</p>
           <p className="mt-1 text-sm text-soft text-pretty">
             Locking ends funding. Nobody can add to the pool after this, so nobody can make your winner amounts stop adding up at the last second.
           </p>
@@ -82,10 +82,10 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
         </div>
       )}
 
-      {canName(purse, now) && <p className="text-sm font-medium text-lock">Step 1 done. The purse is locked.</p>}
+      {canName(purse, now) && <p className="text-sm font-semibold text-paid">Step 1 done. The purse is locked.</p>}
 
       <div>
-        <p className="text-sm font-medium">Step 2. Name the winners</p>
+        <p className="text-sm font-semibold">Step 2. Name the winners</p>
         {!purse.locked && <p className="mt-1 text-sm text-soft">Lock the purse first. The pool can still change until you do.</p>}
         <ul className="mt-3 space-y-3">
           {rows.map((row, i) => (
@@ -97,7 +97,7 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
                 placeholder="0x… wallet address"
                 spellCheck={false}
                 autoComplete="off"
-                className="col-span-2 min-h-12 rounded-lg border border-ink/40 bg-white px-3 font-mono text-sm sm:col-span-1"
+                className="col-span-2 min-h-12 rounded-lg border border-soft bg-plate px-3 t-mono sm:col-span-1"
               />
               <input
                 aria-label={`Winner ${i + 1} amount in USDC`}
@@ -105,7 +105,7 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
                 inputMode="decimal"
                 onChange={(e) => update(i, { amount: e.target.value })}
                 placeholder="0.00"
-                className="min-h-12 rounded-lg border border-ink/40 bg-white px-3 text-right tabular-nums"
+                className="min-h-12 rounded-lg border border-soft bg-plate px-3 text-right tabular-nums"
               />
               <Button variant="secondary" aria-label={`Remove winner ${i + 1}`} disabled={rows.length === 1} onClick={() => setRows((prev) => prev.filter((_, j) => j !== i))}>
                 <X size={16} aria-hidden />

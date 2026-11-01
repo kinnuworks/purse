@@ -26,9 +26,9 @@ export function AddFunds({ id }: { id: bigint }) {
 
   return (
     <div className="border-t border-rule pt-6">
-      <h3 className="font-medium">Add to this purse</h3>
+      <h3 className="font-semibold">Add to this purse</h3>
       <p className="mt-1 text-sm text-soft text-pretty">Anyone can add money until the organiser locks the purse. You can take your own money back if no winners are named in time.</p>
-      <label htmlFor="add-amount" className="mt-3 block text-sm font-medium">
+      <label htmlFor="add-amount" className="mt-3 block text-sm font-semibold">
         Amount (USDC)
       </label>
       <input
@@ -37,7 +37,7 @@ export function AddFunds({ id }: { id: bigint }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="0.00"
-        className="mt-2 min-h-12 w-full rounded-lg border border-ink/40 bg-white px-3 text-right tabular-nums"
+        className="mt-2 min-h-12 w-full rounded-lg border border-soft bg-plate px-3 text-right tabular-nums"
       />
       {address && balance.data !== undefined && (
         <p className="mt-2 text-sm text-soft">
@@ -49,9 +49,9 @@ export function AddFunds({ id }: { id: bigint }) {
 
       <ol className="mt-4 space-y-4">
         <li>
-          <p className="text-sm font-medium">Step 1. Let the purse take {valid ? formatMoney(amount) : 'this amount'} USDC</p>
+          <p className="text-sm font-semibold">Step 1. Let the purse take {valid ? formatMoney(amount) : 'this amount'} USDC</p>
           {approved ? (
-            <p className="mt-1 text-sm text-lock">Already approved.</p>
+            <p className="mt-1 text-sm text-paid">Already approved.</p>
           ) : (
             <>
               <Button
@@ -73,7 +73,7 @@ export function AddFunds({ id }: { id: bigint }) {
           )}
         </li>
         <li>
-          <p className="text-sm font-medium">Step 2. Add it to the purse</p>
+          <p className="text-sm font-semibold">Step 2. Add it to the purse</p>
           <Button
             className="mt-2"
             disabled={!valid || !approved || short || add.busy}

@@ -61,3 +61,10 @@ export function timeLeft(deadline: bigint, now: bigint): string {
 }
 
 export const nowSeconds = () => BigInt(Math.floor(Date.now() / 1000))
+
+const dayOnly = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' })
+
+/** A date without the time, for the PAID stamp. */
+export function formatDay(seconds: bigint | number): string {
+  return dayOnly.format(new Date(Number(seconds) * 1000))
+}

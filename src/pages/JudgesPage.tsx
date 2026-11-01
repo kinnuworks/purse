@@ -10,7 +10,7 @@ import { readProof } from '@/lib/proof-data'
 import proof from '@/proof.json'
 
 
-const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink'
+const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:text-brass hover:decoration-brass'
 
 const WAYS: Record<MoneyOut, { heading: string; sentence: (e: Example) => string }> = {
   delivered: { heading: 'Delivered to a winner', sentence: () => 'was sent to a winner the organiser had named.' },
@@ -21,7 +21,7 @@ const WAYS: Record<MoneyOut, { heading: string; sentence: (e: Example) => string
 function Row({ kind, example, loading }: { kind: MoneyOut; example: Example | null; loading: boolean }) {
   return (
     <li className="py-5">
-      <div className="font-medium">{WAYS[kind].heading}</div>
+      <div className="font-semibold">{WAYS[kind].heading}</div>
       {loading ? (
         <Skeleton className="mt-2 h-5 w-3/4" />
       ) : example ? (
@@ -51,7 +51,7 @@ function StatRow({ label, children }: { label: string; children: ReactNode }) {
       <th scope="row" className="py-3 pr-4 text-left font-normal">
         {label}
       </th>
-      <td className="py-3 text-right text-lg font-medium tabular-nums">{children}</td>
+      <td className="py-3 text-right font-display text-[22px] font-medium tabular-nums">{children}</td>
     </tr>
   )
 }
@@ -67,7 +67,7 @@ export default function JudgesPage() {
 
   return (
     <>
-      <h1 className="font-display text-4xl font-semibold tracking-tight">For reviewers</h1>
+      <h1 className="h-headline">For reviewers</h1>
       <p className="mt-3 max-w-[34rem] text-lg text-pretty">
         Purse is a contract on Arc that locks a contest’s USDC prize before the contest starts. The whole pool has to go to the named winners. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to the organiser.
       </p>
@@ -106,8 +106,8 @@ export default function JudgesPage() {
         </Ledger>
       </div>
 
-      <section className="mt-14 border-t border-rule pt-8" aria-labelledby="sixty">
-        <h2 id="sixty" className="font-display text-xl font-semibold tracking-tight">
+      <section className="mt-20 border-t border-rule pt-10" aria-labelledby="sixty">
+        <h2 id="sixty" className="h-section">
           See it in 60 seconds
         </h2>
         <p className="mt-2 text-soft">One real example, from the live contract, for each way money can leave it.</p>
@@ -124,8 +124,8 @@ export default function JudgesPage() {
         </p>
       </section>
 
-      <section className="mt-14 border-t border-rule pt-8" aria-labelledby="live">
-        <h2 id="live" className="font-display text-xl font-semibold tracking-tight">
+      <section className="mt-20 border-t border-rule pt-10" aria-labelledby="live">
+        <h2 id="live" className="h-section">
           Counts from the chain, live
         </h2>
         {!PURSE_ADDRESS ? (
@@ -175,7 +175,7 @@ export default function JudgesPage() {
         )}
       </section>
 
-      <p className="mt-14 max-w-[34rem] border-l-2 border-ink pl-4 text-pretty">
+      <p className="mt-20 max-w-[34rem] border-l-2 border-ink pl-4 text-pretty">
         What this does not prove: the organiser alone picks the winners, and Purse cannot show the judging was fair. The contract has not been audited.
       </p>
     </>
