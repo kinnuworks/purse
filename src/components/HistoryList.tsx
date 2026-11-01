@@ -70,24 +70,24 @@ export function HistoryList({ id }: { id: bigint }) {
             <Skeleton className="h-5 w-3/4" />
             <Skeleton className="h-5 w-2/3" />
             <Skeleton className="h-5 w-1/2" />
-            <p className="text-xs opacity-60 tabular-nums">
+            <p className="text-sm text-soft tabular-nums">
               Reading the chain history{progress ? `: block ${progress.scannedTo.toString()} of ${progress.head.toString()}` : '…'}
             </p>
           </>
         ) : (
-          <p className="text-sm opacity-70">No events recorded for this purse yet.</p>
+          <p className="text-sm text-soft">No events recorded for this purse yet.</p>
         )}
       </div>
     )
   }
 
   return (
-    <ol className="divide-y divide-ink/10 rounded-xl border border-ink/15">
+    <ol className="divide-y divide-rule border-y border-rule">
       {events.map((event) => {
         const time = times.data?.[event.blockNumber.toString()]
         return (
-          <li key={`${event.txHash}:${event.logIndex}`} className="px-4 py-3 text-sm leading-relaxed">
-            <div className="mb-0.5 text-xs opacity-60 tabular-nums">
+          <li key={`${event.txHash}:${event.logIndex}`} className="py-4 leading-relaxed">
+            <div className="mb-1 text-sm text-soft tabular-nums">
               {time !== undefined ? formatDate(time) : <Skeleton className="inline-block h-3 w-28 align-middle" />}
             </div>
             <div className="text-pretty">
@@ -100,7 +100,7 @@ export function HistoryList({ id }: { id: bigint }) {
         )
       })}
       {history.status === 'loading' && (
-        <li className="px-4 py-2 text-xs opacity-60">Checking for newer events…</li>
+        <li className="py-3 text-sm text-soft">Checking for newer events…</li>
       )}
     </ol>
   )

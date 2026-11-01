@@ -18,14 +18,14 @@ type Unit = keyof typeof UNITS
 
 function Step({ n, title, done, children }: { n: number; title: string; done?: boolean; children: ReactNode }) {
   return (
-    <section className="rounded-xl border border-ink/15 p-4 sm:p-5">
-      <h2 className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight">
-        <span className={cx('inline-flex h-6 w-6 items-center justify-center rounded-full text-xs', done ? 'bg-lock text-white' : 'border border-ink/30')}>
+    <section className="border-t border-rule pt-6">
+      <h2 className="flex items-center gap-3 font-display text-xl font-semibold tracking-tight">
+        <span className={cx('inline-flex h-8 w-8 items-center justify-center rounded-full text-sm', done ? 'bg-lock text-white' : 'border border-ink/40')}>
           {done ? <Check size={14} aria-hidden /> : n}
         </span>
         {title}
       </h2>
-      <div className="mt-3">{children}</div>
+      <div className="mt-4">{children}</div>
     </section>
   )
 }
@@ -33,16 +33,16 @@ function Step({ n, title, done, children }: { n: number; title: string; done?: b
 function Field({ id, label, hint, children }: { id: string; label: string; hint?: string; children: ReactNode }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium">
+      <label htmlFor={id} className="block font-medium">
         {label}
       </label>
       {children}
-      {hint && <p className="mt-1 text-xs opacity-60">{hint}</p>}
+      {hint && <p className="mt-1.5 text-sm text-soft">{hint}</p>}
     </div>
   )
 }
 
-const inputClass = 'mt-1 min-h-11 w-full rounded-lg border border-ink/25 px-3'
+const inputClass = 'mt-2 min-h-12 w-full rounded-lg border border-ink/40 bg-white px-3'
 
 export default function CreatePage() {
   const navigate = useNavigate()
@@ -98,12 +98,12 @@ export default function CreatePage() {
 
   return (
     <>
-      <h1 className="font-display text-3xl font-semibold tracking-tight">Create a purse</h1>
-      <p className="mt-2 max-w-prose text-sm opacity-75 text-pretty">
+      <h1 className="font-display text-4xl font-semibold tracking-tight">Create a purse</h1>
+      <p className="mt-3 max-w-[34rem] text-lg text-pretty">
         The prize leaves your wallet now and sits in the contract. After the contest it goes to the winners you name, or back to whoever put it in.
       </p>
 
-      <div className="mt-6 space-y-4">
+      <div className="mt-10 space-y-10">
         <Step n={1} title="Connect your wallet" done={onChain}>
           {onChain && address ? (
             <p className="text-sm">
@@ -139,8 +139,8 @@ export default function CreatePage() {
             </Field>
             <Field id="window" label="Time winners have to claim" hint="Counted from the moment you name winners, so naming late never shortens it.">
               <div className="mt-1 flex gap-2">
-                <input id="window" inputMode="decimal" value={windowValue} onChange={(e) => setWindowValue(e.target.value)} className="min-h-11 w-24 rounded-lg border border-ink/25 px-3 text-right tabular-nums" />
-                <select aria-label="Claim window unit" value={unit} onChange={(e) => setUnit(e.target.value as Unit)} className="min-h-11 rounded-lg border border-ink/25 bg-white px-3">
+                <input id="window" inputMode="decimal" value={windowValue} onChange={(e) => setWindowValue(e.target.value)} className="min-h-12 w-24 rounded-lg border border-ink/40 px-3 text-right tabular-nums" />
+                <select aria-label="Claim window unit" value={unit} onChange={(e) => setUnit(e.target.value as Unit)} className="min-h-12 rounded-lg border border-ink/40 bg-white px-3">
                   <option value="minutes">minutes</option>
                   <option value="hours">hours</option>
                   <option value="days">days</option>
@@ -162,7 +162,7 @@ export default function CreatePage() {
             <p className="text-sm text-lock">Approved. The purse may take {amount !== null && formatMoney(amount)} USDC from your wallet.</p>
           ) : (
             <>
-              <p className="mb-2 text-sm opacity-75">This lets the contract take exactly the prize amount. It moves nothing yet.</p>
+              <p className="mb-2 text-sm text-soft">This lets the contract take exactly the prize amount. It moves nothing yet.</p>
               <Button
                 disabled={!formOk || !onChain || approve.busy}
                 onClick={() => {
@@ -182,7 +182,7 @@ export default function CreatePage() {
             {create.busy ? 'Creating…' : 'Create purse'}
           </Button>
           <SendStatus state={create.state} />
-          {!approved && formOk && onChain && <p className="mt-2 text-sm opacity-70">Approve first, then create.</p>}
+          {!approved && formOk && onChain && <p className="mt-2 text-sm text-soft">Approve first, then create.</p>}
         </Step>
 
         <Notice>You will lock funding and name winners from the purse page after it is created.</Notice>

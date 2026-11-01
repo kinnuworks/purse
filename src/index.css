@@ -8,13 +8,15 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  font-size: 17px;
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
-  background: #ffffff;
-  color: #10151c;
+  background: #fbfaf7;
+  color: #14171a;
+  line-height: 1.6;
   font-family: 'DM Sans', ui-sans-serif, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -24,7 +26,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid #10151c;
+  outline: 2px solid #14171a;
   outline-offset: 2px;
 }
 
@@ -46,7 +48,7 @@ button {
 }
 
 .skeleton {
-  background: rgba(16, 21, 28, 0.08);
+  background: rgba(20, 23, 26, 0.09);
   border-radius: 6px;
   animation: purse-pulse 1.4s ease-in-out infinite;
 }

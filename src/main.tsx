@@ -69,6 +69,13 @@ const StudioWatermark = () => (
 
 installShareSync()
 
+// After a new deploy, a page opened earlier can ask for a script file that no longer exists. Reload once to pick up the new one.
+window.addEventListener('vite:preloadError', () => {
+  if (sessionStorage.getItem('purse-reloaded')) return
+  sessionStorage.setItem('purse-reloaded', '1')
+  window.location.reload()
+})
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <WagmiProvider config={config}>

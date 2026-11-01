@@ -33,9 +33,9 @@ export function EmbedBadge({ id }: { id: bigint }) {
   }
 
   return (
-    <div className="rounded-xl border border-ink/15 p-4">
+    <div className="border-t border-rule pt-6">
       <h3 className="font-medium">Put this on your contest page</h3>
-      <p className="mt-1 text-sm opacity-70 text-pretty">Paste this into your page. It shows the prize, its state and a link back here, read from the chain each time it loads.</p>
+      <p className="mt-1 text-sm text-soft text-pretty">Paste this into your page. It shows the prize, its state and a link back here, read from the chain each time it loads.</p>
       <textarea
         readOnly
         aria-label="Embed code"
@@ -43,7 +43,7 @@ export function EmbedBadge({ id }: { id: bigint }) {
         placeholder="Preparing the link…"
         rows={4}
         onFocus={(e) => e.currentTarget.select()}
-        className="mt-3 w-full resize-none rounded-lg border border-ink/25 p-3 font-mono text-xs"
+        className="mt-3 w-full resize-none rounded-lg border border-ink/40 bg-white p-3 font-mono text-sm"
       />
       <Button className="mt-2" variant="secondary" disabled={!src} onClick={() => void copy()}>
         {copied ? (

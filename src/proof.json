@@ -3,18 +3,55 @@
   "appTests": 80,
   "sdkTests": 26,
   "ourAddresses": [
-    { "address": "0xC112DCb724a80E00Af0980e3a4023c4833B4F04e", "label": "Organiser wallet" },
-    { "address": "0xd80b6Ffa6b5Fa21e7c7Ddc605B1D00D29b9e6B17", "label": "Demo wallet" },
-    { "address": "0xE2Da137CF73E79404E36aac21446B8e4b40bfDA6", "label": "Test winner 1" },
-    { "address": "0x5F56b2AC16F66031403d402adc52ca46345f26FE", "label": "Test winner 2" },
-    { "address": "0x29FEeC332e0b98e15c8C1410529fe6484E25D41F", "label": "Test winner 3" },
-    { "address": "0x8BF6d9bF6AF06a54102b8D7Ac5a881F7b2297F59", "label": "Test winner 4" },
-    { "address": "0x90e89CC6369fF4e2F1Adaf90854860867Ff11CcC", "label": "Test winner 5" },
-    { "address": "0xB14adB46741B33fc1F8bbb15164F3E3cc2b21701", "label": "Test winner 6" },
-    { "address": "0xaFBc199B0024882967C5f1dE86608Ab5c749b7ca", "label": "Test winner 7" },
-    { "address": "0x050aC4Dc001db9DD671C44f5b2C2cE06255677c6", "label": "Test winner 8" },
-    { "address": "0x11485E0c07B5774008A00B0c9b6193dC12113A1F", "label": "Test winner 9" },
-    { "address": "0x41Fa9AAd9Ea95870906fFdd7863600404E38FD4D", "label": "Test winner 10" }
+    {
+      "address": "0xC112DCb724a80E00Af0980e3a4023c4833B4F04e",
+      "label": "Organiser wallet"
+    },
+    {
+      "address": "0xd80b6Ffa6b5Fa21e7c7Ddc605B1D00D29b9e6B17",
+      "label": "Demo wallet"
+    },
+    {
+      "address": "0xE2Da137CF73E79404E36aac21446B8e4b40bfDA6",
+      "label": "Test winner 1"
+    },
+    {
+      "address": "0x5F56b2AC16F66031403d402adc52ca46345f26FE",
+      "label": "Test winner 2"
+    },
+    {
+      "address": "0x29FEeC332e0b98e15c8C1410529fe6484E25D41F",
+      "label": "Test winner 3"
+    },
+    {
+      "address": "0x8BF6d9bF6AF06a54102b8D7Ac5a881F7b2297F59",
+      "label": "Test winner 4"
+    },
+    {
+      "address": "0x90e89CC6369fF4e2F1Adaf90854860867Ff11CcC",
+      "label": "Test winner 5"
+    },
+    {
+      "address": "0xB14adB46741B33fc1F8bbb15164F3E3cc2b21701",
+      "label": "Test winner 6"
+    },
+    {
+      "address": "0xaFBc199B0024882967C5f1dE86608Ab5c749b7ca",
+      "label": "Test winner 7"
+    },
+    {
+      "address": "0x050aC4Dc001db9DD671C44f5b2C2cE06255677c6",
+      "label": "Test winner 8"
+    },
+    {
+      "address": "0x11485E0c07B5774008A00B0c9b6193dC12113A1F",
+      "label": "Test winner 9"
+    },
+    {
+      "address": "0x41Fa9AAd9Ea95870906fFdd7863600404E38FD4D",
+      "label": "Test winner 10"
+    },
+    "0xD6C9826f7903B6F1836a299B5d77b017Add81891"
   ],
   "transactions": [
     {
@@ -234,5 +271,6 @@
       "network": "testnet"
     }
   ],
-  "testnetContract": "0x7fCF2eAf1b38f93e4d606a2826394E299a38bb97"
+  "testnetContract": "0x7fCF2eAf1b38f93e4d606a2826394E299a38bb97",
+  "reportUrl": "https://github.com/kinnuworks/purse/issues"
 }

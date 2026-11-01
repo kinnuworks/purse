@@ -10,7 +10,7 @@ Not on npm. Install it from the GitHub repo (replace `OWNER/REPO` with the repos
 
 ```
 # pnpm can install a folder of a repo
-pnpm add viem github:OWNER/REPO#path:/packages/purse-sdk
+pnpm add viem github:kinnuworks/purse#path:/packages/purse-sdk
 
 # npm and bun cannot install a sub-folder from GitHub; clone, then install from the folder
 git clone https://github.com/OWNER/REPO.git

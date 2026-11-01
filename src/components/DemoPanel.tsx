@@ -64,17 +64,17 @@ export function DemoPanel({ purses }: { purses: PurseData[] | undefined }) {
   const latestFinished = purses?.find((p) => p.title === DEMO_TITLE && deriveState(p, now) === 'Paid out')
 
   return (
-    <section className="mt-10 rounded-xl border border-ink/15 p-5" aria-labelledby="try-heading">
-      <h2 id="try-heading" className="font-display text-lg font-semibold tracking-tight">
+    <section className="mt-14 border-t border-rule pt-8" aria-labelledby="try-heading">
+      <h2 id="try-heading" className="font-display text-xl font-semibold tracking-tight">
         Try it with a real cent
       </h2>
-      <p className="mt-1 max-w-prose text-sm leading-relaxed opacity-75 text-pretty">
+      <p className="mt-2 max-w-[34rem] text-soft text-pretty">
         This runs a real {DEMO_PRIZE_USDC} USDC prize on Arc: create, lock, name the winner, deliver. One run a minute, 50 a day, and one run per winner
         address.
       </p>
 
-      <label htmlFor="demo-winner" className="mt-4 block text-sm font-medium">
-        Winner address <span className="font-normal opacity-60">(optional)</span>
+      <label htmlFor="demo-winner" className="mt-6 block font-medium">
+        Winner address <span className="font-normal text-soft">(optional)</span>
       </label>
       <input
         id="demo-winner"
@@ -83,12 +83,12 @@ export function DemoPanel({ purses }: { purses: PurseData[] | undefined }) {
         placeholder="0x… leave empty to use the demo wallet's second address"
         spellCheck={false}
         autoComplete="off"
-        className="mt-1 min-h-11 w-full rounded-lg border border-ink/25 px-3 font-mono text-sm placeholder:font-sans placeholder:opacity-50"
+        className="mt-2 min-h-12 w-full rounded-lg border border-ink/40 bg-white px-3 font-mono text-sm placeholder:font-sans placeholder:text-soft"
         aria-invalid={invalid}
       />
       {invalid && <p className="mt-1 text-sm">That is not a full Arc wallet address.</p>}
 
-      <Button className="mt-3 w-full sm:w-auto" disabled={running || invalid} onClick={() => void start()}>
+      <Button className="mt-4 w-full sm:w-auto" disabled={running || invalid} onClick={() => void start()}>
         {running ? (
           <>
             <Loader2 size={16} className="animate-spin" aria-hidden /> Running…
@@ -99,9 +99,9 @@ export function DemoPanel({ purses }: { purses: PurseData[] | undefined }) {
       </Button>
 
       {rows.length > 0 && (
-        <ol className="mt-4 space-y-2 text-sm" aria-live="polite">
+        <ol className="mt-6 divide-y divide-rule border-y border-rule" aria-live="polite">
           {rows.map((row) => (
-            <li key={row.step} className="flex flex-wrap items-center gap-x-2">
+            <li key={row.step} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-3">
               {row.status === 'done' ? <Check size={16} className="text-lock" aria-hidden /> : <Loader2 size={16} className="animate-spin" aria-hidden />}
               <span>{STEP_LABEL[row.step]}</span>
               {row.hash && <TxLink hash={row.hash} label="View transaction" />}
@@ -111,9 +111,9 @@ export function DemoPanel({ purses }: { purses: PurseData[] | undefined }) {
       )}
 
       {finishedId && (
-        <p className="mt-4 text-sm font-medium text-lock">
+        <p className="mt-4 font-medium text-lock">
           Paid out.{' '}
-          <Link to={`/p/${finishedId}`} className="underline underline-offset-2">
+          <Link to={`/p/${finishedId}`} className="underline underline-offset-4">
             Open the purse
           </Link>
         </p>
@@ -130,9 +130,9 @@ export function DemoPanel({ purses }: { purses: PurseData[] | undefined }) {
             The live demo is not available right now. {latestFinished ? 'Here is the latest finished demo purse:' : 'No finished demo purse has been recorded yet.'}
           </Notice>
           {latestFinished && (
-            <Link to={`/p/${latestFinished.id}`} className="mt-2 flex items-center justify-between rounded-lg border border-ink/15 px-4 py-3 text-sm hover:border-ink">
+            <Link to={`/p/${latestFinished.id}`} className="mt-3 flex items-center justify-between gap-3 border-y border-rule py-4 hover:bg-ink/[0.04]">
               <span>
-                {latestFinished.title} <span className="opacity-60">#{latestFinished.id.toString()}</span>
+                {latestFinished.title} <span className="text-soft">#{latestFinished.id.toString()}</span>
               </span>
               <Money raw={latestFinished.pool} />
             </Link>

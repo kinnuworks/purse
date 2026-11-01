@@ -25,9 +25,9 @@ export function AddFunds({ id }: { id: bigint }) {
   const short = valid && balance.data !== undefined && balance.data < amount
 
   return (
-    <div className="rounded-xl border border-ink/15 p-4">
+    <div className="border-t border-rule pt-6">
       <h3 className="font-medium">Add to this purse</h3>
-      <p className="mt-1 text-sm opacity-70 text-pretty">Anyone can add money until the organiser locks the purse. You can take your own money back if no winners are named in time.</p>
+      <p className="mt-1 text-sm text-soft text-pretty">Anyone can add money until the organiser locks the purse. You can take your own money back if no winners are named in time.</p>
       <label htmlFor="add-amount" className="mt-3 block text-sm font-medium">
         Amount (USDC)
       </label>
@@ -37,10 +37,10 @@ export function AddFunds({ id }: { id: bigint }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="0.00"
-        className="mt-1 min-h-11 w-full rounded-lg border border-ink/25 px-3 text-right tabular-nums"
+        className="mt-2 min-h-12 w-full rounded-lg border border-ink/40 bg-white px-3 text-right tabular-nums"
       />
       {address && balance.data !== undefined && (
-        <p className="mt-1 text-xs opacity-60">
+        <p className="mt-2 text-sm text-soft">
           Your balance: <Money raw={balance.data} />
         </p>
       )}

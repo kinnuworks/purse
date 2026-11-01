@@ -13,7 +13,7 @@ function ReturnedAmount({ id }: { id: bigint }) {
   return (
     <>
       <Money raw={held.raw} />
-      {held.returned && <span className="ml-2 text-sm font-medium opacity-70">returned</span>}
+      {held.returned && <span className="ml-2 text-sm font-medium text-soft">returned</span>}
     </>
   )
 }
@@ -25,7 +25,7 @@ export default function BadgePage() {
   const purse = usePurse(id)
   const now = useNow()
 
-  const shell = 'flex min-h-dvh flex-col justify-center bg-white p-3 text-ink'
+  const shell = 'flex min-h-dvh flex-col justify-center bg-paper p-3 text-ink'
   const card = 'rounded-xl border border-ink/20 p-4'
 
   if (!PURSE_ADDRESS || id === null) {
@@ -70,8 +70,8 @@ export default function BadgePage() {
           <StatePill state={state} />
         </div>
         <p className="mt-2 font-display text-3xl font-semibold tracking-tight">{p.pool > 0n ? <Money raw={p.pool} className="[&>span]:text-sm" /> : <ReturnedAmount id={p.id} />}</p>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs">
-          <span className="opacity-60">Read from the chain</span>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-sm">
+          <span className="text-soft">Read from the chain</span>
           <a href={`/p/${p.id}`} target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2">
             View this purse
           </a>

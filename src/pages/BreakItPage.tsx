@@ -35,7 +35,7 @@ function Result({ plan, result }: { plan: AttackPlan; result: SimulationResult |
   }
   if (result.outcome === 'succeeded') {
     return (
-      <div className="mt-3 rounded-lg border-2 border-red-600 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+      <div className="mt-3 rounded-lg border-2 border-red-700 bg-red-50 px-4 py-3 text-red-900" role="alert">
         <p className="font-semibold">Failure: this call succeeded.</p>
         <p className="mt-1">The contract should have refused it. If you see this, please report it.</p>
       </div>
@@ -49,18 +49,18 @@ function Result({ plan, result }: { plan: AttackPlan; result: SimulationResult |
     )
   }
   return (
-    <div className="mt-3 grid gap-3 rounded-lg border border-ink/15 p-3 text-sm sm:grid-cols-2" role="status">
+    <div className="mt-4 grid gap-5 border-l-2 border-rule pl-4 sm:grid-cols-2" role="status">
       <div>
-        <div className="text-xs font-medium uppercase tracking-wider opacity-60">The contract said</div>
+        <div className="text-sm font-medium text-soft">The contract said</div>
         <p className="mt-1 break-all font-mono text-[0.85em]">{result.reason}</p>
         {!result.matchesExpected && (
-          <p className="mt-1 text-xs">It refused, but for a different reason than expected ({plan.expect}). The purse’s state may have changed.</p>
+          <p className="mt-1 text-sm">It refused, but for a different reason than expected ({plan.expect}). The purse’s state may have changed.</p>
         )}
       </div>
       <div>
-        <div className="text-xs font-medium uppercase tracking-wider opacity-60">In plain words</div>
+        <div className="text-sm font-medium text-soft">In plain words</div>
         <p className="mt-1 text-pretty">{plainRevert(result.name) ?? plan.meaning}</p>
-        <p className="mt-1 text-xs opacity-70 text-pretty">{plan.meaning}</p>
+        <p className="mt-1 text-sm text-soft text-pretty">{plan.meaning}</p>
       </div>
     </div>
   )
@@ -86,11 +86,11 @@ export default function BreakItPage() {
 
   return (
     <>
-      <h1 className="font-display text-3xl font-semibold tracking-tight">Try to break it</h1>
-      <p className="mt-3 max-w-prose text-pretty">
+      <h1 className="font-display text-4xl font-semibold tracking-tight">Try to break it</h1>
+      <p className="mt-3 max-w-[34rem] text-lg text-pretty">
         Each row is an attack. The button asks the live contract on Arc to run it, from the address that would really try it, using a read-only call. No wallet, no transaction, no money moves. The contract’s own refusal is shown next to what it means.
       </p>
-      <p className="mt-2 max-w-prose text-sm text-pretty opacity-80">
+      <p className="mt-3 max-w-[34rem] text-pretty text-soft">
         Purses are picked from the chain so each test means something. If none fits right now, the row says so instead of pretending.
       </p>
 
@@ -101,11 +101,11 @@ export default function BreakItPage() {
       )}
 
       {PURSE_ADDRESS && (
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center gap-3">
           <Button disabled={!anyRunnable} onClick={() => void runAll()}>
             Run them all
           </Button>
-          {failures > 0 && <span className="text-sm font-semibold text-red-700">{failures} failed. See below.</span>}
+          {failures > 0 && <span className="font-semibold text-red-800">{failures} failed. See below.</span>}
         </div>
       )}
 
@@ -122,18 +122,19 @@ export default function BreakItPage() {
         </div>
       )}
 
-      <ol className="mt-6 space-y-4">
+      <h2 className="mt-12 font-display text-xl font-semibold tracking-tight">The attacks</h2>
+      <ol className="mt-4 divide-y divide-rule border-y border-rule">
         {plans.map((plan, i) => {
           const result = results[plan.key]
           const failed = result !== undefined && result !== 'running' && result.outcome === 'succeeded'
           return (
-            <li key={plan.key} className={cx('rounded-xl border p-4', failed ? 'border-red-600' : 'border-ink/15')}>
+            <li key={plan.key} className={cx('py-6', failed && 'border-l-4 border-red-700 pl-4')}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <h2 className="font-display text-base font-semibold tracking-tight">
+                  <h3 className="font-display text-lg font-semibold tracking-tight">
                     {i + 1}. {plan.title}
-                  </h2>
-                  <p className="mt-1 text-sm text-pretty opacity-80">{plan.how}</p>
+                  </h3>
+                  <p className="mt-1 text-pretty text-soft">{plan.how}</p>
                 </div>
                 {plan.target && (
                   <Button variant="secondary" disabled={result === 'running'} onClick={() => void run(plan)}>
@@ -143,17 +144,17 @@ export default function BreakItPage() {
               </div>
 
               {plan.target ? (
-                <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+                <dl className="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
                   <div>
-                    <dt className="inline opacity-60">Caller: </dt>
+                    <dt className="inline text-soft">Caller: </dt>
                     <dd className="inline">
                       {plan.target.callerLabel} <Addr address={plan.target.caller} />
                     </dd>
                   </div>
                   <div>
-                    <dt className="inline opacity-60">On: </dt>
+                    <dt className="inline text-soft">On: </dt>
                     <dd className="inline">
-                      <Link to={`/p/${plan.target.purseId}`} className="underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
+                      <Link to={`/p/${plan.target.purseId}`} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
                         Purse #{plan.target.purseId.toString()}, {plan.target.purseTitle}
                       </Link>{' '}
                       <StatePill state={plan.target.purseState} />
@@ -161,18 +162,19 @@ export default function BreakItPage() {
                   </div>
                 </dl>
               ) : (
-                <p className="mt-3 text-sm font-medium">Not run: {plan.unavailable}</p>
+                <p className="mt-4 font-medium">Not run: {plan.unavailable}</p>
               )}
-              {plan.note && plan.target && <p className="mt-2 text-xs opacity-70 text-pretty">{plan.note}</p>}
+              {plan.note && plan.target && <p className="mt-3 text-sm text-soft text-pretty">{plan.note}</p>}
               {result !== undefined && <Result plan={plan} result={result} />}
             </li>
           )
         })}
       </ol>
 
-      <p className="mt-8 border-l-2 border-ink pl-3 text-sm text-pretty">
+      <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">Found a way through?</h2>
+      <p className="mt-3 max-w-[34rem] text-pretty">
         Found a way past any of these, or something we missed? Please{' '}
-        <a href={reportUrl || STUDIO_PROJECT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+        <a href={reportUrl || STUDIO_PROJECT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
           report it
         </a>
         .

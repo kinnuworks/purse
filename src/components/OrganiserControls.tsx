@@ -15,7 +15,7 @@ function AllocationLine({ pool, amounts }: { pool: bigint; amounts: bigint[] }) 
   const a = allocation(amounts, pool)
   return (
     <div
-      className={cx('rounded-lg border px-3 py-2 text-sm', a.status === 'match' ? 'border-lock text-lock' : 'border-ink/25')}
+      className={cx('border-l-2 py-1 pl-4', a.status === 'match' ? 'border-lock text-lock' : 'border-ink')}
       role="status"
       aria-live="polite"
     >
@@ -37,7 +37,7 @@ function AllocationLine({ pool, amounts }: { pool: bigint; amounts: bigint[] }) 
           )}
         </span>
       </div>
-      {a.status !== 'match' && <p className="mt-1 opacity-70">Naming is blocked until the amounts add up to exactly the pool, so the organiser cannot keep any of it.</p>}
+      {a.status !== 'match' && <p className="mt-1 text-soft">Naming is blocked until the amounts add up to exactly the pool, so the organiser cannot keep any of it.</p>}
     </div>
   )
 }
@@ -62,13 +62,13 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
   const update = (i: number, patch: Partial<WinnerRowInput>) => setRows((prev) => prev.map((r, j) => (j === i ? { ...r, ...patch } : r)))
 
   return (
-    <div className="space-y-4 rounded-xl border border-ink p-4">
+    <div className="space-y-5 border-t-2 border-ink pt-6">
       <h3 className="font-display text-lg font-semibold tracking-tight">You are the organiser</h3>
 
       {canLock(purse, now) && (
         <div>
           <p className="text-sm font-medium">Step 1. Lock the purse</p>
-          <p className="mt-1 text-sm opacity-70 text-pretty">
+          <p className="mt-1 text-sm text-soft text-pretty">
             Locking ends funding. Nobody can add to the pool after this, so nobody can make your winner amounts stop adding up at the last second.
           </p>
           <Button
@@ -86,7 +86,7 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
 
       <div>
         <p className="text-sm font-medium">Step 2. Name the winners</p>
-        {!purse.locked && <p className="mt-1 text-sm opacity-70">Lock the purse first. The pool can still change until you do.</p>}
+        {!purse.locked && <p className="mt-1 text-sm text-soft">Lock the purse first. The pool can still change until you do.</p>}
         <ul className="mt-3 space-y-3">
           {rows.map((row, i) => (
             <li key={i} className="grid grid-cols-[1fr_auto] gap-2 sm:grid-cols-[1fr_9rem_auto]">
@@ -97,7 +97,7 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
                 placeholder="0x… wallet address"
                 spellCheck={false}
                 autoComplete="off"
-                className="col-span-2 min-h-11 rounded-lg border border-ink/25 px-3 font-mono text-sm sm:col-span-1"
+                className="col-span-2 min-h-12 rounded-lg border border-ink/40 bg-white px-3 font-mono text-sm sm:col-span-1"
               />
               <input
                 aria-label={`Winner ${i + 1} amount in USDC`}
@@ -105,7 +105,7 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
                 inputMode="decimal"
                 onChange={(e) => update(i, { amount: e.target.value })}
                 placeholder="0.00"
-                className="min-h-11 rounded-lg border border-ink/25 px-3 text-right tabular-nums"
+                className="min-h-12 rounded-lg border border-ink/40 bg-white px-3 text-right tabular-nums"
               />
               <Button variant="secondary" aria-label={`Remove winner ${i + 1}`} disabled={rows.length === 1} onClick={() => setRows((prev) => prev.filter((_, j) => j !== i))}>
                 <X size={16} aria-hidden />
@@ -151,7 +151,7 @@ export function OrganiserControls({ purse, now }: { purse: PurseData; now: bigin
         >
           {name.busy ? 'Naming…' : 'Name the winners'}
         </Button>
-        <p className="mt-1 text-xs opacity-60">Winners can be named once. It cannot be changed afterwards.</p>
+        <p className="mt-2 text-sm text-soft">Winners can be named once. It cannot be changed afterwards.</p>
         <SendStatus state={name.state} />
       </div>
     </div>

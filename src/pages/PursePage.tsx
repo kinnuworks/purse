@@ -8,7 +8,7 @@ import { EmbedBadge } from '@/components/EmbedBadge'
 import { HistoryList } from '@/components/HistoryList'
 import { OrganiserControls } from '@/components/OrganiserControls'
 import { NotConfigured } from '@/components/Shell'
-import { Addr, BackLink, HeldMoney, Money, Notice, Section, Skeleton, StatePill } from '@/components/ui'
+import { Addr, BackLink, HeldMoney, Ledger, LedgerRow, Money, Notice, Section, Skeleton, StatePill } from '@/components/ui'
 import { readContribution } from '@/lib/data'
 import { PURSE_ADDRESS } from '@/lib/env'
 import { plainError } from '@/lib/errors'
@@ -105,16 +105,16 @@ export default function PursePage() {
   return (
     <>
       <BackLink />
-      <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
+      <div className="mt-6 flex flex-wrap items-start justify-between gap-3">
         <h1 className="font-display text-3xl font-semibold tracking-tight text-balance">{purse.title}</h1>
         <StatePill state={state} />
       </div>
-      <p className="mt-1 text-sm opacity-60">Purse #{purse.id.toString()}</p>
+      <p className="mt-1 text-soft">Purse #{purse.id.toString()}</p>
 
-      <p className="mt-6 font-display text-5xl font-semibold tracking-tight">
-        <HeldMoney held={held} className="[&>span]:text-base" returnedClassName="font-sans text-lg font-medium tracking-normal opacity-70" />
+      <p className="mt-10 font-display text-5xl font-semibold tracking-tight sm:text-6xl">
+        <HeldMoney held={held} className="[&>span]:text-lg [&>span]:text-soft" returnedClassName="font-sans text-xl font-medium tracking-normal text-soft" />
       </p>
-      <p className="mt-1 text-sm opacity-70 tabular-nums">
+      <p className="mt-3 text-soft tabular-nums">
         {purse.owed > 0n ? (
           <>
             <Money raw={purse.owed} /> is still held by the contract for this purse.
@@ -126,63 +126,55 @@ export default function PursePage() {
         )}
       </p>
 
-      <div className="mt-5 space-y-2">
+      <div className="mt-6 space-y-3">
         {organiserIsWinner && <Notice>The organiser is also one of the winners.</Notice>}
         {organiserOnlyFunder && <Notice>The organiser is the only funder: all of this money came from them.</Notice>}
       </div>
 
-      <dl className="mt-6 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
-        <div>
-          <dt className="opacity-60">Organiser</dt>
-          <dd className="mt-0.5">
+      <div className="mt-10">
+        <Ledger>
+          <LedgerRow label="Organiser">
             <Addr address={purse.organiser} you={isOrganiser} />
-          </dd>
-        </div>
-        <div>
-          <dt className="opacity-60">Winners must be named by</dt>
-          <dd className="mt-0.5 tabular-nums">
-            {formatDate(purse.nameBy)} {!purse.named && <span className="opacity-60">({timeLeft(purse.nameBy, now)})</span>}
-          </dd>
-        </div>
-        <div>
-          <dt className="opacity-60">Time to claim after winners are named</dt>
-          <dd className="mt-0.5">{formatDuration(purse.claimWindow)}</dd>
-        </div>
-        <div>
-          <dt className="opacity-60">Claim deadline</dt>
-          <dd className="mt-0.5 tabular-nums">
+          </LedgerRow>
+          <LedgerRow label="Winners must be named by">
+            <span className="tabular-nums">
+              {formatDate(purse.nameBy)} {!purse.named && <span className="text-soft">({timeLeft(purse.nameBy, now)})</span>}
+            </span>
+          </LedgerRow>
+          <LedgerRow label="Time to claim after winners are named">{formatDuration(purse.claimWindow)}</LedgerRow>
+          <LedgerRow label="Claim deadline">
             {purse.named ? (
-              <>
-                {formatDate(purse.claimBy)} <span className="opacity-60">({timeLeft(purse.claimBy, now)})</span>
-              </>
+              <span className="tabular-nums">
+                {formatDate(purse.claimBy)} <span className="text-soft">({timeLeft(purse.claimBy, now)})</span>
+              </span>
             ) : (
-              <span className="opacity-60">Set when winners are named</span>
+              <span className="text-soft">Set when winners are named</span>
             )}
-          </dd>
-        </div>
-      </dl>
+          </LedgerRow>
+        </Ledger>
+      </div>
 
-      <p className="mt-6 max-w-prose border-l-2 border-ink pl-3 text-sm text-pretty">
+      <p className="mt-8 max-w-[34rem] border-l-2 border-ink pl-4 text-pretty">
         Purse proves the money is there and where it went. It can't prove the judging was fair.
       </p>
 
-      <div className="mt-8 space-y-4">
+      <div className="mt-10 space-y-10">
         {isOrganiser && <OrganiserControls purse={purse} now={now} />}
         {canAdd(purse, now) && <AddFunds id={purse.id} />}
       </div>
 
       <Section title="Winners">
         {purse.winners.length === 0 ? (
-          <p className="text-sm opacity-70">{state === 'Refunds open' || state === 'Returned' ? 'No winners were named in time.' : 'Winners have not been named yet.'}</p>
+          <p className="text-soft">{state === 'Refunds open' || state === 'Returned' ? 'No winners were named in time.' : 'Winners have not been named yet.'}</p>
         ) : (
-          <ul className="divide-y divide-ink/10 rounded-xl border border-ink/15">
+          <ul className="divide-y divide-rule border-y border-rule">
             {purse.winners.map((w) => (
-              <li key={w.winner} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+              <li key={w.winner} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-4">
                 <div className="min-w-0">
                   <Addr address={w.winner} you={sameAddress(account, w.winner)} />
-                  <div className="mt-0.5 text-sm">
+                  <div className="mt-1 tabular-nums">
                     <Money raw={w.amount} />{' '}
-                    <span className={w.delivered ? 'text-lock' : 'opacity-60'}>{w.delivered ? 'Delivered' : 'Not delivered yet'}</span>
+                    <span className={w.delivered ? 'text-lock' : 'text-soft'}>{w.delivered ? 'Delivered' : 'Not delivered yet'}</span>
                   </div>
                 </div>
                 {canDeliver(purse, now, w.delivered) && (
@@ -196,7 +188,7 @@ export default function PursePage() {
             ))}
           </ul>
         )}
-        {purse.named && <p className="mt-2 text-xs opacity-60">Anyone can press Deliver. The prize always goes to the winner, who needs no gas and no USDC.</p>}
+        {purse.named && <p className="mt-3 text-sm text-soft text-pretty">Anyone can press Deliver. The prize always goes to the winner, who needs no gas and no USDC.</p>}
         {canSweep(purse, now) && (
           <div className="mt-3">
             <Notice>
@@ -219,16 +211,16 @@ export default function PursePage() {
             <Skeleton className="h-12 w-full" />
           </div>
         ) : funders.length === 0 ? (
-          <p className="text-sm opacity-70">No funding events were found.</p>
+          <p className="text-soft">No funding events were found.</p>
         ) : (
-          <ul className="divide-y divide-ink/10 rounded-xl border border-ink/15">
+          <ul className="divide-y divide-rule border-y border-rule">
             {funders.map((f) => {
               const left = contributions.data?.get(f.address.toLowerCase())
               return (
-                <li key={f.address} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+                <li key={f.address} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-4">
                   <div>
                     <Addr address={f.address} you={sameAddress(account, f.address)} />
-                    <div className="mt-0.5 text-sm">
+                    <div className="mt-1 tabular-nums">
                       <Money raw={f.funded} /> put in
                       {f.returned > 0n && (
                         <span className="text-lock">
@@ -250,7 +242,7 @@ export default function PursePage() {
             })}
           </ul>
         )}
-        {!purse.named && now > purse.nameBy && <p className="mt-2 text-xs opacity-60">No winners were named in time, so each funder can take back exactly what they put in. Anyone can press the button for them.</p>}
+        {!purse.named && now > purse.nameBy && <p className="mt-3 text-sm text-soft text-pretty">No winners were named in time, so each funder can take back exactly what they put in. Anyone can press the button for them.</p>}
       </Section>
 
       <Section title="Share">

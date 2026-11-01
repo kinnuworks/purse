@@ -1,9 +1,9 @@
 import { ExternalLink } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { NotConfigured } from '@/components/Shell'
-import { Addr, Notice, Skeleton } from '@/components/ui'
+import { Addr, ContractLine, CopyButton, GroupLabel, Ledger, LedgerRow, Notice, Skeleton } from '@/components/ui'
 import { readTransaction, testnetAddressUrl, testnetTxUrl, type ProofNetwork } from '@/lib/data'
-import { CHAIN_ID, PURSE_ADDRESS, STUDIO_PROJECT_URL, explorerAddress, explorerTx, sourcifyUrl } from '@/lib/env'
+import { CHAIN_ID, PURSE_ADDRESS, STUDIO_PROJECT_URL, explorerTx, sourcifyUrl } from '@/lib/env'
 import { formatDate, shortAddress } from '@/lib/format'
 import proof from '@/proof.json'
 
@@ -25,10 +25,15 @@ interface ProofFile {
 
 const file = proof as ProofFile
 const transactions = file.transactions
+const mainnetTransactions = transactions.filter((t) => t.network !== 'testnet')
+const testnetTransactions = transactions.filter((t) => t.network === 'testnet')
 const HASH = /^0x[0-9a-fA-F]{64}$/
+
+const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink'
 
 function ProofRow({ tx }: { tx: ProofTx }) {
   const valid = HASH.test(tx.hash)
+  const testnet = tx.network === 'testnet'
   const read = useQuery({
     queryKey: ['proof-tx', tx.network ?? 'mainnet', tx.hash],
     queryFn: () => readTransaction(tx.hash as `0x${string}`, tx.network ?? 'mainnet'),
@@ -36,85 +41,89 @@ function ProofRow({ tx }: { tx: ProofTx }) {
     staleTime: Infinity,
   })
   return (
-    <tr className="border-t border-ink/10 align-top">
-      <td className="py-3 pr-3 font-medium">{tx.sender}</td>
-      <td className="py-3 pr-3">
-        {tx.what}
-        {tx.network === 'testnet' && <span className="ml-2 rounded border border-ink/30 px-1.5 py-0.5 text-xs font-medium">Testnet</span>}
-      </td>
-      <td className="py-3 pr-3 tabular-nums">
-        {!valid ? 'Not a valid hash' : read.isLoading ? <Skeleton className="h-4 w-28" /> : read.data ? formatDate(read.data.timestamp) : 'Not found'}
-      </td>
-      <td className="py-3 pr-3">{read.data ? tx.network === 'testnet' ? <a href={testnetAddressUrl(read.data.from)} target="_blank" rel="noopener noreferrer" title={read.data.from} className="font-mono text-[0.85em] underline decoration-ink/25 underline-offset-2 hover:decoration-ink">{shortAddress(read.data.from)}</a> : <Addr address={read.data.from} /> : read.isLoading ? <Skeleton className="h-4 w-20" /> : '—'}</td>
-      <td className="py-3 pr-3">{read.data ? (read.data.status === 'success' ? 'Succeeded' : 'Failed') : read.isLoading ? <Skeleton className="h-4 w-14" /> : '—'}</td>
-      <td className="py-3">
-        {valid &&
-          (tx.network === 'testnet' ? (
-            <a href={testnetTxUrl(tx.hash)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-              Open <ExternalLink size={12} aria-hidden />
-            </a>
+    <li className="py-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <span className="font-medium text-pretty">
+          {tx.what}
+          {testnet && <span className="ml-2 whitespace-nowrap rounded border border-ink/40 px-1.5 py-0.5 text-sm font-medium">Testnet</span>}
+        </span>
+        <span className="tabular-nums text-soft">
+          {!valid ? 'Not a valid hash' : read.isLoading ? <Skeleton className="inline-block h-4 w-28 align-middle" /> : read.data ? formatDate(read.data.timestamp) : 'Not found'}
+        </span>
+      </div>
+      <div className="mt-1.5 flex flex-wrap items-center gap-x-5 gap-y-1 text-soft">
+        <span>
+          Sent by <span className="text-ink">{tx.sender}</span>
+        </span>
+        <span className="inline-flex items-center gap-2">
+          From wallet{' '}
+          {read.data ? (
+            testnet ? (
+              <span className="inline-flex items-center gap-2.5">
+                <a href={testnetAddressUrl(read.data.from)} target="_blank" rel="noopener noreferrer" title={read.data.from} className="font-mono text-[0.9em] text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+                  {shortAddress(read.data.from)}
+                </a>
+                <CopyButton value={read.data.from} />
+              </span>
+            ) : (
+              <Addr address={read.data.from} />
+            )
+          ) : read.isLoading ? (
+            <Skeleton className="inline-block h-4 w-20 align-middle" />
           ) : (
-            <a href={explorerTx(tx.hash)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-              Open <ExternalLink size={12} aria-hidden />
-            </a>
-          ))}
-      </td>
-    </tr>
+            '—'
+          )}
+        </span>
+        <span>{read.data ? (read.data.status === 'success' ? 'Succeeded' : 'Failed') : read.isLoading ? <Skeleton className="inline-block h-4 w-14 align-middle" /> : '—'}</span>
+        {valid && (
+          <a href={testnet ? testnetTxUrl(tx.hash) : explorerTx(tx.hash)} target="_blank" rel="noopener noreferrer" className={`${linkClass} text-ink`}>
+            Open <ExternalLink size={14} aria-hidden />
+          </a>
+        )}
+      </div>
+    </li>
   )
 }
 
 export default function ProofPage() {
   return (
     <>
-      <h1 className="font-display text-3xl font-semibold tracking-tight">Proof</h1>
-      <p className="mt-2 max-w-prose text-sm opacity-75 text-pretty">Where the contract lives, how it was built, and the transactions that show it working.</p>
+      <h1 className="font-display text-4xl font-semibold tracking-tight">Proof</h1>
+      <p className="mt-3 max-w-[34rem] text-lg text-pretty">Where the contract lives, how it was built, and the transactions that show it working.</p>
 
-      <dl className="mt-6 space-y-5 text-sm">
-        <div>
-          <dt className="opacity-60">Contract address</dt>
-          <dd className="mt-1 break-all font-mono">
-            {PURSE_ADDRESS ? (
-              <a href={explorerAddress(PURSE_ADDRESS)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-                {PURSE_ADDRESS} <ExternalLink size={12} aria-hidden />
+      <h2 className="mt-12 font-display text-xl font-semibold tracking-tight">The contract</h2>
+      <div className="mt-4">
+        <Ledger>
+          <LedgerRow label="Contract address">{PURSE_ADDRESS ? <ContractLine address={PURSE_ADDRESS} /> : 'Not set yet'}</LedgerRow>
+          {PURSE_ADDRESS && (
+            <LedgerRow label="Source code">
+              <a href={sourcifyUrl(PURSE_ADDRESS, CHAIN_ID)} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                Verified on Sourcify, exact match <ExternalLink size={14} aria-hidden />
               </a>
-            ) : (
-              <span className="font-sans">Not set yet</span>
-            )}
-          </dd>
-        </div>
-        {PURSE_ADDRESS && (
-          <div>
-            <dt className="opacity-60">Source code</dt>
-            <dd className="mt-1">
-              <a href={sourcifyUrl(PURSE_ADDRESS, CHAIN_ID)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-                Verified on Sourcify, exact match <ExternalLink size={12} aria-hidden />
-              </a>
-            </dd>
-          </div>
-        )}
-        {file.testnetContract && (
-          <div>
-            <dt className="opacity-60">Testnet rehearsal contract (Arc Testnet, no real money)</dt>
-            <dd className="mt-1 break-all font-mono">
-              <a href={testnetAddressUrl(file.testnetContract)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-                {file.testnetContract} <ExternalLink size={12} aria-hidden />
-              </a>
-            </dd>
-          </div>
-        )}
-        <div>
-          <dt className="opacity-60">Built in Arc Studio</dt>
-          <dd className="mt-1">
-            <a href={STUDIO_PROJECT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-              Open the Studio project <ExternalLink size={12} aria-hidden />
+            </LedgerRow>
+          )}
+          {file.testnetContract && (
+            <LedgerRow label="Testnet rehearsal contract">
+              <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="break-all font-mono text-[0.9em]">{file.testnetContract}</span>
+                <CopyButton value={file.testnetContract} label="Copy contract address" />
+                <a href={testnetAddressUrl(file.testnetContract)} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                  Explorer <ExternalLink size={14} aria-hidden />
+                </a>
+              </span>
+              <span className="mt-1 block text-soft">Arc Testnet, no real money.</span>
+            </LedgerRow>
+          )}
+          <LedgerRow label="Built in Arc Studio">
+            <a href={STUDIO_PROJECT_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              Open the Studio project <ExternalLink size={14} aria-hidden />
             </a>
-          </dd>
-        </div>
-        <div>
-          <dt className="opacity-60">Contract tests passing</dt>
-          <dd className="mt-1 tabular-nums">{file.foundryTests}</dd>
-        </div>
-      </dl>
+          </LedgerRow>
+          <LedgerRow label="Contract tests passing">
+            <span className="tabular-nums">{file.foundryTests}</span>
+          </LedgerRow>
+        </Ledger>
+      </div>
 
       {!PURSE_ADDRESS && (
         <div className="mt-6">
@@ -122,34 +131,38 @@ export default function ProofPage() {
         </div>
       )}
 
-      <section className="mt-10">
-        <h2 className="font-display text-lg font-semibold tracking-tight">Transactions</h2>
-        {transactions.length === 0 ? (
-          <div className="mt-3">
-            <Notice>No transactions have been added yet. Add them to <span className="font-mono">src/proof.json</span> with who sent each one.</Notice>
-          </div>
-        ) : (
-          <div className="mt-3 overflow-x-auto">
-            <table className="w-full min-w-[40rem] text-left text-sm">
-              <thead className="text-xs uppercase tracking-wider opacity-60">
-                <tr>
-                  <th className="pb-2 pr-3 font-medium">Sent by</th>
-                  <th className="pb-2 pr-3 font-medium">What</th>
-                  <th className="pb-2 pr-3 font-medium">When</th>
-                  <th className="pb-2 pr-3 font-medium">From wallet</th>
-                  <th className="pb-2 pr-3 font-medium">Result</th>
-                  <th className="pb-2 font-medium">Link</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transactions.map((tx) => (
+      <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">Transactions</h2>
+      {transactions.length === 0 ? (
+        <div className="mt-4">
+          <Notice>
+            No transactions have been added yet. Add them to <span className="font-mono">src/proof.json</span> with who sent each one.
+          </Notice>
+        </div>
+      ) : (
+        <>
+          <p className="mt-2 text-soft">Each line says who sent it. The wallet, time and result are read from the chain.</p>
+          {mainnetTransactions.length > 0 && (
+            <>
+              <GroupLabel>Arc mainnet</GroupLabel>
+              <ul className="divide-y divide-rule border-y border-rule">
+                {mainnetTransactions.map((tx) => (
                   <ProofRow key={tx.hash} tx={tx} />
                 ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
+              </ul>
+            </>
+          )}
+          {testnetTransactions.length > 0 && (
+            <>
+              <GroupLabel>Arc Testnet rehearsal</GroupLabel>
+              <ul className="divide-y divide-rule border-y border-rule">
+                {testnetTransactions.map((tx) => (
+                  <ProofRow key={tx.hash} tx={tx} />
+                ))}
+              </ul>
+            </>
+          )}
+        </>
+      )}
     </>
   )
 }

@@ -46,8 +46,8 @@
       "pulledAt": "2026-11-01T17:23:31.997Z"
     },
     "tailwind.config.js": {
-      "hash": "1c5883a36687003286dd5f49786e1c94f90d9228b0fe75180898356498896b20",
-      "pulledAt": "2026-11-01T17:38:48.207Z"
+      "hash": "937c81a6b72d3867e69338b990295ebbe647be3a0f7d01025e4f06c60c5ec206",
+      "pulledAt": "2026-11-01T19:29:25.823Z"
     },
     "tsconfig.json": {
       "hash": "003683dc0879da1ed95203d91536162d27753053d74e43db14c24f1dae4b4912",
@@ -94,12 +94,12 @@
       "pulledAt": "2026-11-01T17:23:32.001Z"
     },
     "src/index.css": {
-      "hash": "9e0bca9b9d6e97f3b2e8c3bd34caca715782a00cc425fc4531612f4dfff8bd7a",
-      "pulledAt": "2026-11-01T17:38:48.210Z"
+      "hash": "c9b42f4a31fd0c9951d5bf0257de89e18e49739b26ec476619481f11deacb7a3",
+      "pulledAt": "2026-11-01T19:29:25.827Z"
     },
     "src/main.tsx": {
-      "hash": "fa352ff515bf95c41a91e7b420a4916108c4f25e53bb8e7090b11e339e5e63b2",
-      "pulledAt": "2026-11-01T19:21:49.657Z"
+      "hash": "93b3c455a1493f8935b43f28230aa336e1da7375eeed2da64f0cdbb5f626f8fc",
+      "pulledAt": "2026-11-01T19:29:25.827Z"
     },
     "src/onchain-facts.ts": {
       "hash": "c7c314ada2f6be684dcd24c703fee3fec68f8bc0a2c7c9d1bcf3633c33199abd",
@@ -530,8 +530,8 @@
       "pulledAt": "2026-11-01T17:50:45.514Z"
     },
     "vercel.json": {
-      "hash": "83411a225e7cec25c183a82c570f44d6f6a5639eba84d56271904c760ae692c3",
-      "pulledAt": "2026-11-01T17:38:48.207Z"
+      "hash": "480a147552bf9e6dc7cbf8aa1e46f05a1dbf8ca53bfe5b8eff9228c73693cc3d",
+      "pulledAt": "2026-11-01T19:29:25.824Z"
     },
     "vitest.config.ts": {
       "hash": "d7d26d6f89ca5215cf08fb7a30c65cb15f7d6347e717cee0a7a022c1c251809f",
@@ -546,36 +546,36 @@
       "pulledAt": "2026-11-01T17:50:45.517Z"
     },
     "src/proof.json": {
-      "hash": "93f4b8ac1318bb4bb2a061d1cbd5506956ff7a1b750b3bceda568e7679699dd9",
-      "pulledAt": "2026-11-01T19:21:49.658Z"
+      "hash": "50a8564096862c064633566a9c90e5bfa3b2bef057eb80486754c6e2b5d7ca8e",
+      "pulledAt": "2026-11-01T19:29:14.124Z"
     },
     "src/components/AddFunds.tsx": {
-      "hash": "8c422b43634efb663f3082d35c63af61b9f0d0c72afd34bfd9a99301c0e3fcf6",
-      "pulledAt": "2026-11-01T17:38:48.216Z"
+      "hash": "38e692feaf2217a85d9d07e0445909fbd088d9ac81c9b0adbebaa8d24f67a981",
+      "pulledAt": "2026-11-01T19:29:25.832Z"
     },
     "src/components/ChainButton.tsx": {
       "hash": "2558f4a0629cb0eff0c39d5f1bda8b2b5268bda860ded2973e727e6608e6ddce",
       "pulledAt": "2026-11-01T17:38:48.216Z"
     },
     "src/components/DemoPanel.tsx": {
-      "hash": "2c5738e86a8546d10849f0b1d30bd2fb4a8d1a88d5fa72c73210ba8589251e65",
-      "pulledAt": "2026-11-01T17:50:45.525Z"
+      "hash": "7c8928669a013c0a9f788163e8271196e51d9d58999f5237198af2a24306374c",
+      "pulledAt": "2026-11-01T19:29:25.833Z"
     },
     "src/components/HistoryList.tsx": {
-      "hash": "08563642164b17ec8db1df80ab8b1d31f126acd489e60ba2c9a812909f818fcd",
-      "pulledAt": "2026-11-01T17:38:48.216Z"
+      "hash": "b570b2891b86118631442ee1655001b4968077854f3afd32cbe7e1b0a97320e1",
+      "pulledAt": "2026-11-01T19:29:25.833Z"
     },
     "src/components/OrganiserControls.tsx": {
-      "hash": "b294866fc3dfee3be92e20a38131018fecef7ea5824754f1376ac2238319ebc1",
-      "pulledAt": "2026-11-01T17:38:48.217Z"
+      "hash": "9f78319f563ab0fe5219bf4cc622430747532c508346d4b109ced506fad77095",
+      "pulledAt": "2026-11-01T19:29:25.833Z"
     },
     "src/components/Shell.tsx": {
-      "hash": "0807bba186bc10a253a7c4ee5105138d9a4f78875e7b2312cdffd62f74bbe37c",
-      "pulledAt": "2026-11-01T19:21:49.664Z"
+      "hash": "1719f37d6261695dd9e3a1755c0ae1f297bad375e0e71c5b0868f220c4ff4242",
+      "pulledAt": "2026-11-01T19:29:25.834Z"
     },
     "src/components/ui.tsx": {
-      "hash": "c41a4e54c1bfe92ac864f15963b4c2366840327681f19f444511210f240a4d7e",
-      "pulledAt": "2026-11-01T17:54:36.577Z"
+      "hash": "6f40d545d3f12659ad7cc58cf97aab4ea975e232bd174def50a23142f5636d87",
+      "pulledAt": "2026-11-01T19:29:25.834Z"
     },
     "src/lib/chain.ts": {
       "hash": "b243eb6a0666c1e99efacda7a17d17c041fc8ba0141ebc45f7f68ac3b8d9e236",
@@ -642,20 +642,20 @@
       "pulledAt": "2026-11-01T17:38:48.220Z"
     },
     "src/pages/CreatePage.tsx": {
-      "hash": "a8d39a29d7e82966eb87cb9fad1c04dc508c7146d8bf1521e30f2cdf7c46ff29",
-      "pulledAt": "2026-11-01T17:38:48.220Z"
+      "hash": "728cd708e1bb1060b9895155a5075067bbb35122ef1297190d46f3bd04a9996c",
+      "pulledAt": "2026-11-01T19:29:25.837Z"
     },
     "src/pages/HomePage.tsx": {
-      "hash": "e77639dab4520d000c1d9592f6adca89da6637c57fa680760c9b092218460496",
-      "pulledAt": "2026-11-01T17:54:36.579Z"
+      "hash": "acec6b6ca188c59dcbf5315a0da8a67e61cb543990d3890179e9bb219f0b72e8",
+      "pulledAt": "2026-11-01T19:29:25.837Z"
     },
     "src/pages/ProofPage.tsx": {
-      "hash": "d1d33abf2fd2ddea3a654091b46076526001f956ed017495c2917d4e460837ad",
-      "pulledAt": "2026-11-01T17:50:45.529Z"
+      "hash": "8562e03048646208da55d8447fc5bb8bab8bd23c03f0b6dab3de728e35148897",
+      "pulledAt": "2026-11-01T19:29:25.838Z"
     },
     "src/pages/PursePage.tsx": {
-      "hash": "bc119e730600742f26e2fd5e9efcf61724123ffae2b840f167271ab270f34771",
-      "pulledAt": "2026-11-01T19:21:49.669Z"
+      "hash": "2338db2cd01e62e21451ad919e83c6a54a85cd37f67aa07e177fabe50f71fcdf",
+      "pulledAt": "2026-11-01T19:29:25.838Z"
     },
     "contracts/out/Base.sol/CommonBase.json": {
       "hash": "19e9d367aee662b24ad5f3ee89428c793c285be432c3000aa20974cf0dcf9479",
@@ -890,8 +890,8 @@
       "pulledAt": "2026-11-01T19:21:49.654Z"
     },
     "packages/purse-sdk/README.md": {
-      "hash": "512df15b0af42b0d552d21a3a7eddbb3ac7f7314718d19635abfa3083eca5d49",
-      "pulledAt": "2026-11-01T19:21:49.663Z"
+      "hash": "fdef2d3ded47a68168b1a042d5896f486d02e7863232f9dea3d6239a4e06f9d7",
+      "pulledAt": "2026-11-01T19:29:14.124Z"
     },
     "packages/purse-sdk/package.json": {
       "hash": "209d0c4a466e19f5b6b3c89579d2d901fc02cbc094da3093b1550164cc1c6b14",
@@ -902,8 +902,8 @@
       "pulledAt": "2026-11-01T19:21:49.663Z"
     },
     "src/components/EmbedBadge.tsx": {
-      "hash": "3145ae60b8c6a4dbc2504e44edc4f5a16f76247091143d760755ec4398b790fa",
-      "pulledAt": "2026-11-01T19:21:49.664Z"
+      "hash": "756f61024cd482c0b42e15e05f0b8874353539ecf4281c7ea79225392c303488",
+      "pulledAt": "2026-11-01T19:29:25.833Z"
     },
     "src/lib/attacks.ts": {
       "hash": "790c53ae8788a6a30757865ec2c0d8d719cef55b5df8813bf9d3c5c1469f2070",
@@ -918,16 +918,16 @@
       "pulledAt": "2026-11-01T19:21:49.668Z"
     },
     "src/pages/BadgePage.tsx": {
-      "hash": "219bdae0f25334273abde6160cf2882f450e388d25f856634e1260f853335d18",
-      "pulledAt": "2026-11-01T19:21:49.668Z"
+      "hash": "87d71d326461f86b750635d79e4217bb8649244242f2058922f44ae2ad627088",
+      "pulledAt": "2026-11-01T19:29:25.836Z"
     },
     "src/pages/BreakItPage.tsx": {
-      "hash": "e831dba6695e712d6ea2527d44ff4baba4969db04edede949163e94b9c2e63f6",
-      "pulledAt": "2026-11-01T19:21:49.668Z"
+      "hash": "df2e1dd02b01eed6e6a64eb375b072ab7e065d6ebfae8003e08d8eaab02dfc0e",
+      "pulledAt": "2026-11-01T19:29:25.836Z"
     },
     "src/pages/JudgesPage.tsx": {
-      "hash": "27b3e333c205da3a3e3784da2b20bcc4333c41e54f1bfddbdbabc2d10507b8cc",
-      "pulledAt": "2026-11-01T19:21:49.668Z"
+      "hash": "c0af79015865db225ec1d25fa61dc77bdc6826df3245a781ff7e55d9d6d16759",
+      "pulledAt": "2026-11-01T19:29:25.837Z"
     },
     "packages/purse-sdk/src/abi.ts": {
       "hash": "65b01cbfd39ca742ae46f5491c6661a7f9c566bf174422ddca9699a2f806d5f1",
