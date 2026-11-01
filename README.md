@@ -13,7 +13,7 @@
 - Every mainnet transaction, labelled by who sent it: [/proof](https://purse-arc.vercel.app/proof) and [`ops/txs.tsv`](ops/txs.tsv)
 - Money has left the contract all three ways on mainnet: delivered to winners, refunded to funders, and returned to the organiser when unclaimed
 - Built in Arc Studio, contracts, tests and app: [project](https://studio.arc.io/app/4f1afe15-a898-46ff-9acf-196783f28e52). The prompts are in `brief-*.md`. Studio deployed to testnet; mainnet was deployed from my own wallet with `arc-forge`, because Studio doesn't touch mainnet.
-- 139 Foundry tests, 80 app tests and 26 SDK tests
+- 139 Foundry tests and 114 app and SDK tests
 
 **What it doesn't prove:** the organiser still picks the winners and sets the claim window, which can be as short as 60 seconds, so a prize left unclaimed can return to them quickly, including money a sponsor added. Purse shows the money is there and where it went, not that the judging was fair. The contract has not been audited, has no admin and can't be upgraded. Keep amounts small.
 
@@ -78,4 +78,4 @@ Server only (set in the hosting project, never in the browser):
 
 ### Proof and reviewer pages
 
-Add the transactions you want to show to `src/proof.json`. Each entry has `sender` (who sent it, in words), `what` and `hash`; add `"network": "testnet"` to mark an Arc Testnet rehearsal, and `testnetContract` for its contract address. `ourAddresses` lists the wallets we control, so `/judges` can split wallets into ours and others. `foundryTests`, `appTests` and `sdkTests` are the test counts shown there; `reportUrl` (optional) is where `/break-it` sends bug reports.
+Add the transactions you want to show to `src/proof.json`. Each entry has `sender` (who sent it, in words), `what` and `hash`; add `"network": "testnet"` to mark an Arc Testnet run, and `testnetContract` for its contract address. `ourAddresses` lists the wallets we control, so `/judges` can split wallets into ours and others. `foundryTests`, `appTests` and `sdkTests` are the test counts shown there; `reportUrl` (optional) is where `/break-it` sends bug reports.
