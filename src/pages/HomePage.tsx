@@ -67,7 +67,7 @@ function FeaturedSkeleton() {
 function Headline() {
   return (
     <>
-      <h1 className="mt-14 font-display text-4xl font-semibold tracking-tight text-balance sm:text-5xl">Prize money you can see.</h1>
+      <h1 className="font-display text-4xl font-semibold tracking-tight text-balance sm:text-5xl">Prize money you can see.</h1>
       <p className="mt-4 max-w-[34rem] text-lg text-pretty">Lock the prize before the contest. The whole pool has to go to the named winners. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to the organiser.</p>
     </>
   )
@@ -95,6 +95,9 @@ export default function HomePage() {
 
   return (
     <>
+      <div className="mb-10">
+        <Headline />
+      </div>
       {list.isLoading && <FeaturedSkeleton />}
       {list.isError && <Notice strong>Could not read the purses from the chain. {plainError(list.error)}</Notice>}
       {purses && featured && <FeaturedPurse purse={featured} now={now} events={history.events} ready={ready} />}
@@ -104,8 +107,7 @@ export default function HomePage() {
         </Notice>
       )}
 
-      <Headline />
-      <Link to="/new" className="mt-6 inline-block">
+      <Link to="/new" className="mt-8 inline-block">
         <Button>Create a purse</Button>
       </Link>
 
