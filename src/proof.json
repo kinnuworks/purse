@@ -235,6 +235,30 @@
       "network": "mainnet"
     },
     {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "SDK example: create bounty, purse 5",
+      "hash": "0x56cce65b951444c78da9dcb35b86bbf17c79a93da5a35d28e7b7c9b5a127658a",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "SDK example: lock",
+      "hash": "0xebe53311006fd110c66fa10bf18e01ab8fae444e0b5eb4118a89e0b740162df7",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "SDK example: name winner (our own address)",
+      "hash": "0x151fc675034026060633186946bcea0d490b6be0d86904f0ff6d385340e44a24",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours)",
+      "what": "SDK example: deliver",
+      "hash": "0x2ebdb925e74764cb8f53390a7470101dc774fa68ba395cf22433b4fff8b06daf",
+      "network": "mainnet"
+    },
+    {
       "sender": "Arc Studio platform deployer wallet",
       "what": "Deployed Purse to Arc Testnet",
       "hash": "0x9c17cdd660af604504804cd202926abbbb3f73fdfeee72e857083e370b486094",
