@@ -39,7 +39,7 @@ function FeaturedPurse({ purse, now, events, ready }: { purse: PurseData; now: b
       <p className="mt-8 font-display text-5xl font-semibold tracking-tight sm:text-6xl">
         <HeldMoney held={heldAmount(purse.pool, events, purse.id, ready)} className="[&>span]:text-lg [&>span]:text-soft" returnedClassName="font-sans text-xl font-medium tracking-normal text-soft" />
       </p>
-      <p className="mt-3 text-soft">{state === 'Locked' ? 'Locked in the contract. It cannot be taken back by anyone.' : 'Read from the contract just now.'}</p>
+      <p className="mt-3 text-soft">{state === 'Locked' ? 'Locked in the contract. It is paid to the named winners, or returned to the funders if nobody is named in time.' : 'Read from the contract just now.'}</p>
       <dl className="mt-8 divide-y divide-rule border-t border-rule">
         <LedgerRow label={purse.named ? 'Winners were named' : 'Winners must be named by'}>
           <span className="tabular-nums">{purse.named ? `Claim by ${formatDate(purse.claimBy)}` : `${formatDate(purse.nameBy)} (${timeLeft(purse.nameBy, now)})`}</span>
@@ -68,7 +68,7 @@ function Headline() {
   return (
     <>
       <h1 className="mt-14 font-display text-4xl font-semibold tracking-tight text-balance sm:text-5xl">Prize money you can see.</h1>
-      <p className="mt-4 max-w-[34rem] text-lg text-pretty">Lock the prize before the contest. The whole pool goes to the winners, or back to whoever funded it.</p>
+      <p className="mt-4 max-w-[34rem] text-lg text-pretty">Lock the prize before the contest. The whole pool has to go to the named winners. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to the organiser.</p>
     </>
   )
 }

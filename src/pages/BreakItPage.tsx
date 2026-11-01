@@ -1,16 +1,19 @@
 import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { Addr, Button, Notice, Skeleton, StatePill, cx } from '@/components/ui'
+import { Addr, Button, Money, Notice, Skeleton, StatePill, cx } from '@/components/ui'
 import { classifySimulation, planAttacks, type AttackPlan, type SimulationResult } from '@/lib/attacks'
 import { publicClient } from '@/lib/chain'
-import { PURSE_ADDRESS, STUDIO_PROJECT_URL } from '@/lib/env'
+import { readMinClaimWindow } from '@/lib/data'
+import { PURSE_ADDRESS, STUDIO_PROJECT_URL, explorerTx } from '@/lib/env'
 import { plainError, plainRevert, revertInfo } from '@/lib/errors'
+import { useHistory } from '@/lib/history'
 import { useNow, usePurseList } from '@/lib/hooks'
+import { readProof } from '@/lib/proof-data'
 import { withRetry } from '@/lib/retry'
 import proof from '@/proof.json'
 
-const reportUrl = (proof as { reportUrl?: string }).reportUrl?.trim()
 
 /** Asks the live contract to run the call as `caller` with eth_call. Nothing is signed or sent. */
 async function simulate(plan: AttackPlan): Promise<SimulationResult> {
@@ -66,7 +69,54 @@ function Result({ plan, result }: { plan: AttackPlan; result: SimulationResult |
   )
 }
 
+const SWEPT_EXAMPLE_ID = 3n
+
+function CannotStop() {
+  const history = useHistory()
+  const minWindow = useQuery({ queryKey: ['min-claim-window'], queryFn: readMinClaimWindow, staleTime: Infinity, enabled: PURSE_ADDRESS !== null })
+  const swept = history.events.find((e) => e.name === 'Swept' && e.id === SWEPT_EXAMPLE_ID)
+  const shortest = minWindow.data !== undefined ? `${minWindow.data.toString()} seconds` : 'the shortest the contract allows'
+  return (
+    <>
+      <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">What Purse can’t stop</h2>
+      <p className="mt-3 max-w-[34rem] text-pretty">These are not bugs. They are things the contract allows by design, so you should know them before you trust a purse.</p>
+      <ul className="mt-4 divide-y divide-rule border-y border-rule">
+        <li className="py-4 text-pretty">
+          <span className="font-medium">The organiser can name themselves as a winner.</span> The purse page flags it when they do.
+        </li>
+        <li className="py-4 text-pretty">
+          <span className="font-medium">The organiser can set a claim window as short as {shortest}</span>, then return an undelivered prize to themselves once it ends.
+        </li>
+        <li className="py-4 text-pretty">
+          <span className="font-medium">Money a sponsor added goes with it.</span> An unclaimed prize returns to the organiser, not to the sponsors.
+        </li>
+        <li className="py-4 text-pretty">
+          <span className="font-medium">Anyone can deliver a prize,</span> so a short claim window is only a risk if nobody delivers in time.
+        </li>
+      </ul>
+      <p className="mt-4 max-w-[34rem] text-pretty">
+        A real example is{' '}
+        <Link to={`/p/${SWEPT_EXAMPLE_ID.toString()}`} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+          purse #{SWEPT_EXAMPLE_ID.toString()}
+        </Link>
+        {swept && swept.name === 'Swept' ? (
+          <>
+            , where <Money raw={swept.amount} /> went back to the organiser after the claim window ended (
+            <a href={explorerTx(swept.txHash)} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+              transaction
+            </a>
+            ).
+          </>
+        ) : (
+          '.'
+        )}
+      </p>
+    </>
+  )
+}
+
 export default function BreakItPage() {
+  const reportUrl = readProof(proof).reportUrl
   const list = usePurseList()
   const now = useNow()
   const [results, setResults] = useState<Record<string, SimulationResult | 'running'>>({})
@@ -170,6 +220,8 @@ export default function BreakItPage() {
           )
         })}
       </ol>
+
+      <CannotStop />
 
       <h2 className="mt-14 font-display text-xl font-semibold tracking-tight">Found a way through?</h2>
       <p className="mt-3 max-w-[34rem] text-pretty">

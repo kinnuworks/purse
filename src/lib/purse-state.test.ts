@@ -99,39 +99,58 @@ describe('home ordering', () => {
   const finished = { ...named, owed: 0n, winners: [{ amount: 5_000_000n, delivered: true }] }
   const p = (id: number, title: string, snap: PurseSnapshot = open) => ({ ...snap, id: BigInt(id), title })
 
-  it('features the newest real purse that still holds money (Open or Locked)', () => {
+  const returned = { ...open, nameBy: 100n, owed: 0n }
+  const big = (snap: PurseSnapshot, pool: number): PurseSnapshot => ({ ...snap, pool: BigInt(pool) })
+
+  it('features the largest real purse that is open or paid', () => {
     const { featured } = arrangePurses(
-      [p(0, 'Spring hackathon', locked), p(1, 'Grant round', finished), p(2, 'Test: flow', open), p(3, 'Demo purse', open), p(4, 'Autumn bounty', open)],
+      [
+        p(0, 'Spring hackathon', big(locked, 5)),
+        p(1, 'Grant round', big(finished, 9)),
+        p(2, 'Test: flow', big(open, 99)),
+        p(3, 'Demo purse', big(open, 99)),
+        p(4, 'Bounty: fix a bug', big(open, 99)),
+        p(5, 'Autumn prize', big(open, 2)),
+      ],
       now,
     )
-    expect(featured?.id).toBe(4n)
+    expect(featured?.id).toBe(1n)
   })
 
-  it('skips a newer real purse that is already paid out', () => {
-    const { featured } = arrangePurses([p(0, 'Spring hackathon', locked), p(1, 'Grant round', finished)], now)
+  it('takes the newest of equally large purses', () => {
+    const { featured } = arrangePurses([p(0, 'A', big(open, 5)), p(1, 'B', big(locked, 5)), p(2, 'C', big(open, 4))], now)
+    expect(featured?.id).toBe(1n)
+  })
+
+  it('does not feature a returned purse, however large it was', () => {
+    const { featured } = arrangePurses([p(0, 'Small prize', big(open, 1)), p(1, 'Big but returned', big(returned, 500))], now)
     expect(featured?.id).toBe(0n)
   })
 
-  it('never features a Test: or demo purse while a real one is holding money', () => {
-    expect(arrangePurses([p(0, 'Real', locked), p(5, 'Test: newest', locked), p(6, 'Demo purse', locked)], now).featured?.id).toBe(0n)
+  it('never features a Test:, Bounty: or demo purse while a real one qualifies', () => {
+    expect(
+      arrangePurses([p(0, 'Real', big(locked, 1)), p(5, 'Test: newest', big(locked, 50)), p(6, 'Demo purse', big(locked, 50)), p(7, 'Bounty: x', big(locked, 50))], now).featured?.id,
+    ).toBe(0n)
   })
 
-  it('falls back to the newest real purse, then to the newest test or demo run', () => {
-    expect(arrangePurses([p(0, 'Old', finished), p(1, 'Newer', finished), p(2, 'Test: x', open)], now).featured?.id).toBe(1n)
-    expect(arrangePurses([p(0, 'Demo purse'), p(1, 'Test: y'), p(2, 'Demo purse')], now).featured?.id).toBe(2n)
+  it('falls back to the newest real purse, then to the newest test, bounty or demo run', () => {
+    expect(arrangePurses([p(0, 'Old', returned), p(1, 'Newer', returned), p(2, 'Test: x', open)], now).featured?.id).toBe(1n)
+    expect(arrangePurses([p(0, 'Demo purse'), p(1, 'Test: y'), p(2, 'Bounty: z')], now).featured?.id).toBe(2n)
   })
 
-  it('groups Test: and demo purses together, newest first, after the real ones', () => {
-    const { real, testAndDemo } = arrangePurses([p(0, 'A'), p(1, 'Test: b'), p(2, 'Demo purse'), p(3, 'C'), p(4, 'Test: d')], now)
+  it('groups Test:, Bounty: and demo purses together, newest first, after the real ones', () => {
+    const { real, testAndDemo } = arrangePurses([p(0, 'A'), p(1, 'Test: b'), p(2, 'Demo purse'), p(3, 'C'), p(4, 'Bounty: d'), p(5, 'Test: e')], now)
     expect(real.map((x) => x.id)).toEqual([3n, 0n])
-    expect(testAndDemo.map((x) => x.id)).toEqual([4n, 2n, 1n])
+    expect(testAndDemo.map((x) => x.id)).toEqual([5n, 4n, 2n, 1n])
   })
 
   it('has nothing to feature when there are no purses', () => {
     expect(arrangePurses([], now).featured).toBeUndefined()
   })
 
-  it('matches the Test: prefix and the exact demo title only', () => {
+  it('matches the Test: and Bounty: prefixes and the exact demo title only', () => {
+    expect(isTestOrDemo('Bounty: fix it')).toBe(true)
+    expect(isTestOrDemo('Bounties')).toBe(false)
     expect(isTestOrDemo('Test: a')).toBe(true)
     expect(isTestOrDemo('Demo purse')).toBe(true)
     expect(isTestOrDemo('Testing')).toBe(false)

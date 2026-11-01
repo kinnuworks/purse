@@ -120,7 +120,7 @@ export default function PursePage() {
             <Money raw={purse.owed} /> is still held by the contract for this purse.
           </>
         ) : held.kind === 'amount' && held.returned ? (
-          'Nothing is left in the contract. All of it went back to the people who put it in.'
+          'Nothing is left in the contract. Each funder was given their own money back.'
         ) : (
           'Nothing is left in the contract for this purse.'
         )}
@@ -129,6 +129,9 @@ export default function PursePage() {
       <div className="mt-6 space-y-3">
         {organiserIsWinner && <Notice>The organiser is also one of the winners.</Notice>}
         {organiserOnlyFunder && <Notice>The organiser is the only funder: all of this money came from them.</Notice>}
+        {ready && purse.named && funders.length > 1 && (
+          <Notice>This purse has more than one funder. Any prize left unclaimed returns to the organiser, not to the sponsors.</Notice>
+        )}
       </div>
 
       <div className="mt-10">
@@ -141,7 +144,14 @@ export default function PursePage() {
               {formatDate(purse.nameBy)} {!purse.named && <span className="text-soft">({timeLeft(purse.nameBy, now)})</span>}
             </span>
           </LedgerRow>
-          <LedgerRow label="Time to claim after winners are named">{formatDuration(purse.claimWindow)}</LedgerRow>
+          <LedgerRow label="Time to claim after winners are named">
+            {formatDuration(purse.claimWindow)}
+            {purse.claimWindow < 86400n && (
+              <span className="mt-2 block border-l-2 border-ink pl-3 font-medium text-pretty">
+                Short window: under a day. Winners have little time to receive their prize, and after it ends an undelivered prize returns to the organiser. Anyone can deliver it for them.
+              </span>
+            )}
+          </LedgerRow>
           <LedgerRow label="Claim deadline">
             {purse.named ? (
               <span className="tabular-nums">

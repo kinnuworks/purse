@@ -2,31 +2,12 @@ import { ExternalLink } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { NotConfigured } from '@/components/Shell'
 import { Addr, ContractLine, CopyButton, GroupLabel, Ledger, LedgerRow, Notice, Skeleton } from '@/components/ui'
-import { readTransaction, testnetAddressUrl, testnetTxUrl, type ProofNetwork } from '@/lib/data'
+import { readTransaction, testnetAddressUrl, testnetTxUrl } from '@/lib/data'
 import { CHAIN_ID, PURSE_ADDRESS, STUDIO_PROJECT_URL, explorerTx, sourcifyUrl } from '@/lib/env'
 import { formatDate, shortAddress } from '@/lib/format'
+import { readProof, type ProofTx } from '@/lib/proof-data'
 import proof from '@/proof.json'
 
-interface ProofTx {
-  /** Who sent it, in words: "Organiser", "Sponsor", "Winner", "Anyone". */
-  sender: string
-  what: string
-  hash: string
-  /** Leave out for Arc mainnet. "testnet" marks a rehearsal on Arc Testnet with no real money. */
-  network?: ProofNetwork
-}
-
-interface ProofFile {
-  foundryTests: number
-  /** Address of the Purse contract used for the testnet rehearsal, if any. */
-  testnetContract?: string
-  transactions: ProofTx[]
-}
-
-const file = proof as ProofFile
-const transactions = file.transactions
-const mainnetTransactions = transactions.filter((t) => t.network !== 'testnet')
-const testnetTransactions = transactions.filter((t) => t.network === 'testnet')
 const HASH = /^0x[0-9a-fA-F]{64}$/
 
 const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink'
@@ -86,6 +67,10 @@ function ProofRow({ tx }: { tx: ProofTx }) {
 }
 
 export default function ProofPage() {
+  const file = readProof(proof)
+  const transactions = file.transactions
+  const mainnetTransactions = transactions.filter((t) => t.network !== 'testnet')
+  const testnetTransactions = transactions.filter((t) => t.network === 'testnet')
   return (
     <>
       <h1 className="font-display text-4xl font-semibold tracking-tight">Proof</h1>
@@ -103,7 +88,7 @@ export default function ProofPage() {
             </LedgerRow>
           )}
           {file.testnetContract && (
-            <LedgerRow label="Testnet rehearsal contract">
+            <LedgerRow label="Testnet contract">
               <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <span className="break-all font-mono text-[0.9em]">{file.testnetContract}</span>
                 <CopyButton value={file.testnetContract} label="Copy contract address" />
@@ -120,7 +105,7 @@ export default function ProofPage() {
             </a>
           </LedgerRow>
           <LedgerRow label="Contract tests passing">
-            <span className="tabular-nums">{file.foundryTests}</span>
+            <span className="tabular-nums">{file.foundryTests ?? 'Not recorded'}</span>
           </LedgerRow>
         </Ledger>
       </div>
@@ -153,7 +138,7 @@ export default function ProofPage() {
           )}
           {testnetTransactions.length > 0 && (
             <>
-              <GroupLabel>Arc Testnet rehearsal</GroupLabel>
+              <GroupLabel>Arc Testnet run</GroupLabel>
               <ul className="divide-y divide-rule border-y border-rule">
                 {testnetTransactions.map((tx) => (
                   <ProofRow key={tx.hash} tx={tx} />

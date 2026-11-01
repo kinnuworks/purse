@@ -26,13 +26,14 @@ export function deriveState(s: PurseSnapshot, now: bigint): PurseState {
 /** Title the demo function gives every purse it runs. */
 export const DEMO_TITLE = 'Demo purse'
 
-/** Purses that exist to rehearse the flow: titles starting "Test:" and the demo function's runs. */
-export const isTestOrDemo = (title: string) => title.startsWith('Test:') || title === DEMO_TITLE
+/** Purses made to try the flow: titles starting "Test:" or "Bounty:", and the demo function's runs. */
+export const isTestOrDemo = (title: string) => title.startsWith('Test:') || title.startsWith('Bounty:') || title === DEMO_TITLE
 
 /**
  * Splits purses (any order) into real ones and test/demo runs, each newest first by id.
- * The featured purse is, in order: the newest real purse still holding money (Open or Locked),
- * else the newest real purse, else the newest test or demo run.
+ * The featured purse is, in order: the largest real purse that is open or being paid (Open, Locked,
+ * Winners named or Paid out; the biggest pool wins, the newest on a tie), else the newest real purse,
+ * else the newest test, bounty or demo run.
  */
 export function arrangePurses<T extends PurseSnapshot & { id: bigint; title: string }>(
   purses: T[],
@@ -41,11 +42,13 @@ export function arrangePurses<T extends PurseSnapshot & { id: bigint; title: str
   const newestFirst = (a: T, b: T) => (a.id === b.id ? 0 : a.id > b.id ? -1 : 1)
   const real = purses.filter((p) => !isTestOrDemo(p.title)).sort(newestFirst)
   const testAndDemo = purses.filter((p) => isTestOrDemo(p.title)).sort(newestFirst)
-  const holding = real.find((p) => {
+  const eligible = real.filter((p) => {
     const state = deriveState(p, now)
-    return state === 'Open' || state === 'Locked'
+    return state === 'Open' || state === 'Locked' || state === 'Winners named' || state === 'Paid out'
   })
-  return { featured: holding ?? real[0] ?? testAndDemo[0], real, testAndDemo }
+  // `real` is newest first, so on equal pools the first one seen (the newest) is kept.
+  const largest = eligible.reduce<T | undefined>((best, p) => (best === undefined || p.pool > best.pool ? p : best), undefined)
+  return { featured: largest ?? real[0] ?? testAndDemo[0], real, testAndDemo }
 }
 
 /** The most money a purse ever held: everything put in, from its Funded events. */

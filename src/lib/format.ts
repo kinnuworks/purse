@@ -32,11 +32,20 @@ export function formatDate(seconds: bigint | number): string {
 }
 
 export function formatDuration(seconds: bigint | number): string {
-  const s = Number(seconds)
-  if (s % 86400 === 0) return `${s / 86400} day${s === 86400 ? '' : 's'}`
-  if (s % 3600 === 0) return `${s / 3600} hour${s === 3600 ? '' : 's'}`
-  if (s % 60 === 0) return `${s / 60} minute${s === 60 ? '' : 's'}`
-  return `${s} seconds`
+  let s = Math.max(0, Math.floor(Number(seconds)))
+  const units: Array<[string, number]> = [
+    ['day', 86400],
+    ['hour', 3600],
+    ['minute', 60],
+    ['second', 1],
+  ]
+  const parts: string[] = []
+  for (const [name, size] of units) {
+    const n = Math.floor(s / size)
+    s -= n * size
+    if (n > 0) parts.push(`${n} ${name}${n === 1 ? '' : 's'}`)
+  }
+  return parts.length === 0 ? '0 seconds' : parts.slice(0, 2).join(' ')
 }
 
 export function timeLeft(deadline: bigint, now: bigint): string {

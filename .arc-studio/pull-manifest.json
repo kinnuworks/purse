@@ -18,12 +18,12 @@
       "pulledAt": "2026-11-01T17:23:31.995Z"
     },
     "README.md": {
-      "hash": "38e7d5bd428cc785f9539629c69a76aecb5cbb8898efbe6aa3d89c912300c11c",
-      "pulledAt": "2026-11-01T19:36:44.147Z"
+      "hash": "dec6da5961b915a869fd89bee5fa8dafb69c6885ab7ec38ce10346a2c6c0a373",
+      "pulledAt": "2026-11-01T19:49:45.934Z"
     },
     "bun.lock": {
-      "hash": "c6f0a83638a7ca02a35d15bd0c205f83a3849b4732f4865e72e4ba466052d9fd",
-      "pulledAt": "2026-11-01T17:38:48.205Z"
+      "hash": "9e150b27b4f09a39184d01e68f20ea7569225147f65858b3141478eb0b0c32d5",
+      "pulledAt": "2026-11-01T19:49:56.895Z"
     },
     "foundry.toml": {
       "hash": "fa63dae2b6b2e947737b466c96fbcbd35a1d22313b9300c7979025b1fc500263",
@@ -34,8 +34,8 @@
       "pulledAt": "2026-11-01T17:38:48.206Z"
     },
     "package.json": {
-      "hash": "3bb82de54a685c72934c82ae3e04449edc9f3c32b9db3d3aa613cc8274703874",
-      "pulledAt": "2026-11-01T19:21:49.651Z"
+      "hash": "bf247cdd733b1f2402ffaffec6fd2445d8e884bc5203c47528e10d461ca8f9bc",
+      "pulledAt": "2026-11-01T19:49:56.896Z"
     },
     "postcss.config.js": {
       "hash": "f0156321fafa19749b38a82ea29e7b1786a1f727b67372ef40cc66de0ed898fb",
@@ -82,8 +82,8 @@
       "pulledAt": "2026-11-01T17:23:32.000Z"
     },
     "src/App.tsx": {
-      "hash": "5a225742546104a4906b4008496bd0279221512dfd237685d0f2a5b020cd388c",
-      "pulledAt": "2026-11-01T19:21:49.656Z"
+      "hash": "78eb88220a93a7cba0180cb8cf245ec472fe0f951b454df2650de8a21f6aa23f",
+      "pulledAt": "2026-11-01T19:49:56.900Z"
     },
     "src/config.ts": {
       "hash": "320d1db88dbafeb26d298191a11bd45fe99f095d355c0d96000d9ff16d9dabe1",
@@ -534,8 +534,8 @@
       "pulledAt": "2026-11-01T19:29:25.824Z"
     },
     "vitest.config.ts": {
-      "hash": "d7d26d6f89ca5215cf08fb7a30c65cb15f7d6347e717cee0a7a022c1c251809f",
-      "pulledAt": "2026-11-01T19:21:49.653Z"
+      "hash": "f04bad7ff0ef71a56c061e154ea5acbd80a26277a48e385bf96d2dc3bd31c535",
+      "pulledAt": "2026-11-01T19:49:56.897Z"
     },
     "api/demo.test.ts": {
       "hash": "29317f5fa019e219928aa1c3228ce101b1b853cf8b757dc222b143dd4e6687d2",
@@ -546,8 +546,8 @@
       "pulledAt": "2026-11-01T17:50:45.517Z"
     },
     "src/proof.json": {
-      "hash": "d69e46067d0258b18caa19d3e832f1aa54429b194e9791952defa0c8f80d81de",
-      "pulledAt": "2026-11-01T19:36:44.147Z"
+      "hash": "8e09b0bdaec8ef6e3bb3c7fd17a9bf4f4c51af7f27869045231e593eb0fadacb",
+      "pulledAt": "2026-11-01T19:49:45.934Z"
     },
     "src/components/AddFunds.tsx": {
       "hash": "38e692feaf2217a85d9d07e0445909fbd088d9ac81c9b0adbebaa8d24f67a981",
@@ -602,8 +602,8 @@
       "pulledAt": "2026-11-01T17:38:48.218Z"
     },
     "src/lib/format.ts": {
-      "hash": "73b55e04e8967a55bc23e71b58c3c0da48ddc15d6fc2db5ba6d0fe50f10a19da",
-      "pulledAt": "2026-11-01T17:38:48.218Z"
+      "hash": "c9e1e6bbc78d8527698ea098602c9f772987e8b91123ce77b290cbca6cdf3eb8",
+      "pulledAt": "2026-11-01T19:49:56.910Z"
     },
     "src/lib/history.ts": {
       "hash": "68db35c511a29ecd89ba6320257804195de55bb1f2d2bdd70b1efef3c04a20bf",
@@ -626,12 +626,12 @@
       "pulledAt": "2026-11-01T17:38:48.219Z"
     },
     "src/lib/purse-state.test.ts": {
-      "hash": "af86e3ed7c41bc3ce68daaef905c0375e17d31fa9a0a517023bcadccf2720c45",
-      "pulledAt": "2026-11-01T17:54:36.578Z"
+      "hash": "85238e09cfa74889deb3e54517b0db1f1dcc03d3d7092af242b0f45803e428be",
+      "pulledAt": "2026-11-01T19:49:56.912Z"
     },
     "src/lib/purse-state.ts": {
-      "hash": "547f09ad9823602b9cf05f2da94b5f7d1ee392f25f1a3c166ee4c47a35e83482",
-      "pulledAt": "2026-11-01T17:54:36.579Z"
+      "hash": "64218973ec7df0d8ab0409ade881c98980c240e71790083cd4dc95decf1125be",
+      "pulledAt": "2026-11-01T19:49:56.912Z"
     },
     "src/lib/retry.ts": {
       "hash": "ee67b840140a92e264b0431b530ac5263d2adfb4fa231f57666c86dbe192010c",
@@ -642,20 +642,20 @@
       "pulledAt": "2026-11-01T17:38:48.220Z"
     },
     "src/pages/CreatePage.tsx": {
-      "hash": "728cd708e1bb1060b9895155a5075067bbb35122ef1297190d46f3bd04a9996c",
-      "pulledAt": "2026-11-01T19:29:25.837Z"
+      "hash": "640bab321822d25fdc41ee3b08d6d314b6bad87b7f71c6a268eb9aeca45a0ac1",
+      "pulledAt": "2026-11-01T19:49:56.914Z"
     },
     "src/pages/HomePage.tsx": {
-      "hash": "acec6b6ca188c59dcbf5315a0da8a67e61cb543990d3890179e9bb219f0b72e8",
-      "pulledAt": "2026-11-01T19:29:25.837Z"
+      "hash": "a615118a1db02e2d977d8e69b1a851e1eae1849426bf2ffed6a570195c468b72",
+      "pulledAt": "2026-11-01T19:49:56.914Z"
     },
     "src/pages/ProofPage.tsx": {
-      "hash": "8562e03048646208da55d8447fc5bb8bab8bd23c03f0b6dab3de728e35148897",
-      "pulledAt": "2026-11-01T19:29:25.838Z"
+      "hash": "a984e7499aa47c18cfe6a420336e4b825e63218ee37a1a9142d214635b798c96",
+      "pulledAt": "2026-11-01T19:49:56.915Z"
     },
     "src/pages/PursePage.tsx": {
-      "hash": "2338db2cd01e62e21451ad919e83c6a54a85cd37f67aa07e177fabe50f71fcdf",
-      "pulledAt": "2026-11-01T19:29:25.838Z"
+      "hash": "a8a3416f7cd06db2f2c3ef61cb809a7052278ecf19c04406777bdc6f0a4117d7",
+      "pulledAt": "2026-11-01T19:49:56.915Z"
     },
     "contracts/out/Base.sol/CommonBase.json": {
       "hash": "19e9d367aee662b24ad5f3ee89428c793c285be432c3000aa20974cf0dcf9479",
@@ -922,12 +922,12 @@
       "pulledAt": "2026-11-01T19:29:25.836Z"
     },
     "src/pages/BreakItPage.tsx": {
-      "hash": "df2e1dd02b01eed6e6a64eb375b072ab7e065d6ebfae8003e08d8eaab02dfc0e",
-      "pulledAt": "2026-11-01T19:29:25.836Z"
+      "hash": "6a216b46f78c059b4e0d37f0f38b601ffe2fcc93905799a41da8b87611eea214",
+      "pulledAt": "2026-11-01T19:49:56.914Z"
     },
     "src/pages/JudgesPage.tsx": {
-      "hash": "c0af79015865db225ec1d25fa61dc77bdc6826df3245a781ff7e55d9d6d16759",
-      "pulledAt": "2026-11-01T19:29:25.837Z"
+      "hash": "1851b79a8239bd1534f29f7edbf01d12f6e7b5e30aa9c1e98be51a78bc70f16f",
+      "pulledAt": "2026-11-01T19:49:56.915Z"
     },
     "packages/purse-sdk/src/abi.ts": {
       "hash": "65b01cbfd39ca742ae46f5491c6661a7f9c566bf174422ddca9699a2f806d5f1",
@@ -956,6 +956,22 @@
     "contracts/cache/Deploy.s.sol/31337/run-1793560832783.json": {
       "hash": "aba22b1358f104a636d766c8ba102e1e94ef97243099d572987164fa79b7b5cb",
       "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "src/components/ErrorBoundary.tsx": {
+      "hash": "a573061f96503a858930bfc1720307d9f3918b86c4388359ec83e84d7cf68a83",
+      "pulledAt": "2026-11-01T19:49:56.908Z"
+    },
+    "src/lib/proof-data.test.ts": {
+      "hash": "3d634d83890c13b8cd7cdb9a51a7ed7fe467492e0f19176826911669de926d22",
+      "pulledAt": "2026-11-01T19:49:56.911Z"
+    },
+    "src/lib/proof-data.ts": {
+      "hash": "979167e4dfc3e3318cd16d4c2a93c7d1b25ab7a22b894bb8fe45dd62e1ff2e9c",
+      "pulledAt": "2026-11-01T19:49:56.911Z"
+    },
+    "src/pages/render.test.tsx": {
+      "hash": "5023f5a8823fe8162e6fc53273bfce100c982cfdf05cb5d4680aa1cf9a62587e",
+      "pulledAt": "2026-11-01T19:49:56.915Z"
     }
   }
 }

@@ -6,16 +6,9 @@ import { CHAIN_ID, PURSE_ADDRESS, STUDIO_PROJECT_URL, explorerTx, sourcifyUrl } 
 import { useHistory } from '@/lib/history'
 import { usePurseList } from '@/lib/hooks'
 import { computeStats, pickExamples, type Example, type MoneyOut } from '@/lib/stats'
+import { readProof } from '@/lib/proof-data'
 import proof from '@/proof.json'
 
-interface ProofFile {
-  foundryTests?: number
-  appTests?: number
-  sdkTests?: number
-  ourAddresses?: Array<{ address: string; label?: string }>
-}
-const file = proof as ProofFile
-const ours = (file.ourAddresses ?? []).map((a) => a.address)
 
 const linkClass = 'inline-flex items-center gap-1 underline decoration-ink/30 underline-offset-4 hover:decoration-ink'
 
@@ -64,6 +57,8 @@ function StatRow({ label, children }: { label: string; children: ReactNode }) {
 }
 
 export default function JudgesPage() {
+  const file = readProof(proof)
+  const ours = file.ours
   const history = useHistory()
   const list = usePurseList()
   const ready = history.status === 'ready' && list.data !== undefined
@@ -74,7 +69,7 @@ export default function JudgesPage() {
     <>
       <h1 className="font-display text-4xl font-semibold tracking-tight">For reviewers</h1>
       <p className="mt-3 max-w-[34rem] text-lg text-pretty">
-        Purse is a contract on Arc that locks a contest’s USDC prize before the contest starts, so the money can only be paid to the winners the organiser names, or sent back.
+        Purse is a contract on Arc that locks a contest’s USDC prize before the contest starts. The whole pool has to go to the named winners. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to the organiser.
       </p>
 
       <div className="mt-10">
@@ -172,6 +167,9 @@ export default function JudgesPage() {
             </table>
             <p className="mt-3 text-sm text-soft text-pretty">
               Wallets are organisers, funders, winners, and whoever pressed Deliver or Return. “Ours” are the {ours.length} addresses listed in the repo’s proof file; every other wallet counts as “others”.
+            </p>
+            <p className="mt-4 max-w-[34rem] text-pretty">
+              Everything so far is small and mostly our own wallets. The two launch-prize winners are people I know personally.
             </p>
           </>
         )}

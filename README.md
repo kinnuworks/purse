@@ -1,6 +1,6 @@
 # Purse
 
-**Prize money you can see.** Purse locks a hackathon, grant or bounty prize in a contract before the contest starts. The whole pool goes to the named winners, or back to whoever funded it.
+**Prize money you can see.** Purse locks a hackathon, grant or bounty prize in a contract before the contest starts. The whole pool has to go to the named winners. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to the organiser.
 
 **Live app:** https://purse-arc.vercel.app (no wallet needed to read anything)
 
@@ -15,9 +15,9 @@
 - Built in Arc Studio, contracts, tests and app: [project](https://studio.arc.io/app/4f1afe15-a898-46ff-9acf-196783f28e52). The prompts are in `brief-*.md`. Studio deployed to testnet; mainnet was deployed from my own wallet with `arc-forge`, because Studio doesn't touch mainnet.
 - 139 Foundry tests, 80 app tests and 26 SDK tests
 
-**What it doesn't prove:** the organiser still picks the winners, so Purse shows the money is there and where it went, not that the judging was fair. The contract has not been audited, has no admin and can't be upgraded. Keep amounts small.
+**What it doesn't prove:** the organiser still picks the winners and sets the claim window, which can be as short as 60 seconds, so a prize left unclaimed can return to them quickly, including money a sponsor added. Purse shows the money is there and where it went, not that the judging was fair. The contract has not been audited, has no admin and can't be upgraded. Keep amounts small.
 
-**Honest usage note:** most mainnet transactions come from my own wallets, and they're labelled that way. The launch prize paid 0.50 USDC each to two people I know personally, friends and family. One's feedback led to the design pass. Both also ran the real-cent demo themselves.
+**Honest usage note:** most mainnet transactions come from my own wallets, and they're labelled that way. The launch prize paid 0.50 USDC each to two people I know personally, friends and family. One's feedback led to the design pass. Both addresses also received a real-cent demo prize.
 
 ## What it does
 

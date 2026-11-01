@@ -51,7 +51,10 @@
       "address": "0x41Fa9AAd9Ea95870906fFdd7863600404E38FD4D",
       "label": "Test winner 10"
     },
-    "0xD6C9826f7903B6F1836a299B5d77b017Add81891"
+    {
+      "address": "0xD6C9826f7903B6F1836a299B5d77b017Add81891",
+      "label": "Demo wallet's second address (ours)"
+    }
   ],
   "transactions": [
     {
@@ -283,37 +286,49 @@
       "network": "mainnet"
     },
     {
+      "sender": "Demo wallet 0xd80b…6B17 (ours), run from the site's button",
+      "what": "Real-cent demo, purse 6: delivered to a launch-prize winner",
+      "hash": "0xffae0ad2153721d0ed1f8d192a790c23a28b3236e50016a7acf7ff6ea16d41dc",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Demo wallet 0xd80b…6B17 (ours), run from the site's button",
+      "what": "Real-cent demo, purse 7: delivered to a launch-prize winner",
+      "hash": "0xb33d95de4e64501f380f524bfe4167647b1835ba41ad7bf750065b0c0340d49b",
+      "network": "mainnet"
+    },
+    {
       "sender": "Arc Studio platform deployer wallet",
       "what": "Deployed Purse to Arc Testnet",
       "hash": "0x9c17cdd660af604504804cd202926abbbb3f73fdfeee72e857083e370b486094",
       "network": "testnet"
     },
     {
-      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet run)",
       "what": "Approved USDC for the purse",
       "hash": "0x050a6720315364e6af3f9819bc7f7542d5bfd7a55287fb32bbd6318761c1fbb6",
       "network": "testnet"
     },
     {
-      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet run)",
       "what": "Created purse #0 \"Testnet proof\" with 0.01 USDC",
       "hash": "0x76b2579c6a739b1f23eaec06c95b8bfe91fe975f834e57a0ab7da0c40b0bf1f6",
       "network": "testnet"
     },
     {
-      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet run)",
       "what": "Locked the purse",
       "hash": "0x712ea06c7cf483a4a22b03f6dd8875ea8f07cecbab474a24f7249fa85ff844ec",
       "network": "testnet"
     },
     {
-      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet run)",
       "what": "Named one winner for the whole pool",
       "hash": "0xee773b619823b18d1929417c56ae37e1a379ffa8dee6af9cd8dc5da1b3dee848",
       "network": "testnet"
     },
     {
-      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet rehearsal)",
+      "sender": "Throwaway wallet 0x11FD…Ad4F (testnet run)",
       "what": "Delivered the prize to winner 0x7157…9CAF",
       "hash": "0x6cce5517d388c780481d7a807f0a3577a7380ebea6cbc28e71617ee20f7d206b",
       "network": "testnet"

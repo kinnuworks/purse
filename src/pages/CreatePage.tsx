@@ -100,7 +100,7 @@ export default function CreatePage() {
     <>
       <h1 className="font-display text-4xl font-semibold tracking-tight">Create a purse</h1>
       <p className="mt-3 max-w-[34rem] text-lg text-pretty">
-        The prize leaves your wallet now and sits in the contract. After the contest it goes to the winners you name, or back to whoever put it in.
+        The prize leaves your wallet now and sits in the contract. The whole pool has to go to the winners you name. If nobody is named in time, each funder gets their own money back. A prize left unclaimed returns to you.
       </p>
 
       <div className="mt-10 space-y-10">
