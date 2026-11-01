@@ -30,14 +30,47 @@ const BY_NAME: Record<string, string> = {
   SafeERC20FailedOperation: 'The USDC transfer was refused. The wallet involved may be blocked from receiving USDC.',
 }
 
+const HEX_ERROR = /^0x[0-9a-fA-F]{8,}/
+
 function findRevertData(error: unknown): Hex | null {
   if (error instanceof BaseError) {
-    const found = error.walk((e) => typeof (e as { data?: unknown }).data === 'string' && /^0x[0-9a-fA-F]{8,}/.test((e as { data: string }).data))
-    const data = (found as { data?: unknown } | null)?.data
-    if (typeof data === 'string') return data as Hex
+    // An RPC error carries the revert bytes on `data`; a decoded contract error keeps them on `raw`.
+    const found = error.walk((e) => {
+      const { data, raw } = e as { data?: unknown; raw?: unknown }
+      return (typeof data === 'string' && HEX_ERROR.test(data)) || (typeof raw === 'string' && HEX_ERROR.test(raw))
+    }) as { data?: unknown; raw?: unknown } | null
+    if (found) {
+      if (typeof found.data === 'string' && HEX_ERROR.test(found.data)) return found.data as Hex
+      if (typeof found.raw === 'string') return found.raw as Hex
+    }
   }
   return null
 }
+
+export interface RevertInfo {
+  name: string
+  args: readonly unknown[]
+  /** The reason as the contract states it, for example NotOrganiser(0x…, 0x…). */
+  text: string
+}
+
+const show = (v: unknown): string => (typeof v === 'bigint' ? v.toString() : typeof v === 'string' ? v : JSON.stringify(v, (_k, x: unknown) => (typeof x === 'bigint' ? x.toString() : x)))
+
+/** The contract's own revert reason (error name and arguments) behind a failed call, or null if it is not one of ours. */
+export function revertInfo(error: unknown): RevertInfo | null {
+  const data = findRevertData(error)
+  if (!data) return null
+  try {
+    const decoded = decodeErrorResult({ abi: purseAbi, data })
+    const args = (decoded.args ?? []) as readonly unknown[]
+    return { name: decoded.errorName, args, text: `${decoded.errorName}(${args.map(show).join(', ')})` }
+  } catch {
+    return null
+  }
+}
+
+/** The plain-words meaning of one of the contract's errors, if known. */
+export const plainRevert = (name: string): string | undefined => BY_NAME[name]
 
 /** Turns anything thrown by a wallet, the RPC or the contract into one plain sentence. */
 export function plainError(error: unknown): string {

@@ -1,0 +1,25 @@
+{
+  "name": "purse-sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for Purse: contest prize pools that lock USDC before the contest starts. Built on viem.",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "src", "README.md"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
+  },
+  "license": "MIT"
+}

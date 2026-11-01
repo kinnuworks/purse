@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useAccount } from 'wagmi'
 import { AddFunds } from '@/components/AddFunds'
 import { ChainButton } from '@/components/ChainButton'
+import { EmbedBadge } from '@/components/EmbedBadge'
 import { HistoryList } from '@/components/HistoryList'
 import { OrganiserControls } from '@/components/OrganiserControls'
 import { NotConfigured } from '@/components/Shell'
@@ -250,6 +251,10 @@ export default function PursePage() {
           </ul>
         )}
         {!purse.named && now > purse.nameBy && <p className="mt-2 text-xs opacity-60">No winners were named in time, so each funder can take back exactly what they put in. Anyone can press the button for them.</p>}
+      </Section>
+
+      <Section title="Share">
+        <EmbedBadge id={purse.id} />
       </Section>
 
       <Section title="History">

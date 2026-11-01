@@ -42,6 +42,8 @@
   "include": [
     "src",
     "scripts",
-    "api"
+    "api",
+    "packages",
+    "examples"
   ]
 }

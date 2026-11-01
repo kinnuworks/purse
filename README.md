@@ -13,7 +13,7 @@
 - Every mainnet transaction, labelled by who sent it: [/proof](https://purse-arc.vercel.app/proof) and [`ops/txs.tsv`](ops/txs.tsv)
 - Money has left the contract all three ways on mainnet: delivered to winners, refunded to funders, and returned to the organiser when unclaimed
 - Built in Arc Studio, contracts, tests and app: [project](https://studio.arc.io/app/4f1afe15-a898-46ff-9acf-196783f28e52). The prompts are in `brief-*.md`. Studio deployed to testnet; mainnet was deployed from my own wallet with `arc-forge`, because Studio doesn't touch mainnet.
-- 139 Foundry tests and 60 app tests
+- 139 Foundry tests, 80 app tests and 26 SDK tests
 
 **What it doesn't prove:** the organiser still picks the winners, so Purse shows the money is there and where it went, not that the judging was fair. The contract has not been audited, has no admin and can't be upgraded. Keep amounts small.
 
@@ -26,13 +26,17 @@
 - Anyone can deliver a prize to a winner or return a funder's money when it is due.
 - A "Try it with a real cent" panel runs a real 0.01 USDC prize from a demo wallet.
 - A proof page lists the contract, the tests and the transactions that show it working.
+- A reviewer page (`/judges`) shows the contract, one real example of each way money leaves it, and live counts read from the chain.
+- A "Try to break it" page (`/break-it`) simulates eight attacks against the live contract and shows its real refusals. No wallet and no transaction.
+- Every purse page has a copyable embed code for a small live prize badge (`/badge/:id`) that can sit on a contest page.
+- A TypeScript SDK in `packages/purse-sdk` to create, lock, name, deliver, refund and sweep purses from code, with an agent example in `examples/agent-bounty.ts`.
 
 ## Tech stack
 
 - Solidity 0.8.28, OpenZeppelin, Foundry (contract, tests, deploy script)
 - Vite, React, TypeScript, Tailwind, viem and wagmi
 - A Vercel serverless function for the demo (`api/demo.ts`)
-- Vitest for the app tests
+- Vitest for the app and SDK tests
 
 ## Development
 
@@ -42,8 +46,9 @@ Prerequisites: [Foundry](https://book.getfoundry.sh/) and [Bun](https://bun.sh/)
 bun install
 bun run dev        # start the app
 bun run build      # production build
-bun run test       # app tests (log reading, demo limits, purse rules)
+bun run test       # app and SDK tests (log reading, demo limits, purse rules, SDK)
 bun run check      # lint and typecheck
+bun run sdk:build  # rebuild packages/purse-sdk/dist (committed)
 forge test         # contract tests
 ```
 
@@ -71,6 +76,6 @@ Server only (set in the hosting project, never in the browser):
 
 - `DEMO_PRIVATE_KEY`: key of the demo wallet used by `api/demo.ts`. It must hold USDC on the chain above. The demo stops below 0.20 USDC.
 
-### Proof page
+### Proof and reviewer pages
 
-Add the transactions you want to show to `src/proof.json`. Each entry has `sender` (who sent it, in words), `what` and `hash`; add `"network": "testnet"` to mark an Arc Testnet rehearsal, and `testnetContract` for its contract address.
+Add the transactions you want to show to `src/proof.json`. Each entry has `sender` (who sent it, in words), `what` and `hash`; add `"network": "testnet"` to mark an Arc Testnet rehearsal, and `testnetContract` for its contract address. `ourAddresses` lists the wallets we control, so `/judges` can split wallets into ours and others. `foundryTests`, `appTests` and `sdkTests` are the test counts shown there; `reportUrl` (optional) is where `/break-it` sends bug reports.

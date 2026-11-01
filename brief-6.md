@@ -1,0 +1,13 @@
+Add four things to Purse. Don't change Purse.sol. Everything reads the live mainnet contract, no invented numbers, plain language, same calm design.
+
+1. `/judges`, a one-screen reviewer page linked from the nav as "For reviewers". In order: one sentence on what Purse is; contract address with explorer and Sourcify links; Studio project link; test counts; then "See it in 60 seconds" with one row for each way money leaves the contract (delivered to a winner, refunded to a funder, returned when unclaimed), each linking its purse page and its mainnet transaction. Then a table of counts read live from chain: purses, USDC locked now, USDC delivered, refunded, returned, and distinct wallets. Split wallets into "ours" and "others", using a list of our addresses kept in `src/proof.json`. A final line says what it doesn't prove: the organiser picks the winners, and it isn't audited.
+
+2. `/break-it`, "Try to break it". Each row is an attack with a button that simulates it against the live mainnet contract with `eth_call`, from the right caller, with no wallet and no transaction, and shows the contract's real revert reason beside the plain-language meaning. Include: the organiser takes back a locked prize; the organiser names winners twice; the organiser names less than the whole pool; a stranger names winners on a purse; a winner is paid twice; a stranger redirects a prize to themselves by calling deliver with their own address; a refund after winners are named; a sweep before the claim deadline. Pick purse ids from chain that make each simulation meaningful, and if none fits, say so instead of faking it. A rule of the page: if a simulation ever succeeds, show it in red as a failure. Add one line inviting people to report anything they find.
+
+3. Embeddable prize badge. `/badge/:id` is a small page made to sit in an iframe, showing the title, amount, state and a link back to the purse, read live from chain. On the purse page add "Put this on your contest page" with a copyable iframe snippet.
+
+4. An SDK in `packages/purse-sdk`, in TypeScript on top of viem: `getPurse`, `listPurses`, `createPurse` (approves if needed), `lock`, `nameWinners`, `deliver`, `refund`, `sweep`, each with plain typed errors. Add `packages/purse-sdk/README.md` with a short example, and `examples/agent-bounty.ts`: a script that takes a key from the environment, posts a small bounty, reads open bounties, names the winner and delivers, printing each transaction hash. Unit test it against mocks. Make it installable from the GitHub repo, and don't publish anything.
+
+Also add `run*.json`, `run*.err`, `.env.demo` and `.env.testwallets` to `.gitignore` and keep `.npmrc`.
+
+Run all tests and the build, fix anything that fails, and tell me the new test counts.

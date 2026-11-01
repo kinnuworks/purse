@@ -47,7 +47,7 @@ export function Shell({ children }: { children: ReactNode }) {
         <Link to="/" className="font-display text-xl font-semibold tracking-tight">
           Purse
         </Link>
-        <nav className="order-3 flex w-full items-center gap-5 sm:order-2 sm:w-auto" aria-label="Main">
+        <nav className="order-3 flex w-full flex-wrap items-center gap-x-5 sm:order-2 sm:w-auto" aria-label="Main">
           <NavLink to="/" end className={navClass}>
             Purses
           </NavLink>
@@ -56,6 +56,9 @@ export function Shell({ children }: { children: ReactNode }) {
           </NavLink>
           <NavLink to="/proof" className={navClass}>
             Proof
+          </NavLink>
+          <NavLink to="/judges" className={navClass}>
+            For reviewers
           </NavLink>
         </nav>
         <div className="order-2 sm:order-3">

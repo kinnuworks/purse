@@ -18,8 +18,8 @@
       "pulledAt": "2026-11-01T17:23:31.995Z"
     },
     "README.md": {
-      "hash": "ba5efc4c302ee39c9772c38c911b19be6cff239040f08e6ff027ad4e662807ef",
-      "pulledAt": "2026-11-01T17:54:26.171Z"
+      "hash": "c2b9eef46ee9604cd64385e2133eeb20052d52afeac1de2a05132d27f579c7a7",
+      "pulledAt": "2026-11-01T19:21:49.650Z"
     },
     "bun.lock": {
       "hash": "c6f0a83638a7ca02a35d15bd0c205f83a3849b4732f4865e72e4ba466052d9fd",
@@ -34,8 +34,8 @@
       "pulledAt": "2026-11-01T17:38:48.206Z"
     },
     "package.json": {
-      "hash": "1beb5f1ba4765f696f71388387056fdf8c0acbdc979d513385ba9a9ef6af120d",
-      "pulledAt": "2026-11-01T17:38:48.206Z"
+      "hash": "3bb82de54a685c72934c82ae3e04449edc9f3c32b9db3d3aa613cc8274703874",
+      "pulledAt": "2026-11-01T19:21:49.651Z"
     },
     "postcss.config.js": {
       "hash": "f0156321fafa19749b38a82ea29e7b1786a1f727b67372ef40cc66de0ed898fb",
@@ -50,8 +50,8 @@
       "pulledAt": "2026-11-01T17:38:48.207Z"
     },
     "tsconfig.json": {
-      "hash": "0a36087f958ccc0ed242a02459f5f535f005f1f5b05b971c30d25765d4aafee5",
-      "pulledAt": "2026-11-01T17:38:48.207Z"
+      "hash": "003683dc0879da1ed95203d91536162d27753053d74e43db14c24f1dae4b4912",
+      "pulledAt": "2026-11-01T19:21:49.652Z"
     },
     "vite.config.ts": {
       "hash": "58bfc87c2e88182c01c24d362e85ff51b9cfed76bf16d274a821df623bb68ae2",
@@ -82,8 +82,8 @@
       "pulledAt": "2026-11-01T17:23:32.000Z"
     },
     "src/App.tsx": {
-      "hash": "5f84b13d0c33c65f410cf9a6f63083755a3856a199659770784727993843fa4b",
-      "pulledAt": "2026-11-01T17:38:48.209Z"
+      "hash": "5a225742546104a4906b4008496bd0279221512dfd237685d0f2a5b020cd388c",
+      "pulledAt": "2026-11-01T19:21:49.656Z"
     },
     "src/config.ts": {
       "hash": "320d1db88dbafeb26d298191a11bd45fe99f095d355c0d96000d9ff16d9dabe1",
@@ -98,8 +98,8 @@
       "pulledAt": "2026-11-01T17:38:48.210Z"
     },
     "src/main.tsx": {
-      "hash": "c58c842a9fb63dc351f36a350d53ac97361cea8865ee1116c22a2e13c8c7c6b8",
-      "pulledAt": "2026-11-01T17:23:32.002Z"
+      "hash": "fa352ff515bf95c41a91e7b420a4916108c4f25e53bb8e7090b11e339e5e63b2",
+      "pulledAt": "2026-11-01T19:21:49.657Z"
     },
     "src/onchain-facts.ts": {
       "hash": "c7c314ada2f6be684dcd24c703fee3fec68f8bc0a2c7c9d1bcf3633c33199abd",
@@ -522,8 +522,8 @@
       "pulledAt": "2026-11-01T17:23:32.024Z"
     },
     ".gitignore": {
-      "hash": "05d483afc11550eb420cdc9a57a955be9cf2b1d057cce662b7ec262f2e92e002",
-      "pulledAt": "2026-11-01T17:54:36.567Z"
+      "hash": "fbb066dc355c4f2e91f9dd8db4cc816709ef6c7e4452b319a054ba3e1c6d7e91",
+      "pulledAt": "2026-11-01T19:21:49.648Z"
     },
     "env.example": {
       "hash": "5f07bceb4161b0ae11af36f16d637c8a2228eef91a6b5bb43dedcf072e40ff12",
@@ -534,8 +534,8 @@
       "pulledAt": "2026-11-01T17:38:48.207Z"
     },
     "vitest.config.ts": {
-      "hash": "0b36e6c60fdb9566075e6753173416aca8780196b20b8ec7bf5fa19595360d42",
-      "pulledAt": "2026-11-01T17:38:48.207Z"
+      "hash": "d7d26d6f89ca5215cf08fb7a30c65cb15f7d6347e717cee0a7a022c1c251809f",
+      "pulledAt": "2026-11-01T19:21:49.653Z"
     },
     "api/demo.test.ts": {
       "hash": "29317f5fa019e219928aa1c3228ce101b1b853cf8b757dc222b143dd4e6687d2",
@@ -546,8 +546,8 @@
       "pulledAt": "2026-11-01T17:50:45.517Z"
     },
     "src/proof.json": {
-      "hash": "0b1a9d69f2f490280022bab9e8b501268aa7dca19725fc9d1c774857c86db2ea",
-      "pulledAt": "2026-11-01T17:54:26.171Z"
+      "hash": "93f4b8ac1318bb4bb2a061d1cbd5506956ff7a1b750b3bceda568e7679699dd9",
+      "pulledAt": "2026-11-01T19:21:49.658Z"
     },
     "src/components/AddFunds.tsx": {
       "hash": "8c422b43634efb663f3082d35c63af61b9f0d0c72afd34bfd9a99301c0e3fcf6",
@@ -570,8 +570,8 @@
       "pulledAt": "2026-11-01T17:38:48.217Z"
     },
     "src/components/Shell.tsx": {
-      "hash": "feda9e9b2f2e9b0a8cbe6cf11be7720c0002198263d16783a0ed70020f694143",
-      "pulledAt": "2026-11-01T17:38:48.217Z"
+      "hash": "0807bba186bc10a253a7c4ee5105138d9a4f78875e7b2312cdffd62f74bbe37c",
+      "pulledAt": "2026-11-01T19:21:49.664Z"
     },
     "src/components/ui.tsx": {
       "hash": "c41a4e54c1bfe92ac864f15963b4c2366840327681f19f444511210f240a4d7e",
@@ -594,8 +594,8 @@
       "pulledAt": "2026-11-01T17:50:45.526Z"
     },
     "src/lib/errors.ts": {
-      "hash": "abc81b6e16bf7c43b632873f5f9fcdcabc0fa95a08c3d31f51e6872832b9b1af",
-      "pulledAt": "2026-11-01T17:38:48.218Z"
+      "hash": "1e9e209774e2fee76417f0699522c38a9b04d5a726e19bd389023c8db19da41d",
+      "pulledAt": "2026-11-01T19:21:49.666Z"
     },
     "src/lib/events.ts": {
       "hash": "945022306176de8d1fb73e122ee662f37f418ad861866dadf4e0b8e225c8cf94",
@@ -654,8 +654,8 @@
       "pulledAt": "2026-11-01T17:50:45.529Z"
     },
     "src/pages/PursePage.tsx": {
-      "hash": "118896752aa1c813c012e96a5a0d37aa8721203a04106bc714bb16912889cccc",
-      "pulledAt": "2026-11-01T17:54:36.580Z"
+      "hash": "bc119e730600742f26e2fd5e9efcf61724123ffae2b840f167271ab270f34771",
+      "pulledAt": "2026-11-01T19:21:49.669Z"
     },
     "contracts/out/Base.sol/CommonBase.json": {
       "hash": "19e9d367aee662b24ad5f3ee89428c793c285be432c3000aa20974cf0dcf9479",
@@ -884,6 +884,78 @@
     "contracts/contract-metadata/Purse.json": {
       "hash": "45c098a8ec36ad4c42b3346a9e7bc49acdab2740f9cb0d315b0c620d05c35cf1",
       "pulledAt": "2026-11-01T17:50:45.520Z"
+    },
+    "examples/agent-bounty.ts": {
+      "hash": "697a381ba65e90f2001a54a355ed62cce2e5630e0c53670259876d0b80a460c6",
+      "pulledAt": "2026-11-01T19:21:49.654Z"
+    },
+    "packages/purse-sdk/README.md": {
+      "hash": "512df15b0af42b0d552d21a3a7eddbb3ac7f7314718d19635abfa3083eca5d49",
+      "pulledAt": "2026-11-01T19:21:49.663Z"
+    },
+    "packages/purse-sdk/package.json": {
+      "hash": "209d0c4a466e19f5b6b3c89579d2d901fc02cbc094da3093b1550164cc1c6b14",
+      "pulledAt": "2026-11-01T19:21:49.663Z"
+    },
+    "packages/purse-sdk/tsconfig.json": {
+      "hash": "b93d9b4662e0d3637f7e1112e97ce51be7de789a880e52f35ea31ce487a95432",
+      "pulledAt": "2026-11-01T19:21:49.663Z"
+    },
+    "src/components/EmbedBadge.tsx": {
+      "hash": "3145ae60b8c6a4dbc2504e44edc4f5a16f76247091143d760755ec4398b790fa",
+      "pulledAt": "2026-11-01T19:21:49.664Z"
+    },
+    "src/lib/attacks.ts": {
+      "hash": "790c53ae8788a6a30757865ec2c0d8d719cef55b5df8813bf9d3c5c1469f2070",
+      "pulledAt": "2026-11-01T19:21:49.665Z"
+    },
+    "src/lib/review.test.ts": {
+      "hash": "58e1186991f1d2406cb98cc2ff07aadb3c20f85f490c48120fff6aa62a81162c",
+      "pulledAt": "2026-11-01T19:21:49.667Z"
+    },
+    "src/lib/stats.ts": {
+      "hash": "1be01b15b88dd9f5d00df78306f21f4233e0ad07222998243dbd318160b2d6a1",
+      "pulledAt": "2026-11-01T19:21:49.668Z"
+    },
+    "src/pages/BadgePage.tsx": {
+      "hash": "219bdae0f25334273abde6160cf2882f450e388d25f856634e1260f853335d18",
+      "pulledAt": "2026-11-01T19:21:49.668Z"
+    },
+    "src/pages/BreakItPage.tsx": {
+      "hash": "e831dba6695e712d6ea2527d44ff4baba4969db04edede949163e94b9c2e63f6",
+      "pulledAt": "2026-11-01T19:21:49.668Z"
+    },
+    "src/pages/JudgesPage.tsx": {
+      "hash": "27b3e333c205da3a3e3784da2b20bcc4333c41e54f1bfddbdbabc2d10507b8cc",
+      "pulledAt": "2026-11-01T19:21:49.668Z"
+    },
+    "packages/purse-sdk/src/abi.ts": {
+      "hash": "65b01cbfd39ca742ae46f5491c6661a7f9c566bf174422ddca9699a2f806d5f1",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "packages/purse-sdk/src/client.test.ts": {
+      "hash": "209695eb92b2a065a906d7fb6a48a9f7e72690f4159e779184348e3f240ac96a",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "packages/purse-sdk/src/client.ts": {
+      "hash": "0e8d9a97c93f8708b74210e6a12338f2d5b38e843d29df883e367b7a92e94863",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "packages/purse-sdk/src/errors.ts": {
+      "hash": "8635372fde83cb41ff8582bd38b8c4b27524da0fe5fc0efd67c25270b80133a0",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "packages/purse-sdk/src/index.ts": {
+      "hash": "5fe46532ad8df4d0ddbfdd09eeacd6d621c62713c0c8dc3b295813d9dd94632e",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "packages/purse-sdk/src/types.ts": {
+      "hash": "1e34fde306ec5cc42c8a140c304c449e8322599775233f958d409cd25776fc0e",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
+    },
+    "contracts/cache/Deploy.s.sol/31337/run-1793560832783.json": {
+      "hash": "aba22b1358f104a636d766c8ba102e1e94ef97243099d572987164fa79b7b5cb",
+      "pulledAt": "2026-11-01T19:21:49.695Z"
     }
   }
 }

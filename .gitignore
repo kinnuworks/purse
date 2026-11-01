@@ -1,5 +1,5 @@
 node_modules
-dist
+/dist
 .env
 .env.*
 !env.example
@@ -14,3 +14,5 @@ console.jsonl
 broadcast
 run*.json
 run*.err
+.env.demo
+.env.testwallets

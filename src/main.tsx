@@ -75,7 +75,7 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider>
           <App />
-          <StudioWatermark />
+          {!window.location.pathname.startsWith('/badge/') && <StudioWatermark />}
           <Toaster position="top-center" />
         </ConnectKitProvider>
       </QueryClientProvider>
