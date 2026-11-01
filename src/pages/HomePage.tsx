@@ -2,15 +2,17 @@ import { Link } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
 import { DemoPanel } from '@/components/DemoPanel'
 import { NotConfigured } from '@/components/Shell'
-import { Button, Money, Notice, Skeleton, StatePill } from '@/components/ui'
+import { Button, HeldMoney, Notice, Skeleton, StatePill } from '@/components/ui'
 import type { PurseData } from '@/lib/data'
 import { PURSE_ADDRESS, explorerAddress } from '@/lib/env'
 import { plainError } from '@/lib/errors'
 import { formatDate, timeLeft } from '@/lib/format'
+import { useHistory } from '@/lib/history'
 import { usePurseList, useNow } from '@/lib/hooks'
-import { arrangePurses, deriveState } from '@/lib/purse-state'
+import type { PurseEvent } from '@/lib/events'
+import { arrangePurses, deriveState, heldAmount } from '@/lib/purse-state'
 
-function PurseRow({ p, now }: { p: PurseData; now: bigint }) {
+function PurseRow({ p, now, events, ready }: { p: PurseData; now: bigint; events: PurseEvent[]; ready: boolean }) {
   return (
     <li>
       <Link to={`/p/${p.id}`} className="flex min-h-14 flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-3 hover:bg-ink/[0.03]">
@@ -19,7 +21,7 @@ function PurseRow({ p, now }: { p: PurseData; now: bigint }) {
           <span className="text-xs opacity-60">#{p.id.toString()}</span>
         </span>
         <span className="flex items-center gap-3">
-          <Money raw={p.pool} className="text-sm" />
+          <HeldMoney held={heldAmount(p.pool, events, p.id, ready)} className="text-sm" returnedClassName="text-xs font-medium opacity-70" />
           <StatePill state={deriveState(p, now)} />
         </span>
       </Link>
@@ -27,7 +29,7 @@ function PurseRow({ p, now }: { p: PurseData; now: bigint }) {
   )
 }
 
-function FeaturedPurse({ purse, now }: { purse: PurseData; now: bigint }) {
+function FeaturedPurse({ purse, now, events, ready }: { purse: PurseData; now: bigint; events: PurseEvent[]; ready: boolean }) {
   const state = deriveState(purse, now)
   return (
     <section className="rounded-xl border border-ink/15 p-5 sm:p-7" aria-label="A real purse from the chain">
@@ -36,9 +38,9 @@ function FeaturedPurse({ purse, now }: { purse: PurseData; now: bigint }) {
         <StatePill state={state} />
       </div>
       <p className="mt-5 font-display text-5xl font-semibold tracking-tight sm:text-6xl">
-        <Money raw={purse.pool} className="[&>span]:text-base" />
+        <HeldMoney held={heldAmount(purse.pool, events, purse.id, ready)} className="[&>span]:text-base" returnedClassName="font-sans text-lg font-medium tracking-normal opacity-70" />
       </p>
-      <p className="mt-1 text-sm opacity-70">{state === 'Locked' ? 'Locked in the contract. It cannot be taken back by anyone.' : 'The pool for this purse, read from the contract.'}</p>
+      <p className="mt-1 text-sm opacity-70">{state === 'Locked' ? 'Locked in the contract. It cannot be taken back by anyone.' : 'Read from the contract just now.'}</p>
       <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
         <div>
           <dt className="opacity-60">{purse.named ? 'Winners were named' : 'Winners must be named by'}</dt>
@@ -82,7 +84,9 @@ function FeaturedSkeleton() {
 
 export default function HomePage() {
   const list = usePurseList()
+  const history = useHistory()
   const now = useNow()
+  const ready = history.status === 'ready'
 
   if (!PURSE_ADDRESS) {
     return (
@@ -99,13 +103,13 @@ export default function HomePage() {
   }
 
   const purses = list.data
-  const { featured, real, demos } = arrangePurses(purses ?? [])
+  const { featured, real, testAndDemo } = arrangePurses(purses ?? [], now)
 
   return (
     <>
       {list.isLoading && <FeaturedSkeleton />}
       {list.isError && <Notice strong>Could not read the purses from the chain. {plainError(list.error)}</Notice>}
-      {purses && featured && <FeaturedPurse purse={featured} now={now} />}
+      {purses && featured && <FeaturedPurse purse={featured} now={now} events={history.events} ready={ready} />}
       {purses && !featured && (
         <Notice>
           No purse exists on this contract yet. <Link to="/new" className="font-medium underline underline-offset-2">Create the first one</Link>.
@@ -135,16 +139,16 @@ export default function HomePage() {
               </li>
             ))}
           {real.map((p) => (
-            <PurseRow key={p.id.toString()} p={p} now={now} />
+            <PurseRow key={p.id.toString()} p={p} now={now} events={history.events} ready={ready} />
           ))}
           {purses && purses.length === 0 && <li className="px-4 py-4 text-sm opacity-70">Nothing here yet.</li>}
-          {demos.length > 0 && (
-            <li className="bg-ink/[0.03] px-4 py-2 text-xs font-medium uppercase tracking-wider opacity-70" aria-label="Demo runs">
-              Demo runs
+          {testAndDemo.length > 0 && (
+            <li className="bg-ink/[0.03] px-4 py-2 text-xs font-medium uppercase tracking-wider opacity-70" aria-label="Test and demo runs">
+              Test and demo runs
             </li>
           )}
-          {demos.map((p) => (
-            <PurseRow key={p.id.toString()} p={p} now={now} />
+          {testAndDemo.map((p) => (
+            <PurseRow key={p.id.toString()} p={p} now={now} events={history.events} ready={ready} />
           ))}
         </ul>
       </section>

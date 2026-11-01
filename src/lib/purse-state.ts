@@ -26,15 +26,44 @@ export function deriveState(s: PurseSnapshot, now: bigint): PurseState {
 /** Title the demo function gives every purse it runs. */
 export const DEMO_TITLE = 'Demo purse'
 
+/** Purses that exist to rehearse the flow: titles starting "Test:" and the demo function's runs. */
+export const isTestOrDemo = (title: string) => title.startsWith('Test:') || title === DEMO_TITLE
+
 /**
- * Splits purses (any order) into real ones and demo runs, each newest first by id.
- * The featured purse is the newest real one, or the newest demo if there is no real purse.
+ * Splits purses (any order) into real ones and test/demo runs, each newest first by id.
+ * The featured purse is, in order: the newest real purse still holding money (Open or Locked),
+ * else the newest real purse, else the newest test or demo run.
  */
-export function arrangePurses<T extends { id: bigint; title: string }>(purses: T[]): { featured: T | undefined; real: T[]; demos: T[] } {
+export function arrangePurses<T extends PurseSnapshot & { id: bigint; title: string }>(
+  purses: T[],
+  now: bigint,
+): { featured: T | undefined; real: T[]; testAndDemo: T[] } {
   const newestFirst = (a: T, b: T) => (a.id === b.id ? 0 : a.id > b.id ? -1 : 1)
-  const real = purses.filter((p) => p.title !== DEMO_TITLE).sort(newestFirst)
-  const demos = purses.filter((p) => p.title === DEMO_TITLE).sort(newestFirst)
-  return { featured: real[0] ?? demos[0], real, demos }
+  const real = purses.filter((p) => !isTestOrDemo(p.title)).sort(newestFirst)
+  const testAndDemo = purses.filter((p) => isTestOrDemo(p.title)).sort(newestFirst)
+  const holding = real.find((p) => {
+    const state = deriveState(p, now)
+    return state === 'Open' || state === 'Locked'
+  })
+  return { featured: holding ?? real[0] ?? testAndDemo[0], real, testAndDemo }
+}
+
+/** The most money a purse ever held: everything put in, from its Funded events. */
+export function peakFunded(events: ReadonlyArray<{ name: string; id: bigint; amount?: bigint }>, id: bigint): bigint {
+  return events.reduce((sum, e) => (e.name === 'Funded' && e.id === id && e.amount !== undefined ? sum + e.amount : sum), 0n)
+}
+
+export type Held = { kind: 'amount'; raw: bigint; returned: boolean } | { kind: 'loading' }
+
+/**
+ * What to show as a purse's amount. The pool falls to zero once every funder has been refunded,
+ * so a purse with an empty pool shows what it held, marked returned. Until the events are read there is nothing to show yet.
+ */
+export function heldAmount(pool: bigint, events: ReadonlyArray<{ name: string; id: bigint; amount?: bigint }>, id: bigint, eventsReady: boolean): Held {
+  if (pool > 0n) return { kind: 'amount', raw: pool, returned: false }
+  const peak = peakFunded(events, id)
+  if (peak > 0n) return { kind: 'amount', raw: peak, returned: true }
+  return eventsReady ? { kind: 'amount', raw: 0n, returned: false } : { kind: 'loading' }
 }
 
 export const canAdd = (s: PurseSnapshot, now: bigint) => !s.named && !s.locked && now <= s.nameBy

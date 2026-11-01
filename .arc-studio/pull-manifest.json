@@ -18,8 +18,8 @@
       "pulledAt": "2026-11-01T17:23:31.995Z"
     },
     "README.md": {
-      "hash": "2cec312febb0cd41f558d2ce4d7760fd9e282a0caef8b7196d88a04ff0eb04a1",
-      "pulledAt": "2026-11-01T17:50:45.513Z"
+      "hash": "ba5efc4c302ee39c9772c38c911b19be6cff239040f08e6ff027ad4e662807ef",
+      "pulledAt": "2026-11-01T17:54:26.171Z"
     },
     "bun.lock": {
       "hash": "c6f0a83638a7ca02a35d15bd0c205f83a3849b4732f4865e72e4ba466052d9fd",
@@ -523,7 +523,7 @@
     },
     ".gitignore": {
       "hash": "05d483afc11550eb420cdc9a57a955be9cf2b1d057cce662b7ec262f2e92e002",
-      "pulledAt": "2026-11-01T17:50:45.512Z"
+      "pulledAt": "2026-11-01T17:54:36.567Z"
     },
     "env.example": {
       "hash": "5f07bceb4161b0ae11af36f16d637c8a2228eef91a6b5bb43dedcf072e40ff12",
@@ -546,8 +546,8 @@
       "pulledAt": "2026-11-01T17:50:45.517Z"
     },
     "src/proof.json": {
-      "hash": "cc026efadc789ad0e35c849fb15a640439c350728851cbe731096ca1ef5e87c9",
-      "pulledAt": "2026-11-01T17:50:45.519Z"
+      "hash": "0b1a9d69f2f490280022bab9e8b501268aa7dca19725fc9d1c774857c86db2ea",
+      "pulledAt": "2026-11-01T17:54:26.171Z"
     },
     "src/components/AddFunds.tsx": {
       "hash": "8c422b43634efb663f3082d35c63af61b9f0d0c72afd34bfd9a99301c0e3fcf6",
@@ -574,8 +574,8 @@
       "pulledAt": "2026-11-01T17:38:48.217Z"
     },
     "src/components/ui.tsx": {
-      "hash": "2136236186446a0fca0b607b7d2f8d0699c5464c58f353cc8eb0d9aeb4da6cb9",
-      "pulledAt": "2026-11-01T17:38:48.217Z"
+      "hash": "c41a4e54c1bfe92ac864f15963b4c2366840327681f19f444511210f240a4d7e",
+      "pulledAt": "2026-11-01T17:54:36.577Z"
     },
     "src/lib/chain.ts": {
       "hash": "b243eb6a0666c1e99efacda7a17d17c041fc8ba0141ebc45f7f68ac3b8d9e236",
@@ -626,12 +626,12 @@
       "pulledAt": "2026-11-01T17:38:48.219Z"
     },
     "src/lib/purse-state.test.ts": {
-      "hash": "43c38d626acae404c6ce1ca9840a88c2393f77433895f91625daa17e8abd0778",
-      "pulledAt": "2026-11-01T17:50:45.528Z"
+      "hash": "af86e3ed7c41bc3ce68daaef905c0375e17d31fa9a0a517023bcadccf2720c45",
+      "pulledAt": "2026-11-01T17:54:36.578Z"
     },
     "src/lib/purse-state.ts": {
-      "hash": "09f9fc36802df95b0ac01c3b1bf673cbd561c06e6bff443cb0567ed394c7aadc",
-      "pulledAt": "2026-11-01T17:50:45.528Z"
+      "hash": "547f09ad9823602b9cf05f2da94b5f7d1ee392f25f1a3c166ee4c47a35e83482",
+      "pulledAt": "2026-11-01T17:54:36.579Z"
     },
     "src/lib/retry.ts": {
       "hash": "ee67b840140a92e264b0431b530ac5263d2adfb4fa231f57666c86dbe192010c",
@@ -646,16 +646,16 @@
       "pulledAt": "2026-11-01T17:38:48.220Z"
     },
     "src/pages/HomePage.tsx": {
-      "hash": "8baefa76e71de6b11a8f192ac4f654d91205cacf2cec7a79267496429bfea760",
-      "pulledAt": "2026-11-01T17:50:45.528Z"
+      "hash": "e77639dab4520d000c1d9592f6adca89da6637c57fa680760c9b092218460496",
+      "pulledAt": "2026-11-01T17:54:36.579Z"
     },
     "src/pages/ProofPage.tsx": {
       "hash": "d1d33abf2fd2ddea3a654091b46076526001f956ed017495c2917d4e460837ad",
       "pulledAt": "2026-11-01T17:50:45.529Z"
     },
     "src/pages/PursePage.tsx": {
-      "hash": "475a6187d461edf352ec271240fcecfefeaae8ede0b4478d926b3bfc450cff37",
-      "pulledAt": "2026-11-01T17:38:48.221Z"
+      "hash": "118896752aa1c813c012e96a5a0d37aa8721203a04106bc714bb16912889cccc",
+      "pulledAt": "2026-11-01T17:54:36.580Z"
     },
     "contracts/out/Base.sol/CommonBase.json": {
       "hash": "19e9d367aee662b24ad5f3ee89428c793c285be432c3000aa20974cf0dcf9479",

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createLineParser, runDemo, type DemoEvent } from './demo-client'
 import { parseMoney, formatMoney } from './format'
-import { allocation, arrangePurses, canDeliver, canLock, canName, canRefund, canSweep, checkWinnerRows, deriveState, type PurseSnapshot } from './purse-state'
+import { allocation, arrangePurses, heldAmount, isTestOrDemo, peakFunded, canDeliver, canLock, canName, canRefund, canSweep, checkWinnerRows, deriveState, type PurseSnapshot } from './purse-state'
 
 const base: PurseSnapshot = { named: false, locked: false, nameBy: 1000n, claimBy: 0n, pool: 5_000_000n, owed: 5_000_000n, winners: [] }
 const named: PurseSnapshot = { ...base, locked: true, named: true, claimBy: 2000n, winners: [{ amount: 5_000_000n, delivered: false }] }
@@ -93,26 +93,74 @@ describe('winner amounts against the pool', () => {
 })
 
 describe('home ordering', () => {
-  const p = (id: number, title: string) => ({ id: BigInt(id), title })
+  const now = 500n
+  const open = { ...base, pool: 1n, owed: 1n }
+  const locked = { ...open, locked: true }
+  const finished = { ...named, owed: 0n, winners: [{ amount: 5_000_000n, delivered: true }] }
+  const p = (id: number, title: string, snap: PurseSnapshot = open) => ({ ...snap, id: BigInt(id), title })
 
-  it('features the newest purse that is not a demo run', () => {
-    const { featured, real, demos } = arrangePurses([p(0, 'Spring hackathon'), p(1, 'Demo purse'), p(2, 'Grant round'), p(3, 'Demo purse')])
-    expect(featured?.id).toBe(2n)
-    expect(real.map((x) => x.id)).toEqual([2n, 0n])
-    expect(demos.map((x) => x.id)).toEqual([3n, 1n])
+  it('features the newest real purse that still holds money (Open or Locked)', () => {
+    const { featured } = arrangePurses(
+      [p(0, 'Spring hackathon', locked), p(1, 'Grant round', finished), p(2, 'Test: flow', open), p(3, 'Demo purse', open), p(4, 'Autumn bounty', open)],
+      now,
+    )
+    expect(featured?.id).toBe(4n)
   })
 
-  it('falls back to the newest demo when there is no other purse', () => {
-    expect(arrangePurses([p(0, 'Demo purse'), p(1, 'Demo purse')]).featured?.id).toBe(1n)
+  it('skips a newer real purse that is already paid out', () => {
+    const { featured } = arrangePurses([p(0, 'Spring hackathon', locked), p(1, 'Grant round', finished)], now)
+    expect(featured?.id).toBe(0n)
   })
 
-  it('has nothing to feature when there are no purses, and ignores the order it was given', () => {
-    expect(arrangePurses([]).featured).toBeUndefined()
-    expect(arrangePurses([p(5, 'B'), p(9, 'A')]).real.map((x) => x.id)).toEqual([9n, 5n])
+  it('never features a Test: or demo purse while a real one is holding money', () => {
+    expect(arrangePurses([p(0, 'Real', locked), p(5, 'Test: newest', locked), p(6, 'Demo purse', locked)], now).featured?.id).toBe(0n)
   })
 
-  it('only treats the exact demo title as a demo run', () => {
-    expect(arrangePurses([p(1, 'Demo purse 2'), p(0, 'demo purse')]).demos).toEqual([])
+  it('falls back to the newest real purse, then to the newest test or demo run', () => {
+    expect(arrangePurses([p(0, 'Old', finished), p(1, 'Newer', finished), p(2, 'Test: x', open)], now).featured?.id).toBe(1n)
+    expect(arrangePurses([p(0, 'Demo purse'), p(1, 'Test: y'), p(2, 'Demo purse')], now).featured?.id).toBe(2n)
+  })
+
+  it('groups Test: and demo purses together, newest first, after the real ones', () => {
+    const { real, testAndDemo } = arrangePurses([p(0, 'A'), p(1, 'Test: b'), p(2, 'Demo purse'), p(3, 'C'), p(4, 'Test: d')], now)
+    expect(real.map((x) => x.id)).toEqual([3n, 0n])
+    expect(testAndDemo.map((x) => x.id)).toEqual([4n, 2n, 1n])
+  })
+
+  it('has nothing to feature when there are no purses', () => {
+    expect(arrangePurses([], now).featured).toBeUndefined()
+  })
+
+  it('matches the Test: prefix and the exact demo title only', () => {
+    expect(isTestOrDemo('Test: a')).toBe(true)
+    expect(isTestOrDemo('Demo purse')).toBe(true)
+    expect(isTestOrDemo('Testing')).toBe(false)
+    expect(isTestOrDemo('test: a')).toBe(false)
+    expect(isTestOrDemo('Demo purse 2')).toBe(false)
+  })
+})
+
+describe('amount of a refunded purse', () => {
+  const funded = (id: bigint, amount: bigint) => ({ name: 'Funded', id, amount })
+  const events = [funded(1n, 1_500_000n), funded(1n, 500_000n), funded(2n, 9_000_000n), { name: 'Refunded', id: 1n, amount: 1_500_000n }]
+
+  it('adds up everything put in from the Funded events of that purse only', () => {
+    expect(peakFunded(events, 1n)).toBe(2_000_000n)
+    expect(peakFunded(events, 2n)).toBe(9_000_000n)
+    expect(peakFunded(events, 3n)).toBe(0n)
+  })
+
+  it('shows the pool while money is held', () => {
+    expect(heldAmount(5n, events, 1n, true)).toEqual({ kind: 'amount', raw: 5n, returned: false })
+  })
+
+  it('shows what the purse held, marked returned, once the pool is empty', () => {
+    expect(heldAmount(0n, events, 1n, true)).toEqual({ kind: 'amount', raw: 2_000_000n, returned: true })
+  })
+
+  it('waits for the events instead of flashing zero', () => {
+    expect(heldAmount(0n, [], 1n, false)).toEqual({ kind: 'loading' })
+    expect(heldAmount(0n, [], 1n, true)).toEqual({ kind: 'amount', raw: 0n, returned: false })
   })
 })
 

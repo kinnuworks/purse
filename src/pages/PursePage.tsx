@@ -7,7 +7,7 @@ import { ChainButton } from '@/components/ChainButton'
 import { HistoryList } from '@/components/HistoryList'
 import { OrganiserControls } from '@/components/OrganiserControls'
 import { NotConfigured } from '@/components/Shell'
-import { Addr, BackLink, Money, Notice, Section, Skeleton, StatePill } from '@/components/ui'
+import { Addr, BackLink, HeldMoney, Money, Notice, Section, Skeleton, StatePill } from '@/components/ui'
 import { readContribution } from '@/lib/data'
 import { PURSE_ADDRESS } from '@/lib/env'
 import { plainError } from '@/lib/errors'
@@ -16,7 +16,7 @@ import { useHistory } from '@/lib/history'
 import { useNow, usePurse } from '@/lib/hooks'
 import { purseAbi } from '@/lib/purse-abi'
 import { mapLimit } from '@/lib/retry'
-import { canAdd, canDeliver, canRefund, canSweep, deriveState } from '@/lib/purse-state'
+import { canAdd, canDeliver, canRefund, canSweep, deriveState, heldAmount } from '@/lib/purse-state'
 
 type Address = `0x${string}`
 
@@ -57,6 +57,7 @@ export default function PursePage() {
   const now = useNow()
   const purseQuery = usePurse(id)
   const { funders, ready } = useFunders(id)
+  const history = useHistory()
 
   const funderKey = funders.map((f) => f.address).join(',')
   const contributions = useQuery({
@@ -95,6 +96,7 @@ export default function PursePage() {
   }
 
   const state = deriveState(purse, now)
+  const held = heldAmount(purse.pool, history.events, purse.id, history.status === 'ready')
   const isOrganiser = sameAddress(account, purse.organiser)
   const organiserIsWinner = purse.winners.some((w) => sameAddress(w.winner, purse.organiser))
   const organiserOnlyFunder = ready && funders.length === 1 && sameAddress(funders[0].address, purse.organiser)
@@ -109,13 +111,15 @@ export default function PursePage() {
       <p className="mt-1 text-sm opacity-60">Purse #{purse.id.toString()}</p>
 
       <p className="mt-6 font-display text-5xl font-semibold tracking-tight">
-        <Money raw={purse.pool} className="[&>span]:text-base" />
+        <HeldMoney held={held} className="[&>span]:text-base" returnedClassName="font-sans text-lg font-medium tracking-normal opacity-70" />
       </p>
       <p className="mt-1 text-sm opacity-70 tabular-nums">
         {purse.owed > 0n ? (
           <>
             <Money raw={purse.owed} /> is still held by the contract for this purse.
           </>
+        ) : held.kind === 'amount' && held.returned ? (
+          'Nothing is left in the contract. All of it went back to the people who put it in.'
         ) : (
           'Nothing is left in the contract for this purse.'
         )}

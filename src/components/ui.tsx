@@ -5,6 +5,7 @@ import { explorerAddress, explorerTx } from '@/lib/env'
 import { formatMoney, shortAddress } from '@/lib/format'
 import type { PurseState } from '@/lib/purse-state'
 import type { SendState } from '@/lib/hooks'
+import type { Held } from '@/lib/purse-state'
 
 export const cx = (...parts: Array<string | false | null | undefined>) => parts.filter(Boolean).join(' ')
 
@@ -14,6 +15,17 @@ export function Money({ raw, className = '', unit = true }: { raw: bigint; class
     <span className={cx('tabular-nums whitespace-nowrap', className)}>
       {formatMoney(raw)}
       {unit && <span className="ml-1 text-[0.7em] font-medium tracking-wide opacity-60">USDC</span>}
+    </span>
+  )
+}
+
+/** A purse's amount: the pool, or what it held when everything has been returned. */
+export function HeldMoney({ held, className = '', returnedClassName = 'text-sm font-medium' }: { held: Held; className?: string; returnedClassName?: string }) {
+  if (held.kind === 'loading') return <Skeleton className={cx('inline-block h-[1em] w-24 align-middle', className)} />
+  return (
+    <span className="inline-flex flex-wrap items-baseline gap-x-2">
+      <Money raw={held.raw} className={className} />
+      {held.returned && <span className={returnedClassName}>returned</span>}
     </span>
   )
 }

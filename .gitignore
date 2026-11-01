@@ -14,5 +14,3 @@ console.jsonl
 broadcast
 run*.json
 run*.err
-.env.demo
-.env.testwallets
