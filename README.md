@@ -13,7 +13,7 @@
 - Every mainnet transaction, labelled by who sent it: [/proof](https://purse-arc.vercel.app/proof) and [`ops/txs.tsv`](ops/txs.tsv)
 - Money has left the contract all three ways on mainnet: delivered to winners, refunded to funders, and returned to the organiser when unclaimed
 - Built in Arc Studio, contracts, tests and app: [project](https://studio.arc.io/app/4f1afe15-a898-46ff-9acf-196783f28e52). The prompts are in `brief-*.md`. Studio deployed to testnet; mainnet was deployed from my own wallet with `arc-forge`, because Studio doesn't touch mainnet.
-- 139 Foundry tests and 53 app tests
+- 139 Foundry tests and 60 app tests
 
 **What it doesn't prove:** the organiser still picks the winners, so Purse shows the money is there and where it went, not that the judging was fair. The contract has not been audited, has no admin and can't be upgraded. Keep amounts small.
 
