@@ -26,3 +26,5 @@ launch prize 1: lock	0xba024e7870d2edd2cece3ab1d11c7d26a623bbb8725ddd9cb0efbbbdc
 launch prize 1: name two winners I know personally, 0.50 each	0x131fdd06227ab484ab919ea67899249b35e1b9b631d4c4f764774bbde69dde1d
 launch prize 1: deliver to first winner	0xdf06cc5bae9369edcb35d15cc93161f2eef923052f0303bd185bdd522d22827f
 launch prize 1: deliver to second winner	0x122e00c250b2210ad4d79d212bea553ae34558a6b59e3fa76cc38de645c840b7
+bug bounty 8: create, 1 USDC	0x95d958335b4fe5348c7a79af1cf9fb5a2023881c309a44f6622388751c804090
+bug bounty 8: lock	0x272ae09054527ea217095067bb9b97994772ab77e90b7958095760891e18feec

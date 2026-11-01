@@ -298,6 +298,18 @@
       "network": "mainnet"
     },
     {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "bug bounty 8: create, 1 USDC",
+      "hash": "0x95d958335b4fe5348c7a79af1cf9fb5a2023881c309a44f6622388751c804090",
+      "network": "mainnet"
+    },
+    {
+      "sender": "Organiser wallet 0xC112…F04e (ours)",
+      "what": "bug bounty 8: lock",
+      "hash": "0x272ae09054527ea217095067bb9b97994772ab77e90b7958095760891e18feec",
+      "network": "mainnet"
+    },
+    {
       "sender": "Arc Studio platform deployer wallet",
       "what": "Deployed Purse to Arc Testnet",
       "hash": "0x9c17cdd660af604504804cd202926abbbb3f73fdfeee72e857083e370b486094",
