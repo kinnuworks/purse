@@ -23,6 +23,6 @@ ten winners 4: deliver	0x0bdb473fb18a09a7e562dc687d8ab9805807437ca69b0431319d77b
 ten winners 4: deliver	0x82afb874f939f25749142e07084be3954f248933020688f3dccd7c21bd06f36b
 ten winners 4: deliver	0xa4836390e7432fd8153c9fedb33d921ca6e0079e7a0ab8f475ed1556b0ef2c22
 launch prize 1: lock	0xba024e7870d2edd2cece3ab1d11c7d26a623bbb8725ddd9cb0efbbbdc4e1a43e
-launch prize 1: name a friend and a family member, 0.50 each	0x131fdd06227ab484ab919ea67899249b35e1b9b631d4c4f764774bbde69dde1d
-launch prize 1: deliver to friend	0xdf06cc5bae9369edcb35d15cc93161f2eef923052f0303bd185bdd522d22827f
-launch prize 1: deliver to family member	0x122e00c250b2210ad4d79d212bea553ae34558a6b59e3fa76cc38de645c840b7
+launch prize 1: name two winners I know personally, 0.50 each	0x131fdd06227ab484ab919ea67899249b35e1b9b631d4c4f764774bbde69dde1d
+launch prize 1: deliver to first winner	0xdf06cc5bae9369edcb35d15cc93161f2eef923052f0303bd185bdd522d22827f
+launch prize 1: deliver to second winner	0x122e00c250b2210ad4d79d212bea553ae34558a6b59e3fa76cc38de645c840b7

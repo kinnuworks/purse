@@ -10,7 +10,7 @@ Try it in 30 seconds with no wallet: paste any address into "Try it with a real 
 
 How Arc Studio was used: it wrote the contract, the 139 Foundry tests, the security passes, the app, the SDK and their 106 tests, and deployed to Arc testnet. The prompts are in the repo. I deployed to mainnet from my own wallet with arc-forge.
 
-On mainnet, money has left the contract all three ways: delivered to winners, refunded to funders, and returned to the organiser when unclaimed. The launch prize paid two outside people 0.50 USDC each: a friend, whose feedback led to a redesign, and a family member. Most other transactions come from my own wallets, and they're labelled on the proof page. The organiser still picks the winners, and the contract isn't audited.
+On mainnet, money has left the contract all three ways: delivered to winners, refunded to funders, and returned to the organiser when unclaimed. The launch prize paid 0.50 USDC each to two people I know personally, friends and family. One's feedback led to a redesign, and both also ran the real-cent demo themselves. Most other transactions come from my own wallets, and they're labelled on the proof page. The organiser still picks the winners, and the contract isn't audited.
 
 **Arc Studio project:** https://studio.arc.io/app/4f1afe15-a898-46ff-9acf-196783f28e52
 **Live app:** https://purse-arc.vercel.app

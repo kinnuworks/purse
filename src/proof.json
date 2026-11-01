@@ -266,19 +266,19 @@
     },
     {
       "sender": "Organiser wallet 0xC112…F04e (ours)",
-      "what": "Launch prize, purse 1: name a friend and a family member, 0.50 each",
+      "what": "Launch prize, purse 1: name two winners I know personally, 0.50 each",
       "hash": "0x131fdd06227ab484ab919ea67899249b35e1b9b631d4c4f764774bbde69dde1d",
       "network": "mainnet"
     },
     {
       "sender": "Organiser wallet 0xC112…F04e (ours)",
-      "what": "Launch prize, purse 1: deliver to friend",
+      "what": "Launch prize, purse 1: deliver to first winner",
       "hash": "0xdf06cc5bae9369edcb35d15cc93161f2eef923052f0303bd185bdd522d22827f",
       "network": "mainnet"
     },
     {
       "sender": "Organiser wallet 0xC112…F04e (ours)",
-      "what": "Launch prize, purse 1: deliver to family member",
+      "what": "Launch prize, purse 1: deliver to second winner",
       "hash": "0x122e00c250b2210ad4d79d212bea553ae34558a6b59e3fa76cc38de645c840b7",
       "network": "mainnet"
     },

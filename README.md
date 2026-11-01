@@ -17,7 +17,7 @@
 
 **What it doesn't prove:** the organiser still picks the winners, so Purse shows the money is there and where it went, not that the judging was fair. The contract has not been audited, has no admin and can't be upgraded. Keep amounts small.
 
-**Honest usage note:** most mainnet transactions come from my own wallets, and they're labelled that way. The launch prize paid two outside people, 0.50 USDC each: a friend, whose feedback led to the design pass, and a family member.
+**Honest usage note:** most mainnet transactions come from my own wallets, and they're labelled that way. The launch prize paid 0.50 USDC each to two people I know personally, friends and family. One's feedback led to the design pass. Both also ran the real-cent demo themselves.
 
 ## What it does
 
